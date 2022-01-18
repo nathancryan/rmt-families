@@ -1,0 +1,2918 @@
+\documentclass[11pt,reqno]{amsart} \usepackage{fullpage}
+\usepackage{mathrsfs} \usepackage{latexsym,gensymb,marvosym}
+\usepackage[dvips]{graphics} \usepackage[dvips]{graphicx}
+\usepackage{epsfig} \usepackage{amsmath,amsfonts,amsthm,amssymb,amscd}
+\usepackage{hyperref} \usepackage{url}
+\usepackage[usenames,dvipsnames]{color} \usepackage{mathtools}
+\usepackage{enumitem} \usepackage{fourier} \usepackage{calrsfs}
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+\usepackage[T1]{fontenc} \usepackage[utf8]{inputenc}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\topmargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.5in}
+
+% INDENT FIX
+\usepackage{etoolbox}
+
+\makeatletter
+% uncomment the following if you don't want \clubpenalty\@M ...
+% \let\nearly@afterheading\@afterheading
+% \patchcmd\nearly@afterheading
+%   {\@M}% original temporary setting for \clubpenalty replaced by ...
+%   {\@clubpenalty}% ... or whichever value you deem right
+%   {}{}
+% ... and use \nearly@afterheading instead of \@afterheading here:
+\newcommand*\NoIndentAfterEnv[1]{%
+  \AfterEndEnvironment{#1}{\par\@afterindentfalse\@afterheading}}
+\makeatother
+
+\NoIndentAfterEnv{itemize}
+\NoIndentAfterEnv{theorem}
+\NoIndentAfterEnv{defn}
+\NoIndentAfterEnv{prop}
+\NoIndentAfterEnv{corollary}
+\NoIndentAfterEnv{remark}
+\NoIndentAfterEnv{conjecture}
+% treat other environments you want to patch accordingly
+
+\newtheorem{fact}{Fact}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{defn}[lemma]{Definition}
+\newtheorem{assumption}[lemma]{Assumption}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{prop}[lemma]{Proposition}
+\newtheorem{exercise}[lemma]{Exercise}
+\newtheorem{claim}[lemma]{Claim}
+\newtheorem{remark}[lemma]{Remark}
+\newtheorem{prob}{Problem}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{heuristic}{Heuristic}
+\renewcommand{\theheuristic}{\Alph{heuristic}}
+
+% Owen abhors hollow tombstones
+\renewcommand{\qedsymbol}{{\footnotesize$\blacksquare$}}
+
+% Fourier-provided amssymb commands
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\nleq}{\nleqslant}
+\renewcommand{\ngeq}{\ngeqslant}
+\renewcommand{\subsetneq}{\varsubsetneq}
+
+% important rings
+\newcommand{\R}{\ensuremath{\mathbf{R}}}
+\newcommand{\C}{\ensuremath{\mathbf{C}}}
+\newcommand{\Q}{\ensuremath{\mathbf{Q}}}
+\newcommand{\F}{\ensuremath{\mathbf{F}}}
+\newcommand{\N}{\ensuremath{\mathbf{N}}}
+\newcommand{\Z}{\ensuremath{\mathbf{Z}}}
+\newcommand{\A}{\ensuremath{\mathbf{A}}}
+
+% greek
+\newcommand{\ga}{\alpha}
+\newcommand{\gb}{\beta}
+\newcommand{\ep}{\epsilon}
+\newcommand{\vep}{\varepsilon}
+
+% shortcuts
+\newcommand{\ra}{\rightarrow}
+\renewcommand{\d}[1]{\,\operatorname*{d}\!{#1}}
+\newcommand{\dd}[2][]{\frac{\operatorname*{d}^{#1}}{\operatorname*{d}\! {#2}^{#1}}}
+\newcommand{\pp}[2][]{\frac{\partial^{#1}}{\partial {#2}^{#1}}}
+\newcommand{\yell}[1]{\textbf{#1}}
+\newcommand\be{\begin{equation}}
+\newcommand\ee{\end{equation}}
+\newcommand\bi{\begin{itemize}}
+\newcommand\ei{\end{itemize}}
+\newcommand\ben{\begin{enumerate}}
+\newcommand\een{\end{enumerate}}
+\newcommand{\scnumeral}[1]{\textsc{#1}}
+\newcommand{\eg}{\noindent\textit{Example}\quad}
+\newcommand{\question}{\noindent\textit{Q}\quad}
+\renewcommand{\H}{\mathfrak{H}}
+\newcommand{\pc}[1]{\pazocal{#1}}
+\newcommand{\nb}{\textsc{n.b.}}
+\newcommand{\etal}{\textit{et al.}}
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\nstd}{N_{\text{std}}}
+\newcommand{\neff}{N_{\text{eff}}}
+\newcommand{\cstd}{c_{\text{std}}}
+\newcommand{\ceff}{c_{\text{eff}}}
+\newcommand{\Lsym}[2][]{L_f#1\left(#2,\sym^2\right)}
+\newcommand{\Lsymbar}[2][]{L_{\overline f}#1\left(#2,\sym^2\right)}
+\newcommand{\Lad}[1]{L_f\left(#1,\ad^2\right)}
+\newcommand{\Lchi}[2][]{L(#2,\chi_f#1)}
+\newcommand{\Lchibar}[2][]{L\left(#2,\chi_{\overline f}#1\right)}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\sym}{sym}
+\newcommand{\symres}{r_{\sym^2f}}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Prob}{Prob}
+\newcommand{\D}{\mathcal D_f}
+\newcommand{\E}{\mathcal E_f}
+\newcommand{\T}{\pazocal T_{f\otimes\psi_d}(\alpha,\beta,\gamma,\delta)}
+\renewcommand{\F}{\mathcal F_f}
+\renewcommand{\a}{{\mathfrak f}}
+\renewcommand{\L}[1]{L_{f\otimes\psi_d}\left(#1\right)}
+\newcommand{\gf}{\Phi_d}
+\newcommand{\gfactor}[2][]{\gf#1\left(#2\right)}
+\newcommand{\Lld}[1]{\frac{L_{f\otimes\psi_d}'}{L_{f\otimes\psi_d}}\left(#1\right)}
+\DeclareMathOperator{\Nm}{N}
+\newcommand{\Lunram}{L_{\star}}
+\newcommand{\Lram}{L_{\text{ram}}}
+\numberwithin{equation}{section}
+\begin{document}
+
+\title{An excised orthogonal model for families of cusp forms}
+\date{Version 6.0}
+\author{Owen Barrett, Steven J. Miller}
+\thanks{The authors would like to thank James Cogdell, Zhengyu Mao, and Jeremy Rouse for
+helpful discussions.}
+\begin{abstract}
+  The Katz-Sarnak philosophy dictates that the spacing statistics of the zeros of
+  Hecke cusp form $L$-functions averaged within families coincide with those of
+  eigenvalues of particular random matrices in the limit as the level tends to infinity.
+  While these predictions have been supported by multiple density and correlation results
+  across various families, S.\,J. Miller discovered a significant disagreement for finite
+  conductors in the numerical data for elliptic curve $L$-functions. We use the
+  $L$-functions ratios conjectures to calculate the 1-level density for the family
+  of even quadratic twists of a holomorphic cuspidal newform for large but finite level
+  and recover leading and lower-order terms. Then, using the arithmetic of these
+  lower-order terms and the discretization of the $L$-functions at the central point,
+  we extend a random matrix model proposed by Dueñez, Huynh, Keating, Miller, and Snaith
+  for elliptic curves to Hecke cusp forms of weight $k>2$.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\vspace{.25in}
+
+\section{Introduction}
+In conversation with Freeman Dyson at tea at the Institute for Advanced Study shortly after
+their introduction by Chowla one propitious afternoon in 1971, Hugh Montgomery learned that
+his calculation of the pair-correlation of zeros of $\zeta(s)$ matched the pair-correlation
+of eigenvalues of large unitary matrices.
+
+In the intervening years, a general philosophy has developed in support of the notion that
+spacing statistics of critical zeros of $L$-functions should be in agreement with
+the corresponding statistic attached to associated random matrix ensembles in the correct
+asymptotic limit \cite{hejhal,RS,KaSa1,KaSa2,ILS}.
+
+While the general philosophy connecting zero statistics to eigenvalue statistics can yield
+remarkable predictive insights for both local statistics (on the scale of only several mean
+spacings) and global statistics, such as moments, classic matrix ensembles fail to reflect
+some finer statistical properties of $L$-function zeros, as S.J. Miller~\cite{mil06}
+observed in 2006. He discovered that, localized at the central point, elliptic curve
+$L$-function zero statistics deviated qualitatively from the random matrix model.
+
+Subsequently, Dueñez, Huynh, Keating, Miller, and Snaith~\cite{DHKMS} sought to craft a
+refined matrix ensemble (the \textit{excised orthogonal ensemble}) that would more
+accurately reflect the phenomena Miller observed. 
+One key discrepancy between the arithmetic statistics of $L$-function zeros and the
+statistics of random matrices is described by a theorem of Kohnen and Zagier~\cite{KZ},
+which implies a discretization of $L(s,f)$ at the central
+point that justifies the excised orthogonal model.
+
+\begin{theorem}[Kohnen-Zagier~\cite{KZ}]\label{KZthm}
+  Let $f\in S_k$ be a normalized Hecke eigenform, $g\in S_{(k+1)/2}^+$ a form
+  corresponding to $f$ as above, $d$ a fundamental discriminant with $(-1)^kd>0$,
+  and $L(s,f_d)$ the $L$-series of $f$ twisted by the quadratic character
+  with fundamental discriminant $d$, which is defined by analytic
+  continuation of the Dirichlet $L$-series
+  $\sum_{n\geq1}\left(\frac d n\right)a(n)n^{-s}$. Then
+  \be L_f(k,\psi_d) = \kappa_f \frac{c(|d|)^2}{|d|^{(k-1)/2}},\quad\text{where }
+  \kappa_f = \frac{(k-1)!}{\pi^{k/2}}\frac{\langle f,f\rangle}{\langle g,g\rangle},\ee
+  where $\langle\cdot,\cdot\rangle$ denotes the Petersson inner product,
+  $c(|d|)$ is an integer, and $k$, the weight, also denotes the central point in
+  the evaluation of $L_f(s,\psi_d)$.
+\end{theorem}
+Theorem~\ref{KZthm}, as stated, only holds for level 1 newforms. Baruch-Mao \cite{BM}
+extend to square-free odd level and Mao~\cite{mao} extends to arbitrary odd level,
+with modifications to $\kappa_f$ in both cases.
+
+The philosophy of Dueñez~\etal\ is that values of $L$-functions at the
+central correspond to characteristic polynomials of matrices evaluated at the point $1$.
+Since the number $c(|d|)$ is an integer, Theorem~\ref{KZthm} implies that the value at
+the central point is discretized on the order of $|d|^{(1-k)/2}$. Therefore, to model
+the behavior of low-lying zeros using matrices, one should attempt to account for this
+discretization at the central point with a discretization of the values of the
+characteristic polynomials at $1$.
+This provides a key ingredient to their recipe, the other being a modification to the
+\textit{matrix size} of the ensemble.
+
+While Dueñez~\etal\ seek to model $L$-functions attached to elliptic curves, the
+Kohnen-Zagier formula in Theorem~\ref{KZthm} holds more generally for Hecke eigenforms.
+The purpose of this work is to generalize the random matrix model of Dueñez~\etal\ to
+Hecke eigenforms.
+
+Given a form in $S_k^\ast(M,\chi)$, twisting by a character $\psi_d$,
+where $d$ is a fundamental discriminant, produces a form in
+$S_k^\star(Md^2,\chi)$. Hence, our density of zeros near the central point for a given
+form is $\asymp \log d$, and we obtain the same relation
+$\nstd\sim\log d$. Now, the values at the central point are no longer
+discretized on a scale of $1/\sqrt d$; they are discretized on a scale of
+$1/d^{(k-1)/2}$. Therefore, we excise characteristic polynomials whose value at 1 is of the
+scale $\exp((1-k)\nstd/2)$. If we restrict to even forms, we now want
+matrices in $SO(2N)$ satisfying
+\be\label{eq:exciseddef} |\Lambda_A(1,N)|\geq \exp \mathcal X = c \cdot\exp((1-k)\nstd/2). \ee
+The cutoff value $c$ will be discussed in~\S\ref{sec:cutoff}.
+We also introduce an `effective' matrix size
+$\neff$, based on lower-order terms of the one-level density for our family of Hecke cusp
+forms, which we calculate below, and an effective cutoff value.
+
+\section{Effective matrix size}\label{sec:neff}
+As the asymptotic parameter for a family of $L$-functions tends to infinity, the
+Katz-Sarnak philosophy dictates that the zero statistics, averaged across the family,
+should tend to the scaling limit of eigenvalues of random matrices drawn from an
+appropriate classical matrix group. However, for finite values of the asympototic
+parameter, there is a deviation from the limit of number-theoretic origin.
+These deviations need not generally cause qualitatively different phenomena than in the
+limit, but S.J. Miller's 2006 observation~\cite{mil06} that there is a repulsion of zeros
+away from the central point in elliptic curve families is an example of behavior that is
+qualitatively different from that in the limit.
+
+It is general philosophy that the arithmetic in families of $L$-functions is
+absent in the main term of the limit, but is present in lower-order terms of the asympototic
+expansion in the asymptotic parameter of the family. Since we are interested in modeling
+the effect of the discretization at the central point of Hecke cusp forms on low-lying
+zeros, motivated by Theorem~\ref{KZthm} and Miller's numerical observations in the elliptic
+curve case, we would like to tune our random matrix model to the arithmetic of the
+lower-order terms for our family, in the spirit of Bogomolny, Bohigas, Leboeuf, and
+Monastra~\cite{bblm} as applied by Dueñez~\etal~\cite{DHKMS} in the elliptic curve case.
+
+We will tune the matrix size of our ensemble to take into account the arithmetic of the
+lower order terms of an asymptotic expansion of the one-level density formula for our
+family, which is the family of even quadratic twists of a fixed holomorphic cuspidal
+newform $f$; i.e., primitive Hecke cusp form.
+
+We recall, following~\cite{conreymatrix},
+the definition of the $1$-level density of a matrix ensemble $G(N)$.
+For us, $G(N)$ stands for one of the matrix groups
+$U(N), USp(2N)$, or $SO(2N)$. The definition of the (unscaled) $1$-level density is
+\be\label{eq:matrix1lddef} \int_{G(N)}\sum_{j=1}^N \varphi(\theta_j)dX.\ee
+As a consequence of Weyl's integration formula and Gaudin's 
+lemma,~\eqref{eq:matrix1lddef} can be explicitly computed as
+\be\int\varphi(\theta)S_{G(N)}(\theta)d\theta,\ee
+where the bounds of integration are $[0,2\pi]$ for $G(N)=U(N)$, and $[0,\pi]$ for
+$G(N)=USp(2N),SO(2N)$, and
+\begin{align}
+  S_{SO(2N)}(\theta)&\ =\ \frac{2N-1}{2\pi}+\frac{\sin(2N-1)\theta}{2\pi\sin\theta}, \\
+  S_{U(N)}(\theta)&\ =\ \frac N{2\pi}, \\
+  S_{USp(2N)}(\theta)&\ =\ \frac{2N+1}{2\pi}-\frac{\sin(2N+1)\theta}{2\pi\sin\theta}.
+\end{align}
+We call these functions the unscaled $1$-level density functions for these matrix groups.
+
+The mean spacing of the eigenangles $\theta_j$ of matrices $X\in G(N)$ depends on $N$.
+Therefore, for making statistical comparisons (such as with zeros of $L$-functions), it
+is natural and convenient to scale the eigenangles to have mean spacing one.
+
+The scaling densities for the ensembles $SO(2N)$ and $USp(2N)$ are both $N/\pi$.
+The scaling density for $U(N)$ is $N/2\pi$.
+It is then the case that the asymptotic scaled $1$-level density for large $N$ is given
+by
+\be\int_{\R_+}\varphi(\theta)R_{G(N)}(\theta)d\theta,\ee
+where $R_{G(N)}(\theta)$ is obtained from $S_{G(N)}(\theta)$ by scaling the one-level
+density formulas and expanding in powers of $1/N$:
+\begin{align}
+  R_{SO(2N)}(y)\ :=\ \frac \pi N S_{SO(2N)}(y\pi/N)&\
+  \begin{aligned}[t]&\ =\ 1-\frac1{2N}
+    +\frac{\sin\left[(2N-1)y\pi/N\right]}{2N\sin(y\pi/N)} \\
+    &\ =\ 1+\frac{\sin(2\pi y)}{2\pi y}-\frac{1+\cos(2\pi y)}{2N}-\frac{\pi y\sin(2\pi y)}{6N^2}
+    +O\left(N^{-3}\right),\end{aligned} \\
+  R_{USp(2N)}(y)\ :=\ \frac\pi N S_{USp(2N)}(y\pi/N)&\
+  \begin{aligned}[t]&\ =\ 1+\frac1{2N}-\frac{\sin[(2N+1)y\pi/N]}{2N\sin(y\pi/N)} \\
+    &=1-\frac{\sin(2\pi y)}{2\pi y}+\frac{1-\cos(2\pi y)}{2N}
+    +\frac{\pi y\sin(2\pi y)}{6N^2}+O\left(N^{-3}\right),
+  \end{aligned} \\
+  R_{U(N)}(y)\ :=\ \frac {2\pi}N S_{U(N)}(2 y\pi/N)&\ =\ 1.
+\end{align}
+We call these functions the scaled $1$-level density functions, or simply the $1$-level
+density functions, for these matrix groups.
+
+The standard approach to choose the matrix size is to equate mean densities of
+eigenvalues with mean density of zeros; in our case, this would imply we should choose
+\be \nstd = R \ :=\  \log \left(\tfrac{\sqrt M X}{2\pi e}\right),\ee
+where $M$ is the level of our cusp form $f$.
+The approach of~\cite{bblm,DHKMS} is to multiply $\nstd$ obtained in this way by a
+constant of arithmetic origin so as to see agreement in lower-order terms of the
+two-point correlation statistic or the one-level density, respectively.
+Happily, it occurs that by correcting the matrix size in this way to agree with one of
+these simpler statistics, the authors find better agreement for all correlation
+functions, and therefore also for the nearest-neighbor spacing.
+
+We will consider families of $L$-functions $\F$ which we define rigorously in
+\S\ref{sec:expectations}, Definition~\ref{def:F}. Loosely speaking, they are all families
+of quadratic twists of a fixed newform $f$. One novelty of our computations is that
+we find a variety of different symmetry types for $\F$ depending on different qualities
+of $f$. We use the Ratios conjectures of~\cite{recipe} to compute formulas
+for the one-level density of $\F$ for a variety of different $f$, so as to have lower
+terms for the zero statistics of our $L$-functions to match the random matrix theory
+asymptotics against so as to produce an effective matrix size. For the family with
+unitary symmetry, there are no lower-order terms against which to match. Therefore, we
+compute a formula for the pair-correlation of zeros of $L(s,f\otimes\psi_d)$ for such an
+$f$ giving rise to a family with unitary symmetry with a fixed twist, where our
+asymptotic parameter is now $T$, the height along the critical line. Averaging over
+`good' fundamental discriminants $d\in\D$ (the meaning of which is made precise in
+\S\ref{sec:expectations}, Definition~\ref{def:D}), we obtain a suggested effective matrix
+size for the family with unitary symmetry.
+
+We excerpt a part of Corollary~\ref{cor:expansion} to illustrate how to arrive at the
+effective matrix size for two of our families. If $f$ is a newform of (even) weight $k$
+and (odd prime) level $M$, and with nebentypus $\chi_f$, then the one-level density for
+the scaled zeros of the family $\F$ given in Definition~\ref{def:F} parametrized by
+the set $\D$ of fundamental discriminants described in Definition~\ref{def:D} is
+
+\begin{align}
+    \frac1 {\left|\D(X)\right|} S_1(f) &=
+    \int_{-\infty}^\infty g(\tau)
+    \left(1+\frac{\sin(2\pi\,\tau)}{2\pi\,\tau}
+      +a_1\frac{1+\cos(2\pi\,\tau)}{R}
+      -a_2\frac{\pi\,\tau\,\sin(2\pi\,\tau)}{R^2}
+      +O\left(R^{-3}\right)\right)\d\tau
+    \intertext{if $\chi_f$ is principal, and}
+    \frac1 {\left|\D(X)\right|} S_1(f) &=
+    \int_{-\infty}^\infty g(\tau)
+    \left(
+      1-\frac{\sin(2\pi\,\tau)}{2\pi\,\tau}
+      +d_1\frac{1-\cos(2\pi\,\tau)}R
+      +d_2\frac{\pi\,\tau\sin(2\pi\,\tau)}{R^2}
+      + O\left(R^{-3}\right)
+    \right)\d\tau,
+\end{align}
+if $\chi_f$ is not principal and $f=\overline f$, for a variety of arithmetic constants
+which are defined in \S\ref{sec:1ld}.
+By matching the lower-order terms of these formul\ae\ with those of the scaled one-level
+density functions, we find that
+$\neff$ for the principal character family with $SO(2N)$ symmetry is
+$R/2a_1$, and $\neff$ for the self-dual CM form family with $Sp(2N)$ symmetry is $R/2d_1$,
+where the constants $a_1$ and $d_1$ appear above and are assigned at~\eqref{eq:a1def}
+and~\eqref{eq:d1def}.
+
+As mentioned above, we can't suggest an effective matrix size using the one-level density
+for the generic family (non-principal character, not self-dual), since there are no
+lower-order terms to match in the one level density for unitary matrices.
+To remedy the situation, we perform an analysis of the pair-correlation for that family,
+and discuss the choice of effective matrix size for such a family in \S\ref{sec:pcthm}.
+
+\section{Cutoff value}\label{sec:cutoff}
+We now investigate how best to optimize the cutoff value $c$ in our
+definition~\eqref{eq:exciseddef} of the excision threshold. Our point of departure is the
+work of Conrey, Keating, Rubinstein and Snaith~\cite{CKRS1,CKRS2} as
+modified by Dueñez, Huynh, Keating, Miller and Snaith~\cite{DHKMS}.
+
+We begin by introducing the definition of a moment generating function $M_f(X,s)$ for the
+values at the central point of $L$-functions in our family $\mathcal F^+_f(X)$, the family
+of even twists of the fixed holomorphic Hecke cusp form $f$ by quadratic characters
+$\psi_d$ corresponding to fundamental discriminants $d$ in the range $0<d\leq X$
+satisfying certain properties. We denote these `good' fundamental discriminants by
+$\D(X)$; therefore, the cardinality of our family is $\left|\D(X)\right|$ as a function
+of the asymptotic parameter $X$.
+Define \be M_f(X,s):=\frac1{\left|\D(X)\right|}\sum_{d\in\D(X)}L_f(1/2,\psi_d)^s.\ee
+We expect that values at the central point of $L$-functions averaged over a family
+behave like values of characteristic polynomials evaluated at 1, averaged over the
+appropriate family of random matrices. Therefore, as in~\cite{rmtzeta} and~\cite{rmtL}, we
+posit an asymptotic equivalence of moment generating functions
+\be\label{eq:momentequivalence} M_f(X,s)\sim a_f(s)M_{W(f)}(N,s),\ee where $W^+(f)$ is the
+symmetry type of the family $\F^+(X)$, and $M_{W^+(f)}(N,s)$ is the corresponding
+moment generating function
+\be\label{eq:mgfdef} M_{W^+(f)}(N,s)\ =\ \int_{W^+(f)}\Lambda_A(1,N)^s\d A.\ee
+Our one-level
+density calculations indicate that $W^+(f)$ assumes the following values depending on $f$:
+\be\label{eq:wfdef}W^+(f)=\begin{cases}SO(2N)&\chi_f\text{ principal}, \\
+  U(N)&\chi_f\text{ non-principal, }f\ne\overline f, \\
+  Sp(2N)&\chi_f\text{ non-principal, }f=\overline f.\end{cases}\ee
+For now, we restrict to the first case, the case of principal character, which is the most widely-considered. We now need to explain the arithmetic function $a_f(s)$.
+The origin of this arithmetic factor is in~\cite{recipe}, where it appears in conjectured
+formulas for moments of $L$-functions. In particular, we refer to their recipe in \S4 for
+conjecturing moments, referring also to \S4.3, equation (4.4.22), \S5.3, and Theorem 2.4.1.
+Let us restrict now to $\chi_f$ principal so that we may refer to \S4.3 directly. Then,
+start from their equation~(4.4.20), and excise the zeta factors as per Theorem 2.4.1.
+This is the arithmetic factor $A_m(s;r_1,\ldots,r_m)$ in Theorem 2.4.1., where the $r_i$
+are unspecified small shifts that we will soon let pass to 0;
+$A_m$ specializes to the case of even twists of a primitive real $L$-function like ours as
+\be A_m(s;r_1,\ldots,r_m)=\prod_p R_{m,p}(s)\prod_{1\leq i<j\leq k}
+\left(1-\frac1{p^{2s+r_i+r_j}}\right),\ee where \be R_{m,p}(s)=\left(1+\frac1p\right)^{-1}
+\left(\frac1p+\frac12\left[\prod_{j=1}^m \mathcal L_p\left(\frac1{p^{s+r_j}},f\right)+
+    \prod_{j=1}^m \mathcal L_p\left(\frac{-1}{p^{s+r_j}},f\right)\right]\right)\ee when
+$p\nmid M$, and
+\be R_{m,p}(s)=\prod_{j=1}^m\mathcal L_p\left(\frac{\ep_f}{p^{s+r_j}},f\right)\ee
+when $p=M$. Here, $\mathcal L_p(s,f)$ is not $L_p(s,f)$, the local factor of $L_f(s)$ at
+$p$, but rather given implicitly by \be L_f(s)=\prod_p L_p(s,f)
+=\prod_p\left(1-\lambda_f(p)p^{-s}+\chi_f(p)p^{-2s}\right)^{-1}
+=:\prod_p\mathcal L_p\left(p^{-s},f\right).\ee
+This expression for $A_m$ is valid only for a primitive real $L$-function with orthogonal
+symmetry, which is what we have in the case that $\chi_f$ is principal, which we have
+restricted ourselves to. When $d>0$, $\chi_d(-1)=1$, and so we require $\psi_d(M)=\ep_f$
+so that the product $\psi_d(-M)\vep_f=+1$ and the functional equation of
+$L(s,f\otimes\psi_d)$ is even. This explains why the local factor at the sole ramified
+prime $M$ is evaluated at a fraction with $\ep_f$, the sign of the functional equation of
+$f$, in the numerator, as opposed to $\pm\ep_f$ or otherwise. Setting $s=1/2$ and $r_i=0$,
+we make the definition
+\begin{multline} a_f(m):=A_m(1/2;0,\ldots,0) \\
+=\left[\prod_p\left(1-\frac1p\right)^{m(m-1)/2}\right]
+\times\left[\prod_{p\nmid M}\left(1+\frac1p\right)^{-1}\left(\frac1p
+    +\frac12\left[\mathcal L_p\left(p^{-1/2},f\right)^m
+      +\mathcal L_p\left(-p^{-1/2},f\right)^m\right]\right)\right]
+\times \mathcal L_M\left(\frac{\ep_f}{M^{1/2}},f\right)^m.\end{multline}
+This expression is specified to our case of even twists of a holomorphic Hecke cusp form
+with principal character and prime level, and was first conceived for integral $m$, but we
+will repurpose it for fractional $m$.
+
+We now follow the recipe of~\cite[\S5]{DHKMS}. Since we have restricted to principal
+$\chi_f$, $W^+(f)=SO(2N)$; let $M_{O^+}(N,s):=M_{SO(2N)}(N,s)$ as defined
+in~\eqref{eq:mgfdef}. Then $M_{O^+}(N,s)$ is the moment generating function of the values
+$\left|\Lambda_A(1,N)\right|$ as $A$ varies in the random matrix ensemble $SO(2N)$, and
+$M_{O^+}(N,s)$ can be explicitly evaluated for $\Re s>-1/2$~\cite{rmtL} as
+\be\label{eq:MOexplicit} M_{O^+}(N,s)=\int_{SO(2N)}\Lambda_A(1,N)^s\d A
+=2^{2Ns}\prod_{j=1}^N\frac{\Gamma(N+j-1)\Gamma(s+j-1/2)}{\Gamma(j-1/2)\Gamma(s+j+N-1)}.\ee
+Since the moment generating function of a random variable is related to the probability
+density function by the two-sided Laplace transform, equation~\eqref{eq:MOexplicit} allows
+us to calculate the distribution of the values the characteristic polynomials in the
+ensemble assume at 1. Explicitly, we denote the probability density for values
+$\Lambda_A(1,N)$ with $A\in SO(2N)$ by $P_{O^+}(N,x)$. For $c>0$, we then have
+\be\label{eq:rmtlaplace} P_{O^+}(N,x)=\frac1{2\pi ix}\int_{(c)}M_{O^+}(N,s)x^{-s}\d s.\ee
+For small $x>0$, which is our regime of interest, the simple pole of~\eqref{eq:MOexplicit}
+contributes the main term to $P_{O^+}(N,x)$; we therefore have
+\be\label{eq:POasymp} P_{O^+}(N,x)\sim x^{-1/2}h(N),\ee where
+\be h(N):=\res_{s={-1/2}}M_{O^+}(N,s)=2^{-N}\Gamma(N)^{-1}\prod_{j=1}^N
+\frac{\Gamma(N+j-1)\Gamma(j)}{\Gamma(j-1/2)\Gamma(j+N-3/2)}.\ee
+We also have the asymptotic in large $N$
+\be\label{eq:hNasymp} h(N)\sim2^{-7/8}G(1/2)\pi^{-1/4}N^{3/8},\ee
+where $G$ is the Barnes $G$-function~\cite{barnes}.
+Remarking that $P_{O^+}(Nx,)\d x$ is the probability that a characteristic polynomial
+$\Lambda_A(1,N)$ for $A\in SO(2N)$ attains a value between $x$ and $x+\d x$ and
+leveraging~\eqref{eq:POasymp} gives
+\be\label{eq:probasymp}\Prob\left(0\leq\Lambda_A(1,N)\leq\rho\right)
+=\int_0^\rho P_{O^+}(N,x)\d x\sim\int_0^\rho x^{-1/2}h(N)\d x=2\rho^{1/2}h(N),\ee where the
+middle asymptotic is valid in the regime of small positive $x$.
+
+With the above explicit asymptotic for the probability the characteristic polynomial of
+a random matrix in $SO(2N)$ attains a value at 1 in $[0,\rho]$, the idea in~\cite{DHKMS} is
+then to obtain a formula for the corresponding probability in our family $\mathcal F^+_f(X)$,
+and then to equate the two probabilities. To this end, we introduce a new probability
+density $P_f(d,x)$, which, by~\eqref{eq:momentequivalence}, we expect to serve as a kind of
+smooth approximation to the discretization at the central point of the forms in our family
+corresponding to twists by fundamental discriminants near $d$. As in~\eqref{eq:rmtlaplace},
+we define\be\label{eq:Pfdef}
+P_f(d,x)\ :=\ \frac1{2\pi ix}\int_{(c)}a_f(s) M_{O^+}(\log d,s)x^{-s}\d x
+\sim a_f(-1/2)P_{O^+}(\log d,x),\ee where the last asymptotic is valid for small
+$x$ and is obtained by pulling the line of integration left past the pole at $s=-1/2$.
+
+Recalling Theorem~\ref{KZthm}, we have a discretization at $s=1/2$ for
+$f\otimes\psi_d\in\F^+(X)$ of the form ($d>0$) \be L_f(1/2,\psi_d)
+\ <\ \kappa_f\frac{|c(d)|^2}{d^{(1-k)/2}}\ \Rightarrow\ L_{f}(1/2,\psi_d)\ =\ 0.\ee
+If one were interested in predicting the frequency of vanishing of our family, then, 
+it would be natural to calculate the probability that a random variable $Y_d$ with
+probability density $P_f(d,x)$, assumes a value less than $\kappa_f|c(d)|^2 d^{(1-k)/2}$,
+then sum asymptotically over the family.
+This approach, pioneered by Conrey, Keating, Rubinstein, and Snaith in~\cite{CKRS1}
+and~\cite{CKRS2}, runs into the essential obstacle that in order to obtain an asymptotic
+for the frequency of vanishing with the correct leading coefficient, we need to have some
+idea of the statistical behavior of the coefficient $c(d)$ evaluated at the subset of
+fundamental discriminants $d$ we are considering. (In this article, when $\chi_f$ is
+principal, we are choosing only those positive $d$ that convolve with $f$ to produce an
+even form.)
+
+The coefficients $c(d)$ are the Fourier coefficients of a half-integral weight
+modular form that is obtained via a generalized Shimura correspondence.
+It was Waldspurger~\cite{wald1,wald2} who related the Fourier coefficients $c(n)$ of
+this half-integral weight form obtained via the Shimura correspondence to the central
+values of $L$-functions arising from quadratic twists of an integral weight form.
+Kohnen and Zagier~\cite{KZ} then used this Waldspurger formula to establish a
+discretization at the central point of the functions $L_f(s,\psi_d)$, where $f$ is a cusp
+form for the full modular group.
+In the case that the level $M$ is instead an odd prime and the character $\chi_f$ is
+principal, which is a case we consider here, the Waldspurger-type correspondence and
+formula is due to Kohnen~\cite{kohnen}. More recently, Baruch and Mao~\cite{BM} obtained a
+Waldspurger-type formula valid for automorphic forms over a totally real field, and used it
+to remove some conditions on the fundamental discriminants in the formula of Kohnen and
+Zagier. Mao~\cite{mao} then extended the correspondence to arbitrary odd level.
+
+Though a notion of Shimura correspondence exists for $\chi_f$ non-principal, there is no
+analogous formula of Waldspurger type. For this reason, it is not known whether the values
+$L_f(1/2,\psi_d)$ are discretized in the case $\chi_f$ is not principal. Restricting to
+$\chi_f$ principal, the discretization is known, but the arithmetic of the coefficients
+$c(n)$ is not well-understood. The authors in~\cite[\S4]{CKRS2} use conjectures arising
+from random matrix theory for the value distribution of elliptic curve $L$-functions to
+make a series of conjectures on the statistics of these coefficients $c(d)$. However, one
+would not expect the more complex arithmetic of the coefficients $c(d)$ to be accessible to
+random matrix theory, and indeed predicting the coefficient of the main term of the
+frequency of vanishing of families of elliptic curve $L$-functions related to the families
+we consider here remains out of reach.
+
+It is for this reason that the authors in~\cite{DHKMS} determine this value numerically;
+i.e., they introduce a notion of an `effective' cutoff depending on a parameter that is
+determined numerically, but which does not depend on $d$. We follow, writing
+$\delta_f\kappa_f d^{(1-k)/2}$ for our `effective' cutoff, where $\delta_f$ is a numerical
+input. Then, in analogy with~\eqref{eq:probasymp}, we write
+\be\begin{aligned}\Prob\left(0\leq Y_d\leq\frac{\delta_f\kappa_f}{d^{(k-1)/2}}\right)
+  &\sim\int_0^{\delta_f\kappa_fd^{(1-k)/2}}a_f(-1/2)x^{-1/2}h(\log d)\d x \\
+  &=2a_f(-1/2)\sqrt{\delta_f\kappa_f} d^{(1-k)/4}h(\log d).\end{aligned}\ee
+Following~\cite{CKRS1}, we then conjecture that
+\be\label{eq:probvanish}
+\left|\left\{L_f(s,\psi_d)\in\F^+(X):d\text{ prime, }L_f(1/2,\psi_d)=0\right\}\right|=\left.\sum_{\mathclap{\substack{d\leq X\\d\text{ prime}}}}\right.^\ast
+\Prob\left(0\leq Y_d\leq\frac{\delta_f\kappa_f}{d^{(k-1)/2}}\right),
+\ee where the starred sum in the middle line means that the sum is only over those prime
+fundamental discriminants such that $f\otimes\psi_d$ has an even functional equation, of
+which there are asymptotically $X/4\log X$.
+The convergence of the sum~\eqref{eq:probvanish} is determined by $k$. Namely, if $k=2$ or
+$4$, the sum diverges, and we have the asymptotic
+\be\begin{aligned}
+  \eqref{eq:probvanish}
+  &\sim\frac1{4\log X}\sum_{n=1}^{\lfloor X\rfloor}2a_f(-1/2)\sqrt{\delta_f\kappa_f}
+  n^{(1-k)/4}h(\log X) \\
+  &\sim\frac1{4\log X}\cdot2a_f(-1/2)\sqrt{\delta_f\kappa_f}2^{-7/8}G(1/2)\pi^{-1/4}
+  (\log X)^{3/8}\frac4{5-k}X^{(5-k)/4},\end{aligned}\ee
+where the asymptotic in the last line comes from~\eqref{eq:hNasymp}.
+
+On the other hand, if $k>4$, then the sum~\eqref{eq:probvanish} converges, and we have,
+with the same starred notation,
+\be \sqrt{\delta_f}=
+\frac{\left|\left\{L_f(s,\psi_d)\in\F^+:d\text{ prime, }
+      L_f(1/2,\psi_d)=0\right\}\right|}
+{\left.\sum\limits_{\mathclap{\substack{d\text{ prime}}}}\right.^\ast
+  2a_f(-1/2)\sqrt{\kappa_f}d^{(1-k)/4}h(\log d)}.\ee
+
+\subsection{Translating the cutoff value}
+The probabilities $P_f$ and $P_{O^+}$ are related, for small values of $x$
+(see~\eqref{eq:POasymp} and~\eqref{eq:Pfdef}), by
+\be P_f(d,x)\sim P_{O^+}\left(\nstd,a^{-2}_f(-1/2)x\right),\ee where $\nstd\sim\log d$.
+Thus a cutoff of $\delta_f\kappa_fd^{(1-k)/2}$ applied to $P_f(d,x)$ scales to
+\be\cstd\times\exp\left((1-k)\nstd/2\right)
+:=a_f^{-2}(-1/2)\delta_f\kappa_f\times\exp\left((1-k)\nstd/2\right)\ee for the distribution
+of values of characteristic polynomials of matrices of size $\nstd$.
+
+Now we perform the same calculation for matrices of size $\neff$, referring
+to~\eqref{eq:POasymp}, \eqref{eq:hNasymp}, and \eqref{eq:Pfdef}.
+\be\begin{aligned}
+  P_f(d,x)\sim a_f(-1/2)x^{-1/2}h(\log d)
+  &\sim a_f(-1/2)x^{-1/2}h(2a_1\neff) \\
+  &\sim a_f(-1/2)x^{-1/2}(2a_1)^{3/8}h(\neff) \\
+  &\sim P_{O^+}\left(\neff,a_f^{-2}(-1/2)(2a_1)^{-3/4}x\right).\end{aligned}\ee
+Thus a cutoff of $\delta_f\kappa_fd^{(1-k)/2}$ applied to $P_f(d,x)$ scales to
+\be\ceff\times\exp\left(-\nstd/2\right):=
+a_f^{-2}(-1/2)(2a_1)^{-3/4}\delta_f\kappa_f\times\exp(a_1(1-k)\neff)\ee for the
+distribution of values of characteristic polynomials of matrices of size $\neff$.
+
+\section{Basic automorphic $L$-functions}\label{sec:automorphic}
+We collect some results on the subject of some various convolution $L$-functions of a
+given holomorphic cuspidal newform $L$-function associated to a form of non-principal
+character, making note of where these facts diverge from some existing literature.
+
+In what follows, $f\in S_k^\star(M,\chi_f)$ is a newform of level $M$, weight $k$, and with
+(possibly non-principal) nebentypus $\chi_f$. Such an $f$ has the Fourier (or $q$)
+expansion \be f(s) = \sum_{n\geq1}\lambda_f(n)n^{(k-1)/2}e(nz); \ee
+this normalization of the Fourier coefficients shifts the critical line of the
+$L$-function $L_f(s)$ associated to $f$ to $\Re(s)=\frac12$ so that, among other
+considerations, $L_f(s)$ is a member of the Selberg class of $L$-functions.
+We write $\overline f(z)=\overline{f(\overline z)}
+=\sum_{n\geq1}\overline{\lambda_f(n)}n^{(k-1)/2}e(nz)$ for the form dual to
+$f$ and use the notation $\lambda_{\overline f}(n)$ in lieu of
+$\overline{\lambda_f(n)}$. Deligne~\cite{deligne} proved the bound
+\be\left|\lambda_f(n)\right|\leq d(n)n^{(k-1)/2}\ee
+for any $n\geq1$ as a consequence of the Weil conjectures; $d(n)$ denotes the
+divisor function. We also have the duality relation
+\be\label{eq:lambdaduality} \lambda_f(n)=\chi_f(n)\lambda_{\overline f}(n)
+\quad\text{if $(n,M)=1$} \ee on Fourier coefficients. If $\chi_f$ is principal, then
+$f$ is self-dual by the duality relation and strong multiplicity one, and
+$L_f(s)$ is given by the Dirichlet series
+\be L_f(s)=\sum_{n=1}^\infty \frac{\lambda_f(n)}{n^s},\quad\Re(s)>1, \ee
+and Euler product
+\be\label{eq:leulerprod} L_f(s) = \prod_p\left(1-\frac{\lambda_f(p)}{p^s}+\frac{\chi_f(p)}{p^{2s}}\right)^{-1}
+=\prod_p\left(1-\frac{\alpha_f(p)}{p^s}\right)^{-1}
+\left(1-\frac{\beta_f(p)}{p^s}\right)^{-1},\quad\Re(s)>1, \ee
+where the Satake parameters $\alpha_f, \beta_f$ satisfy
+\be \label{eq:satakeidentity}
+\alpha_f(p)+\beta_f(p)=\lambda_f(p)\quad\text{and}\quad
+\alpha_f(p)\beta_f(p)=\chi_f(p).
+\ee
+By comparing the coefficient of the $p^{-ms}$ term
+of~\eqref{eq:leulerprod} with the Dirichlet series, we obtain the relation
+\be\label{eq:fourierrelation} \lambda_f\left(p^m\right)
+=\sum_{\ell=0}^m \alpha_f(p)^\ell \beta_f(p)^{m-\ell}. \ee
+Specializing to $m=2$, we obtain the following relation on the Fourier
+coefficients of $L_f(s)$:
+\be\label{eq:fouriersquare}
+\lambda_f(p)^2 = \lambda_f\left(p^2\right) + \chi_f(p). \ee
+By dint of the above normalization of the Fourier coefficients, we can relate
+$L_f(s)$ to $L_{\overline f}(1-s)$ by the functional equation
+\be L_f(s)=\epsilon_f
+\left(\frac{\sqrt M}{2\pi}\right)^{1-2s}
+\frac{\Gamma\left(\frac{k+1}2-s\right)}{\Gamma\left(s+\frac{k-1}2\right)}
+L_{\overline f}(1-s) \ee
+where $M$ is the level of $f$ and $\epsilon_f$, the root number associated to
+$f$, has unit modulus.
+
+\subsection{Hecke characters and complex multiplication}\label{sec:cmforms}
+In this section, we give a very brief characterization of forms constructed from Hecke
+grossencharacter. We refer the reader to~\cite[\S12]{iwan},~\cite[\S4.8]{miyake}, and
+especially~\cite{ribet} for more details on these forms.
+
+Let $k\geq2$, let $D<0$ be a fundamental discriminant, let $K=\Q(\sqrt D)$ be the
+corresponding imaginary quadratic field, $\pazocal O_K$ its ring of integers,
+$I$ the group of fractional ideals, $\a\subset\pazocal O_K$ a modulus,
+\be I(\a):=\left\{\mathfrak a\in I:(\mathfrak a,\a)=1\right\}\ee
+the group of fractional ideals prime to $\a$, and $\xi:I(\a)\ra\C^\times$ a group
+homomorphism satisfying $\xi\left(\alpha\pazocal O_K\right)=\alpha^{k-1}$ when
+$\alpha\equiv1\mod\a$. Then $\xi$ is a so-called Hecke grossencharacter.
+Put $\omega_\xi(n):=\xi\left(n\pazocal O_K\right)/n^{k-1}$. Then $\omega_\xi$ is a
+Dirichlet character, and
+\be\label{eq:cmdef} g(z)\ =\ \sum_{\mathfrak a\subset\pazocal O_K}\xi(\mathfrak a)e(\Nm\a z)\ \in\ S_k(\Gamma_0(|D|\Nm\a),\psi_K\omega_\xi),\ee
+where $\psi_K=\left(\frac D\cdot\right)$ is
+the Kronecker symbol attached to the fundamental discriminant $D<0$ corresponding to $K$
+and $\Nm:I\ra\Q^\times$ denotes the norm map; in the case of an integral ideal
+$\mathfrak a$, $\Nm\mathfrak a$ is simply the number of residue classes modulo
+$\mathfrak a$; i.e., $\left|\pazocal O_K/\mathfrak a\right|$.
+
+\begin{defn} A newform $f$ is said to have complex multiplication (CM) if there is a
+  nontrivial Dirichlet character $\eta$ such that $\eta(p)\lambda_f(p)=\lambda_f(p)$
+  for all primes $p$ in a set of primes of density 1.\end{defn}
+On the one hand, Ribet~\cite{ribet} showed that if $f$ has CM by an imaginary quadratic field
+$K$, it arises from a Hecke grossencharacter associated to $K$.
+On the other, let $g$ (constructed as above) have the un-normalized $q$-expansion
+$g(z)=\sum_{n=1}^\infty c_ne(nz)$, and if $p\nmid|D|\Nm\a$, then let $a_p$ denote the
+eigenvalue of the Hecke operator $T_p$ on $g$.
+It is then the case \cite[Corollary 3.5]{ribet} that there exists a unique newform $h$
+of weight $k$ and character $\omega_\xi\psi_K$ with $q$-expansion
+$h(z)=\sum_{n=1}^\infty a_ne(nz)$ such that $a_p=c_p$ for $p\nmid|D|\Nm\a$. Furthermore,
+$a_p=0$ if $\psi_K(p)=-1$, so that $h$ has complex multiplication.
+
+It is even possible to construct integral-weight cusp forms $f$ with complex multiplication
+by their own nebentypuses; Shimura constructed examples of this type from imaginary
+quadratic fields with class number 1 and unit group $\{\pm1\}$; the associated modulus is
+then all of $\pazocal O_K$, so the level $M=|D|$. Such an $f$ has odd integral weight,
+trivial $\omega_\xi$ (the Dirichlet character associated to the grossencharacter), and it
+follows that the field of eigenvalues for $f$ is totally real, hence $f$ has all real
+Fourier coefficients, and is self-dual.
+We call such $f$ self-dual CM forms with nontrivial nebentypus, or `self-CM' forms.
+We record a property of self-CM forms that we will refer to later.
+\begin{lemma}\label{lem:goinnowhere} Let $f$ be self-CM of level $M$.
+  Then for each positive fundamental discriminant $d$ prime to $M$,
+  $\ep_{f\otimes\psi_d}=\ep_f$.\end{lemma}
+\begin{proof}
+  Since $f$ is self-CM, $\Nm\a=1$ and $M=|D|$.
+  For any $f\in S^\star_k(M,\chi)$, the behavior of the root number $\ep_f$ under twisting
+  by a Dirichlet character $\psi$, primitive modulo $r$ with $(r,M)=1$, is given explicitly
+  by \be\ep_{f\otimes\psi}=\ep_f\chi(r)\psi(M)\frac{\tau(\psi)^2}{r},\ee where $\tau(\psi)$
+  denotes the Gauss sum. This fact, combined with \eqref{eq:cmdef}, the facts that
+  $\psi_d=\left(\frac d\cdot\right)$ is real, $D<0<d$, and $\omega_\xi$ is trivial,
+  and quadratic reciprocity, together imply
+  \be\label{eq:quadrecip}
+  \ep_{f\otimes\psi_d}=\chi_f(d)\psi_d(M)\frac{\tau(\psi_d)^2}{d}\ep_f
+  =\psi_D(d)\psi_d(-|D|)\ep_f=\left(\frac Dd\right)\left(\frac d{|D|} \right)\ep_f
+  =(-1)^{(D'-1)(d'-1)/4}\ep_f,\ee
+  where $D'$, $d'$ denote the odd parts (maximal odd divisors with the same sign) of $D$
+  and $d$, respectively. Since $D$ and $d$ are both fundamental discriminants and share no
+  prime factors, one of $\left\{D,d\right\}$ must be odd and therefore congruent to
+  $1$ mod $4$ since both $D$ and $d$ are fundamental discriminants.
+  We conclude $(-1)^{(D'-1)(d'-1)/4}=+1$, and $\ep_{f\otimes\psi_d}=\ep_f$.
+\end{proof}
+
+\subsection{Rankin-Selberg convolution}\label{sec:rs}
+The main convolution $L$-series we concern ourselves with is the classical one
+introduced by Rankin and Selberg. For two newforms $f$ and $g$ of level $M_f$,
+$M_g$, respectively, the Dirichlet series of the Rankin-Selberg convolution is
+\be\label{eq:rsdirichlet}
+L(f\otimes g,s)=L(\chi_f\chi_g,2s)\sum_{n\geq1}\lambda_f(n)\lambda_g(n)n^{-s}
+\ee
+if $(M_f,M_g)=1$ and $[M_f,M_g]$ is square-free.
+Note that $L(f\times g,s)$ is frequently written for the convolution $L$-series
+in the factorization~\eqref{eq:rsdirichlet} of $L(f\otimes g,s)$. $L(f\times g,s)$
+is an $L$-function.
+However, this characterization of $L(f\otimes g,s)$ is not of use to us since we
+will be considering the convolution of a Hecke form with itself or with its dual.
+Fortunately, $L(f\otimes g,s)$ is an $L$-function, and therefore admits an Euler
+product. The local factors at unramified primes (those primes not dividing the level
+of $f$ or $g$) are given by
+\be\label{eq:rseuler}\begin{aligned} L_p(f\otimes g,s)&=
+(1-\alpha_f(p)\alpha_g(p)p^{-s})^{-1}
+(1-\alpha_f(p)\beta_g(p)p^{-s})^{-1}
+(1-\beta_f(p)\alpha_g(p)p^{-s})^{-1}
+(1-\beta_f(p)\beta_g(p)p^{-s})^{-1} \\
+&=\begin{aligned}[t]
+  &1-\frac{\lambda_f(p)\lambda_g(p)}{p^s}+\frac{\chi_f(p)\lambda_g(p)^2
+    +\chi_g(p)\lambda_f(p)^2-2\chi_f(p)\chi_g(p)}{p^{2s}} \\
+  &-\frac{\chi_f(p)\chi_g(p)\lambda_f(p)\lambda_g(p)}{p^{3s}}
+  +\frac{(\chi_f(p)\chi_g(p))^2}{p^{4s}}.\end{aligned}
+\end{aligned}\ee
+The local factors at ramified places are harder to write down in all cases,
+but in the case that $f$ and $g$ have trivial character (and hence real Fourier
+coefficients) and the levels $M_f$, $M_g$ are both square-free, Ogg writes down
+the local factors of the convolution $L$-function in~\cite[Theorem 6]{Ogg}, with
+a different normalization of the Fourier coefficients.
+
+We first consider a more general case, where $f$ and $g$ are allowed to have
+nontrivial characters, but where $p\| M_f$ and $p\nmid M_g$. At primes dividing
+the level, $\alpha_f(p)=\lambda_f(p)$ and $\beta_f(p)=0$;
+see~\cite[\S2]{simplezeros}. In this case, the local factor at $p$ is still given
+by~\eqref{eq:rseuler}.\footnote{To see this, combine the remarks
+  on~\cite[p.133]{IK} with the appropriate comments on page 2 of the errata at
+  \url{http://www.math.ethz.ch/~kowalski/corrections-ant.pdf}.}
+Restricting further to the case that the character of $f$ is principal,
+$\alpha_f(p)^2=\lambda_f(p)^2=p^{-1}$, and the local factor at $p$ simplifies to
+\be \left(1-\lambda_f(p)\lambda_g(p)p^{-s}+p^{-1-2s}\right)^{-1}.\ee
+This is what Ogg writes down in the special case that $f$ and $g$ have trivial
+character and square-free levels $M_f$, $M_g$, and $p\mid M_1$, $p\nmid M_2$.
+
+In the case that $p\mid(M_f,M_g)$, even exactly, the local factor at $p$ differs
+from~\eqref{eq:rseuler}. In the special case of two cusp forms with trivial
+character and square-free levels $M_f$ and $M_g$, Ogg writes down the local
+factor explicitly. Put \be \kappa_{fg}(p):=\lambda_f(p)\lambda_g(p)p.\ee
+Then, since the Fourier coefficients are real and $p\mid(M_f,M_g)$,
+$\left|\lambda_f(p)\right|=p^{-1/2}=\left|\lambda_g(p)\right|$, and
+$\kappa_{fg}(p)=\pm1$. In this case, the local factor of $L(f\otimes g,s)$ at
+$p$ is given by \be\label{eq:ogglocal2} \left(1-\kappa_{fg}(p)p^{-s}\right)^{-1}
+\left(1-\kappa_{fg}(p)p^{-1-s}\right)^{-1}.\ee
+
+Mœglin and Waldspurger~\cite{MW} proved that $L(f\otimes g,s)$ is entire if
+$g\ne\overline f$, and has a simple pole at $s=1$ if $g=\overline f$.
+There is a formula for the residue of $L(f\otimes\overline f,s)$; it is
+\be\label{eq:rsres}
+\res_{s=1}L(f\otimes\overline f,s)=\frac{(4\pi)^k\langle f,f\rangle}
+{\Gamma(k)\operatorname{vol}(\Gamma_0(M_f)\backslash\mathfrak H)}=\Lad{1},\ee
+where $\langle \cdot,\cdot\rangle$ is the Petersson inner product.
+The convolution $L$-function $L(f\times\overline f,s)$ defined above contains
+the pole of $L(f\otimes\overline f,s)$ at $s=1$ and
+\be\res_{s=1} L(f\times\overline f,s)
+= \lim_{x\ra\infty}\frac1 x\sum_{n\leq x}\left|\lambda_f(n)\right|^2.\ee
+This expression for the residue of $L_f(f\times\overline f,s)$ at $s=1$
+essentially follows from the work of Rankin and Selberg
+(c.f.~\cite[Remark~1.3, p.4]{simplezeros}). We will not need it here.
+
+\subsection{Symmetric and adjoint square $L$-functions}\label{sec:symad}
+We turn now to the definition and properties of the symmetric square and
+adjoint square $L$-functions of newforms. Following~\cite{IK}, we define them as
+factors of Rankin-Selberg convolutions. Let $\chi_f'$ denote the primitive
+character that induces $\chi_f$, the nebentypus of $f$. Then we have
+\begin{align}
+  \label{eq:symfactorization}
+  \Lsym{s} &:= L(f\otimes f,s)L(\chi'_f,s)^{-1} \\
+  \label{eq:adfactorization}
+  \Lad{s} &:= L(f\otimes\overline f,s)\zeta(s)^{-1}.
+\end{align}
+This is a reproduction of lines (5.97) and (5.98) in~\cite{IK} with one modification;
+namely, the replacement of the character with the primitive character that
+induces it.
+
+Note $L_f(\sym^2,s)$ has an Euler product with local factors at primes not dividing
+the level given by
+\be\label{eq:symeuler}
+(1-\alpha_f(p)^2p^{-s})^{-1}
+(1-\alpha_f(p)\beta_f(p)p^{-s})^{-1}
+(1-\beta_f(p)^2p^{-s})^{-1}.
+\ee
+Because of the factorization~\eqref{eq:symfactorization}, writing down local factors
+at ramified places of $L_f(\sym^2,s)$ is exactly as hard as writing down the
+corresponding local factor for $L(f\otimes f,s)$; see the discussion in
+\S\ref{sec:rs}. Note that in~\cite{HKS}, equations (2.29) and (2.30)
+for the Euler product of the symmetric square agree with the above remarks.
+In the case of
+trivial character, which is the elliptic curve case considered in~\cite{HKS},
+after restricting to prime level as they do, recognizing that
+$\lambda_f(p)^2=p^{-1}$ in the~\cite[(2.30)]{HKS} formula, applying Ogg's
+formula~\eqref{eq:ogglocal2} (with $\kappa_{ff}=1$), and leveraging the
+factorization~\eqref{eq:symfactorization}, we find agreement.
+
+We now compile some analytic facts about these functions in general. First,
+note that $L_f(\ad^2,s)$ is always entire since $L(f\otimes\overline f,s)$
+always has a simple pole at $s=1$, which cancels that of $\zeta(s)$.
+The value $\Lad{s}$ assumes at $s=1$ is of arithmetic significance, as we have the
+special equality \be\label{eq:ad1}\Lad{1}=\res_{s=1}L(f\otimes\overline f,s).\ee
+In the case that $\chi_f$ is principal, $\chi'_f\equiv1$ and the duality
+relation~\eqref{eq:lambdaduality} implies $f=\overline f$.
+This is enough conclude that in this case, $L_f(\ad^2,s) = L_f(\sym^2,s)$.
+Suppose now that $\chi_f$ is not principal. Then $L(s,\chi_f)$ is entire,
+but $L(f\otimes f,s)$ still may not be, since $f$ may still be self-dual.
+If $\chi_f$ is nontrivial, $f$ is self-dual only if $f$ has CM, as described
+in~\S\ref{sec:cmforms}. More generally, if $f$ is constructed from a Hecke grossencharacter
+$\xi$, then we have the factorization $\Lsym{s}=L(s,\xi^2)L(s,\omega_\xi)$. If $f$ is CM
+and self-dual with nontrivial nebentypus, then $L(s,\omega_\xi)=\zeta(s)$, so again we see
+that $\Lsym{s}$ has a pole.
+
+In view of this, the statement in~\cite[p.\,137]{IK} that `if $f$ has real
+coefficients, then the symmetric and adjoint squares coincide,' is not quite
+right, since it excludes the possibility of self-CM forms. In this case, the adjoint and
+symmetric square $L$-functions do not coincide, since $L(s,\chi'_f)\ne\zeta(s)$. This is
+the only case where $L_f(\sym^2,s)$ is \emph{not} entire, since in this case,
+$f=\overline f$ so $L(f\otimes f,s)$ has a pole at $s=1$, but $L(\chi'_f,s)$ is entire.
+Hence $L_f(\sym^2,s)$ inherits the pole from $L(f\otimes f,s)$.
+
+\section{Ratios conjecture}
+It is necessary to obtain a one-level density formula to calculate $\neff$.
+We use the ratios conjectures. Let $f\in S_k^\star(M,\chi_f)$ be as
+in~\S\ref{sec:automorphic}.
+
+Let $L(f\otimes\psi_d,s)$ denote the $L$-function obtained by twisting $L_f(s)$
+by a quadratic character. Here $d$ is a fundamental discriminant, and $\psi_d$
+is the Kronecker symbol. Then the twisted $L$-function $L(f\otimes\psi_d,s)$ is given, in
+the half-plane $\Re(s)>1$, by
+\be\label{eq:deftwistedLfun}
+L(f\otimes\psi_d,s) = \sum_{n\geq1}\frac{\lambda_f(n)\psi_d(n)}{n^s}
+=
+\prod_p\left(1-\frac{\lambda_f(p)\psi_d(p)}{p^s}+
+  \frac{\chi_f(p)\psi_d(p)^2}{p^{2s}}\right)^{-1},
+\ee
+where $\chi_f$ is the nebentypus of $f$.
+
+Provided $(d,M)=1$, $L(f\otimes\psi_d,s)$ obeys the functional equation
+\be\label{eq:twistedfuneq}
+L(f\otimes\psi_d,s)
+=\omega_f(d)\epsilon_f
+\left(\frac{\sqrt M|d|}{2\pi}\right)^{1-2s}
+\frac{\Gamma\left(\frac{k+1}2-s\right)}{\Gamma\left(s+\frac{k-1}2\right)}
+L(\overline f\otimes\psi_d,1-s),\ee
+where $\omega_f(d) = \chi_f(d)\psi_d(M)\frac{\tau(\psi)^2}{d}$,\footnote{c.f.~\cite[p.377]{IK}.}
+but since $\psi_d$ is quadratic and hence real, we have the identity
+$\tau(\psi_d)^2=\psi_d(-1)d$,\footnote{c.f.~\cite[Theorem 2.1.47]{cohenNT}.}
+whence \be\omega_f(d) = \chi_f(d)\psi_d(-M).\ee
+We record the Dirichlet series which define the $L$-functions dual to $L_f(s)$
+and $L(f\otimes\psi_d,s)$, respectively, in the half-plane $\Re(s)>1$.
+\be L(\overline f,s)=\sum_{n\geq1}\frac{\overline{\lambda_f(n)}}{n^s}, \quad\text{and}\quad
+L(\overline f\otimes\psi_d,s)=\sum_{n\geq1}\frac{\overline{\lambda_f(n)}\psi_d(n)}{n^{s}}.
+\ee
+
+To derive a formula for the one-level density of the zeros near the critical
+point $s=\frac12$ of $L$-functions for our family, we
+consider the average over the family of a ratio of shifted $L$-functions:
+\be\label{eq:Rfdef} R_f(\alpha,\gamma):=\sum_{\substack{0<d\leq X\\d\text{ good}}}
+\frac{L\left(f\otimes\psi_d,\frac12+\alpha\right)}{L\left(f\otimes\psi_d,\frac12+\gamma\right)},\ee
+where the conditions on good $d$ will be described below in~\eqref{eq:dgooddef}.
+Using~\eqref{eq:deftwistedLfun}, we have
+\be\label{eq:recipseries}
+\frac1{L(f\otimes\psi_d,s)}=\sum_{n\geq1}\frac{\mu_f(n)\psi_d(n)}{n^s},\ee
+where $\mu_f(n)$ is a multiplicative function defined by
+\be \mu_f(n) = \begin{cases}
+  -\lambda_f(p) & \text{if $n=p$,} \\
+  \chi_f(p) & \text{if $n=p^2$,} \\
+  0 & \text{if $n=p^j$, $j>2$.}
+\end{cases} \label{eq:mudef} \ee
+We now use the approximate functional equation for the $L$-function in the
+numerator of~\eqref{eq:Rfdef}:
+\be\label{eq:approxfuneq}
+L\left(f\otimes\psi_d,\frac12+\alpha\right)
+=
+\sum_{m<x}\frac{\psi_d(m)\lambda_f(m)}{m^{\frac12+\alpha}}
++
+\omega_f(d)\ep_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2\alpha}
+\frac{\Gamma\left(\frac k2-\alpha\right)}{\Gamma\left(\frac k2+\alpha\right)}
+\sum_{n<y}\frac{\overline{\lambda_f(n)}\psi_d(n)}
+{n^{\frac12-\alpha}}+\text{remainder},
+\ee
+where $xy=d^2/2\pi$. We denote the first sum arising from the approximate
+functional equation $R_f^1(\alpha,\gamma)$; it is thus given by
+\be\label{eq:R1def}R_f^1(\alpha,\gamma):=\sum_{\substack{0<d\leq X\\d\text{ good}}}
+\sum_{h,m}\frac{\lambda_f(m)\mu_f(h)\psi_d(mh)}{m^{\frac12+\alpha}h^{\frac12+\gamma}}.\ee
+Likewise for $R_f^2(\alpha,\gamma)$:
+\be\label{eq:R2def}R_f^2(\alpha,\gamma):=
+\omega_f(d)\ep_f\frac{\Gamma\left(\frac k2-\alpha\right)}{\Gamma\left(\frac k2+\alpha\right)}
+\sum_{\substack{0<d\leq X\\d\text{ good}}}\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2\alpha}
+\sum_{h,m}\frac{\overline{\lambda_f(m)}\mu_f(h)\psi_d(mh)}
+{m^{\frac12-\alpha}h^{\frac12+\gamma}}.\ee
+The recipe given in~\cite{recipe} instructs to discard the remainder in the
+approximate functional equation, and instructs us to replace the root numbers and summands
+with their expectations over the family. The expectation of the root numbers
+$\langle\omega_f(d)\ep_f\rangle$ will be determined by our choice of family in the next
+section, where we will also determine the expectation for the summand. After these
+replacements, we are left with a kind of equivalence
+\be R_f(\alpha,\gamma)\approx R^1_f(\alpha,\gamma)+R^2_f(\alpha,\gamma). \ee
+For other examples, see
+{\it\color{Red}[Miller will add]}.
+
+\subsection{Expectations}\label{sec:expectations}
+The recipe calls for the replacement of $\omega_f(d)\ep_f$ and $\psi_d(mh)$ with their
+averages over the family (the set of fundamental discriminants $d$ being summed over).
+Addressing the latter first, we begin by setting
+\be X^*_b = \sum_{\substack{0<d\leq X\\d\equiv b\mod M}} 1.\ee
+\cite[Theorem 3.1.1]{recipe} contains the following expected value estimate,
+provided that $M$ is either odd or divisible by at least 8 and $(b,M)$ is not
+divisible by an odd prime square:
+\be\label{eq:charexpect}
+\frac1{X^*_b}\sum_{\substack{0<d\leq X\\d\equiv b\mod M}}\psi_d(n)
+\approx
+\begin{cases}
+  \psi_b(g)a(n) & \parbox[t]{0.5\textwidth}{if $n=g\square$, where
+    $(\square,M)=1$ and $g$ has no prime factors not shared by $M$,} \\
+  0 & \text{otherwise,}
+\end{cases}\ee
+\begin{equation*}
+\text{where}\quad a(n)=\prod_{p\mid\square}\frac{p}{p+1}.
+\end{equation*}
+That is, the terms not of the form $n=g\square$ (with the above conditions on
+$g$ and $\square$).
+
+The recipe calls for a splitting of the sums by residue classes of $d\mod M$ and the
+replacement of the oscillatory term with its expected value; in our case, the diagonal
+character sum estimate. How we split depends on $f$, but the general principle that
+freedom in the level and freedom in $d$ are inverse to each other is generally valid.
+That is, imposing restrictive conditions on the prime factorization of $M$ allows us to
+impose few on $d$, while treating general $M$ causes us to need to split discriminants by
+various residue classes depending on the factorization of $M$ to distinguish the various
+contributions to the overall oscillation. This principle justifies the following
+restrictions on $M$ and $d$.
+
+If $\chi_f$ is trivial or $f\ne\overline f$, we insist $M$ is an odd prime.
+Then $g=M^\ell$,
+where $\ell$ depends on $n$. In the former case of trivial character, we restrict to even
+fundamental discriminants; then
+$\psi_b(M^\ell)=\psi_d(M)^\ell=\left(\chi_f(d)\ep_f\right)^\ell=\ep_f^\ell$, since
+$b\equiv d\mod M$, $d$ satisfies $\chi_f(d)\psi_d(-M)\ep_f=+1$, and $\chi_f$ is trivial.
+In the latter case that $f\ne\overline f$, which implies $\chi_f$ nontrivial, there is
+no longer any notion of `even' or `odd' functional equation, and we simply restrict $d$
+to the set of quadratic residues modulo $M$.
+
+We also treat the case of self-dual CM forms with nontrivial nebentypus
+(self-CM for short; c.f.~\S\ref{sec:cmforms} for their construction and a brief summary of
+some of their relevant properties). Per Shimura's construction, these forms come about when
+the modulus of an imaginary quadratic field $K$ is taken to be the whole ring of integers
+$\pazocal O_K$.
+Therefore, the level $M$ of such a form is exactly $|D|$, where $D<0$ is the fundamental
+discriminant of $K$. Lemma~\ref{lem:goinnowhere} implies that we cannot change the sign of
+such $f$ with quadratic twists by positive discriminants prime to the level. Therefore, we
+simply restrict to $|D|$ prime and $\ep_f=+1$, and then split $d$ by residue classes mod
+$|D|$.
+
+In view of the above discussion, we now make precise the notion of `good' $d$ by defining
+the set $\D(X)$, which will allow us to determine the corresponding expectations.
+\begin{defn}\label{def:D}
+  Let $\mathcal D$ denote the set of fundamental discriminants: integers either square-free
+  and $\equiv1\mod4$, or equal to 4 times a square-free number $\equiv2$ or $3\mod 4$.
+  Let $f\in S_k^\star(M,\chi_f)$ be a newform, \emph{with $M$ an odd
+    prime. If $f$ is self-CM, assume $\ep_f=+1$.} With these restrictions on $f$, let
+  $\heartsuit\in\{\pm1\}$ and $1\leq\diamondsuit<M$ be integers, and put
+  \be\label{eq:dgooddef}\D(X):=\left\{\begin{aligned}
+      &\left\{d\in\mathcal D:0<d\leq X\text{ and }\psi_d(M)\ep_f=+1\right\}
+      &&\text{$\chi_f$ principal,} \\
+      &\left\{d\in\mathcal D:0<d\leq X\text{ and }\psi_d(M)=\heartsuit \right\}
+      &&\text{$f$ self-CM,} \\
+      &\left\{d\in\mathcal D:0<d\leq X\text{ and }d\equiv\diamondsuit\mod M \right\}
+      &&\text{$f\ne\overline f$.}\end{aligned}\right.\ee
+\end{defn}
+We now make precise our family $\F$.
+\begin{defn}\label{def:F}
+  Let \be\F(X):=\left\{L({f\otimes\psi_d},s):d\in\D(X)\right\},\ee
+  with $f\in S^\star_k(M,\chi_f)$ restricted as in Definition~\ref{def:D}.
+\end{defn}
+Then, if $\chi_f$ is principal, $\F$ is the family of even quadratic twists
+of $L_f(s)$. If $f$ is self-CM, $\F$ is the subfamily of the family of even
+quadratic twists, with an added condition on the residue class of $d\mod M$.
+If $f\ne\overline f$, then there is no notion of the parity of the functional equation
+of $L_f(s)$, and $\F$ is a subfamily of the family of quadratic twists of
+$L_f(s)$, with an added condition on the residue class of $d\mod M$.
+
+For $d\in\D(X)$, $\psi_d(M)$ assumes the value
+\be\E(M)=\begin{cases}
+  \ep_f&\chi_f\text{ trivial,} \\
+  \heartsuit&\text{$f$ self-CM} \\
+  \left(\frac\diamondsuit M\right)&f\ne\overline f.\end{cases}\ee
+This allows us to replace each summand of $R_f(\alpha,\gamma)$ by its expectation over
+the family. As for the root number $\omega_f(d)\ep_f$, we have the expectation
+\be\label{eq:rootexpect}
+\eta_f:=\langle\omega_f(d)\ep_f\rangle=\begin{cases}1&f=\overline f \\
+  \ep_f&\text{$f$ self-CM}\\
+  \chi_f(\diamondsuit)\left(\frac\diamondsuit M\right)\ep_f&f\ne\overline f\end{cases}\ee
+over $d$ by construction.
+Recall we have restricted to even self-CM forms, so $\ep_f$ actually equals 1 in that
+case. We prove the below cardinality estimates in Lemma~\ref{lem:funcount}:
+\be\label{eq:cardest}\left|\D(X)\right|=
+\begin{cases}
+  \frac3{\pi^2}\frac M{2(M+1)}X+O\left(X^{1/2}\right)&f=\overline f \\
+  \frac3{\pi^2}\frac M{M^2-1}X+O\left(X^{1/2}\right)&f\ne\overline f.
+\end{cases}\ee
+
+\subsection{Factoring divergent $L$-factors}
+Since $\lambda_f(n)$ is a multiplicative function, it is natural to express
+$R^1_f(\alpha,\gamma)$ as the Euler product
+% The below is no longer convenient because we have defined the expectations locally.
+% \be R^1_f(\alpha,\gamma)\approx \left|\D(X)\right|\sum_{mh=\square M^\ell}
+% \frac{\lambda_f(m)\mu_f(h)a(mh)\E^\ell}
+% {m^{\frac12+\alpha}h^{\frac12+\gamma}},
+% \quad\text{with $(\square,M)=1$,} \ee which, factors as
+\be R^1_f(\alpha,\gamma)\approx
+\left|\D(X)\right|V_\mid(\alpha,\gamma)V_\nmid(\alpha,\gamma),\ee where
+\begin{align}\label{eq:Vmid}
+  & V_{\mid}(\alpha,\gamma) := \prod_{p\mid M}\left(\sum_{h,m\geq 0}
+    \frac{\lambda_f(p^m)\mu_f(p^h)\E^{m+h}(p)}
+    {p^{m(1/2+\alpha)+h(1/2+\gamma)}}\right),\quad\text{and} \\
+  & V_\nmid(\alpha,\gamma) := \prod_{p\nmid M}
+  \Bigg(1 + \frac p{p+1}
+    \sum_{\substack{m,h\geq 0\\m+h>0\\m+h\text{ even}}}
+    \frac{\lambda_f(p^m)\mu_f(p^h)}{p^{m(1/2+\alpha)+h(1/2+\gamma)}}
+  \Bigg).
+  \label{eq:Vnmidraw}
+\end{align}
+The definition \eqref{eq:mudef} implies that we need only consider $h=0,1$
+for~\eqref{eq:Vmid} and $h=0,1,2$ for~\eqref{eq:Vnmidraw}. We are left with
+\begin{align}
+&V_\mid(\alpha,\gamma)=\prod_{p\mid M}
+\left(
+  \sum_{m=0}^\infty\left(
+    \frac{\lambda_f(p^{m})\E^{m}(p)}{p^{m(1/2+\alpha)}}
+    -\frac{\lambda_f(p)\lambda(p^{m})\E^{m+1}(p)}
+    {p^{m(1/2+\alpha)+1/2+\gamma}}
+  \right)
+\right),\quad\text{and} \\
+&V_\nmid(\alpha,\gamma)=\prod_{p\nmid M}
+\left(1+\frac p{p+1}\left(
+    \sum_{m=1}^\infty
+    \frac{\lambda_f(p^{2m})}{p^{m(1+2\alpha)}}
+    -\frac{\lambda_f(p)}{p^{1+\alpha+\gamma}}
+    \sum_{m=0}^\infty
+    \frac{\lambda(p^{2m+1})}{p^{m(1+2\alpha)}}
+    +\frac{\chi_f(p)}{p^{1+2\gamma}}
+    \sum_{m=0}^\infty
+    \frac{\lambda_f(p^{2m})}{p^{m(1+2\alpha)}}
+  \right)
+\right).
+\label{eq:Vnmid}
+\end{align}
+Recall the definition of the symmetric square $L$-function $L_f(\sym^2,s)$
+associated to a fixed newform, given in~\eqref{eq:symfactorization}, and the form of its
+local Euler factors at unramified primes, given in~\eqref{eq:symeuler}.
+We wish to rewrite the Euler product for $L_f(\sym^2,s)$ in terms of the Fourier
+coefficients. Using~\eqref{eq:satakeidentity} and~\eqref{eq:fouriersquare}, we
+have that the local factor of $\Lsym{s}$ at a prime not dividing the level
+is given by
+\be\label{eq:symlocalfactor}
+  \left(1-\frac{\lambda_f(p)^2-\alpha_f(p)\beta_f(p)}{p^s}
+  + \frac{\alpha_f(p)\beta_f(p)(\lambda_f(p)^2-\alpha_f(p)\beta_f(p))}{p^{2s}}
+  - \frac{\alpha_f(p)^3\beta_f(p)^3}{p^{3s}}\right)^{-1}.
+\ee
+We now consider~\eqref{eq:Vnmid} and~\eqref{eq:symlocalfactor} together.
+We want to allow $-\frac14<\Re(\alpha)<\frac14$ and $\log X\ll\Re(\gamma)<\frac14$,
+where the bounds at $\frac{1}{4}$ allow us to control the convergence of
+Euler products of the type~\eqref{eq:Vnmid}. Suppose
+$\Re(\alpha)$ and $\Re(\gamma)$ are very small. We write
+\begin{align}
+  V_\nmid(\alpha,\gamma)&=\prod_{p\nmid M}
+  \left(1+\frac p{p+1}\left(
+      \sum_{m=1}^\infty
+      \frac{\lambda_f(p^{2m})}{p^{m(1+2\alpha)}}
+      -\frac{\lambda_f(p)}{p^{1+\alpha+\gamma}}
+      \sum_{m=0}^\infty
+      \frac{\lambda_f(p^{2m+1})}{p^{m(1+2\alpha)}}
+      +\frac{\chi_f(p)}{p^{1+2\gamma}}
+      \sum_{m=0}^\infty
+      \frac{\lambda_f(p^{2m})}{p^{m(1+2\alpha)}}
+    \right)
+  \right) \\
+  &=
+  \prod_{p\nmid M}\left(1+\frac{\lambda(p^2)}{p^{1+2\alpha}}
+    -\frac{\lambda_f(p^2)+\chi_f(p)}{p^{1+\alpha+\gamma}}
+    +\frac{\chi_f(p)}{p^{1+2\gamma}}+\cdots\right),
+  \label{eq:Vnmidexpanded}
+\end{align}
+where the $\cdots$ indicate terms that converge like $1/p^2$ when $\alpha$ or
+$\gamma$ are small. We now use the following approximations to factor out the
+divergent or slowly converging terms. By~\eqref{eq:symlocalfactor} we have
+that the local factor of $\Lsym{1+2\alpha}$ at a prime not dividing the level is
+\be
+\left(1-\frac{\lambda_f(p^2)}{p^{1+2\alpha}}
+  +\frac{\lambda_f(p^2)\chi_f(p)}{p^{2(1+2\alpha)}}
+  -\frac{\chi_f(p)^3}{p^{3(1+2\alpha)}}
+\right)^{-1}
+=\left(1+\frac{\lambda(p^2)}{p^{1+2\alpha}}+\cdots\right),
+\ee
+where here we use the dots $\ldots$ in the same way as above.
+We also observe that the local factor at a prime not dividing the level of
+$\Lsym{1+\alpha+\gamma}^{-1}\Lchi{1+\alpha+\gamma}^{-1}$ coincides with that
+of $L(f\otimes f,1+\alpha+\gamma)^{-1}$ by~\eqref{eq:symfactorization}; this factor
+is \be\left(1-\frac{\lambda(p^2)+\chi_f(p)}{p^{1+\alpha+\gamma}}+\cdots\right).\ee
+Last, we need to account for the factor $\chi_f(p)/p^{1+2\gamma}$
+in~\eqref{eq:Vnmidexpanded}. If $\chi_f$ is nontrivial, this term is convergent
+since $\Lchi{s}$ is entire. However, $\chi_f$ may be principal, in which case
+we need to account for it. Note that both $\Lchi{s}$ and $\Lchi[']{s}$ have the same
+local factors at primes not dividing the modulus of $\chi_f$, which is just $M$.
+Therefore, we let a factor of $\Lchi[']{1+2\gamma}$ account for the divergence of
+the term $\chi_f(p)/p^{1+2\gamma}$ in~\eqref{eq:Vnmidexpanded}.
+
+Hence we can write
+\be V_\nmid(\alpha,\gamma)V_\mid(\alpha,\gamma)
+=Y_f(\alpha,\gamma)A_f(\alpha,\gamma), \ee
+where
+\be\label{eq:Yfdef}
+\begin{aligned}
+  Y_f(\alpha,\gamma)
+  &=\frac{\Lchi[']{1+2\gamma}\Lsym{1+2\alpha}}{L(f\otimes f,1+\alpha+\gamma)} \\
+  &=\frac{\Lchi[']{1+2\gamma}\Lsym{1+2\alpha}}
+  {\Lchi[']{1+\alpha+\gamma}\Lsym{1+\alpha+\gamma}},
+\end{aligned}\ee
+  
+and $A_f(\alpha,\gamma)$ is given by
+\be\label{eq:Afdef} \begin{aligned}
+  A_f(\alpha,\gamma) &= Y_f(\alpha,\gamma)^{-1} \\
+  &\times
+  \prod_{p\nmid M}
+  \left(1+\frac p{p+1}\left(
+      \sum_{m=1}^\infty
+      \frac{\lambda_f(p^{2m})}{p^{m(1+2\alpha)}}
+      -\frac{\lambda_f(p)}{p^{1+\alpha+\gamma}}
+      \sum_{m=0}^\infty
+      \frac{\lambda(p^{2m+1})}{p^{m(1+2\alpha)}}
+      +\frac{\chi_f(p)}{p^{1+2\gamma}}
+      \sum_{m=0}^\infty
+      \frac{\lambda_f(p^{2m})}{p^{m(1+2\alpha)}}
+    \right)
+  \right) \\
+  &\times
+  \prod_{p\mid M}
+  \left(
+    \sum_{m=0}^\infty\left(
+      \frac{\lambda_f(p^{m})\E^{m}(p)}{p^{m(1/2+\alpha)}}
+      -\frac{\lambda_f(p)}{p^{1/2+\gamma}}
+      \frac{\lambda_f(p^{m})\E^{m+1}(p)}
+      {p^{m(1/2+\alpha)}}
+    \right)
+  \right),
+\end{aligned} \ee
+which is analytic as $\alpha,\gamma\ra0$. Hence, recalling~\eqref{eq:R1def}, we have
+\be R^1_f(\alpha,\gamma)\approx\sum_{d\in\D(X)}Y_f(\alpha,\gamma)A_f(\alpha,\gamma).\ee
+We obtain the other sum $R_f^2(\alpha,\gamma)$ in~\eqref{eq:R2def}) by using the
+second term of the approximate functional equation~\eqref{eq:approxfuneq} and
+carrying out the same steps as above. We have analogous expressions for
+$V_\mid(\alpha,\gamma)$ and $V_\nmid(\alpha,\gamma)$, which we denote by
+$\tilde{V}_\mid(\alpha,\gamma)$ and $\tilde{V}_\nmid(\alpha,\gamma)$:
+\begin{align}
+  &\tilde{V}_\mid(-\alpha,\gamma)=\prod_{p\mid M}
+  \left(
+    \sum_{m=0}^\infty\left(
+      \frac{\overline{\lambda_f(p^{m})}\E^{m}(p)}{p^{m(1/2-\alpha)}}
+      -\frac{\lambda_f(p)\overline{\lambda(p^{m})}\E^{m+1}(p)}
+      {p^{m(1/2-\alpha)+1/2+\gamma}}
+    \right)
+  \right), \quad\text{and} \\
+  &\begin{aligned}\tilde{V}_\nmid(-\alpha,\gamma)&=\prod_{p\nmid M}
+    \left(1+\frac p{p+1}\left(
+        \sum_{m=1}^\infty
+        \frac{\overline{\lambda_f(p^{2m})}}{p^{m(1-2\alpha)}}
+        -\frac{\lambda_f(p)}{p^{1-\alpha+\gamma}}
+        \sum_{m=0}^\infty
+        \frac{\overline{\lambda(p^{2m+1})}}{p^{m(1-2\alpha)}}
+        +\frac{\chi_f(p)}{p^{1+2\gamma}}
+        \sum_{m=0}^\infty
+        \frac{\overline{\lambda_f(p^{2m})}}{p^{m(1-2\alpha)}}
+      \right)
+    \right), \\
+    &=\prod_{p\nmid M}\left(1+\frac{\overline{\lambda(p^2)}}{p^{1-2\alpha}}
+      -\frac{\left|\lambda_f(p)\right|^2}{p^{1-\alpha+\gamma}}
+      +\frac{\chi_f(p)}{p^{1+2\gamma}}+\cdots\right).
+  \end{aligned}
+\label{eq:tildeVnmid}
+\end{align}
+Note that $L_{\overline f}(\sym^2,1-2\alpha)$, with local factor at primes
+not dividing the level given by
+\be\prod_p\left(1+\frac{\overline{\lambda_f(p^2)}}{p^{1-2\alpha}}+\cdots\right),\ee
+handles the $\overline{\lambda_f(p^2)}/p^{1-2\alpha}$ term, and the
+$\chi_f(p)/p^{1+2\gamma}$ is handled identically to the previous case.
+To handle the $p^{1-\alpha+\gamma}$ term, note that the local factor of
+$L(f\otimes\overline f,1+\alpha+\gamma)^{-1}$ is
+\be\left(1-\frac{\left|\lambda_f(p)\right|^2}{p^s}+\cdots\right),\ee
+so we may then write
+\be \tilde{V}_\mid(-\alpha,\gamma)\tilde{V}_\nmid(-\alpha,\gamma)
+= \tilde{Y}_f(-\alpha,\gamma)\tilde{A}_f(-\alpha,\gamma), \ee
+where
+\begin{align}\label{eq:tildeYfdef}
+  \tilde{Y}_f(-\alpha,\gamma)
+  &=\frac{\Lchi[']{1+2\gamma}L_{\overline f}(\sym^2,1-2\alpha)}
+    {L(f\otimes\overline f,1-\alpha+\gamma)} \\
+  &=\frac{\Lchi[']{1+2\gamma}L_{\overline f}(\sym^2,1-2\alpha)}
+    {\zeta(1-\alpha+\gamma)\Lad{1-\alpha+\gamma}},
+\end{align}
+and $\tilde{A}_f(-\alpha,\gamma)$ is given by
+\be\label{eq:tildeAfdef} \begin{aligned}
+  \tilde{A}_f(-\alpha,\gamma) &= \tilde{Y}_f(-\alpha,\gamma)^{-1} \\
+  &\times \prod_{p\nmid M}
+  \left(1+\frac p{p+1}\left(
+      \sum_{m=1}^\infty
+      \frac{\overline{\lambda_f(p^{2m})}}{p^{m(1-2\alpha)}}
+      -\frac{\lambda_f(p)}{p^{1-\alpha+\gamma}}
+      \sum_{m=0}^\infty
+      \frac{\overline{\lambda(p^{2m+1})}}{p^{m(1-2\alpha)}}
+      +\frac{\chi_f(p)}{p^{1+2\gamma}}
+      \sum_{m=0}^\infty
+      \frac{\overline{\lambda_f(p^{2m})}}{p^{m(1-2\alpha)}}
+    \right)
+  \right) \\
+  &\times \prod_{p\mid M}
+  \left(
+    \sum_{m=0}^\infty\left(
+      \frac{\overline{\lambda_f(p^{m})}\E^{m}(p)}{p^{m(1/2-\alpha)}}
+      -\frac{\lambda_f(p)\overline{\lambda(p^{m})}\E^{m+1}(p)}
+      {p^{m(1/2-\alpha)+1/2+\gamma}}
+    \right)
+  \right)
+\end{aligned}\ee
+and is analytic as $\alpha,\gamma\ra0$. Recalling~\eqref{eq:R2def}
+and~\eqref{eq:rootexpect}, we have
+\be R^2_f(\alpha,\gamma)\approx
+\sum_{d\in\D(X)}\eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2\alpha}
+\frac{\Gamma\left(\frac k2-\alpha\right)}{\Gamma\left(\frac k2+\alpha\right)}
+\tilde{Y}_f\tilde{A}_f(-\alpha,\gamma). \ee
+The ratios recipe then gives us
+\begin{conjecture}[Ratios Conjecture]\label{conj:ratios}
+  For some reasonable conditions such as $-\frac14<\Re(\alpha)<\frac14$,
+  $\frac1{\log X}\ll\Re(\gamma)<\frac14$ and $\Im(\alpha),\Im(\gamma)\ll X^{1-\vep}$,
+  we have
+  \be\begin{aligned}
+    R_f(\alpha,\gamma)&=
+    \sum_{d\in\D(X)}
+    \frac{L_f\left(\frac12+\alpha,\psi_d\right)}{L_f\left(\frac12+\gamma,\psi_d\right)} \\
+    &=\sum_{d\in\D(X)}
+    \left[Y_fA_f(\alpha,\gamma)+
+      \eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2\alpha}
+      \frac{\Gamma\left(\frac k2-\alpha\right)}{\Gamma\left(\frac k2+\alpha\right)}
+      \tilde{Y}_f\tilde{A}_f(-\alpha,\gamma)\right]
+    +O\left(X^{1/2+\vep}\right),
+  \end{aligned}\ee
+  where $Y_f$, $A_f$, $\tilde Y_f$, and $\tilde A_f$ are defined
+  at~\eqref{eq:Yfdef}, \eqref{eq:Afdef}, \eqref{eq:tildeYfdef},
+  \eqref{eq:tildeAfdef}, respectively, $f$ and $\D(X)$ are as in Definition~\ref{def:D},
+  $M$ is the (odd prime) level of the $L$-function $L_f(s)$, and $\ep_f$ is the root number
+  of its functional equation.
+\end{conjecture}
+Note that the error term $O\left(X^{1/2+\vep}\right)$ is part of the statement of
+the ratios conjecture.
+\subsection{Logarithmic derivative}
+To calculate the one-level density we need the average of the logarithmic
+derivative of $L$-functions in the family, so we note that
+\be \sum_{d\in\D(X)}
+\frac{L'_f\left(\frac12+r,\psi_d\right)}{L_f\left(\frac12+r,\psi_d\right)}
+=\pp\alpha\left.R_f(\alpha,\gamma)\right|_{\alpha=\gamma=r}. \ee
+Using~\eqref{eq:fourierrelation}, we obtain the relation
+\be\label{eq:fouriercombo} \lambda_f(p)\lambda_f(p^{2m+1})
+=\lambda_f(p^{2m+2})+\chi_f(p)\lambda_f(p^{2m}). \ee
+Considering now $p\mid M$, combining~\eqref{eq:fourierrelation} with the fact
+that $\chi_f(p)=0$ yields
+\be\label{eq:fouriermultiplicativity}
+\lambda_f(p^m)=\sum_{\ell=0}^m \alpha_f(p)^\ell \beta_f(p)^{m-\ell}
+= \alpha_f(p)^m + \beta_f(p)^m = \lambda_f(p)^m, \ee
+which establishes the multiplicativity of $\lambda_f(p)$ for $p\mid M$.
+In fact, for $p\mid M$, actually $\alpha_f(p)=\lambda_f(p)$ and $\beta_f(p)=0$, which
+amounts to the same thing.
+
+Using~\eqref{eq:fouriermultiplicativity} for $p\mid M$,
+we observe that the sum in $V_\mid(r,r)$ telescopes, yielding
+\be\label{eq:euler1eq1}
+\prod_{p\mid M}
+  \left(
+    \sum_{m=0}^\infty\left(
+      \frac{\lambda_f(p^{m})\E^{m}(p)}{p^{m(1/2+r)}}
+      -\frac{\lambda_f(p)}{p^{1/2+r}}
+      \frac{\lambda(p^{m})\E^{m+1}(p)}
+      {p^{m(1/2+r)}}
+    \right)
+  \right)
+  = \prod_{p\mid M}
+  \left(1-\lim_{m\ra\infty}\frac{\lambda_f(p)^m\E^{m+1}(p)}
+  {p^{m(1/2+r)}}\right) = 1.
+\ee
+Likewise, applying~\eqref{eq:fouriercombo} to $V_\nmid(r,r)$ yields
+\be\label{eq:euler2eq1}\begin{aligned}
+  &\prod_{p\nmid M}
+  \left(1+\frac p{p+1}\left(
+      \sum_{m=1}^\infty
+      \frac{\lambda_f(p^{2m})}{p^{m(1+2r)}}
+      -\frac{\lambda_f(p)}{p^{1+r+r}}
+      \sum_{m=0}^\infty
+      \frac{\lambda(p^{2m+1})}{p^{m(1+2r)}}
+      +\frac{\chi_f(p)}{p^{1+2r}}
+      \sum_{m=0}^\infty
+      \frac{\lambda_f(p^{2m})}{p^{m(1+2r)}}
+    \right)
+  \right) \\
+  &=\prod_{p\nmid M}\left(1+\frac p{p+1}
+    \sum_{m=0}^\infty\left(\frac{\lambda_f(p^{2m+2})}{p^{(m+1)(1+2r)}}
+      -\frac{\lambda_f(p)}{p^{(m+1)(1+2r)}}\lambda_f(p^{2m+1})
+      +\frac{\chi_f(p)}{p^{(m+1)(1+2r)}}\lambda_f(p^{2m})
+    \right)\right) \\
+  &=\prod_{p\nmid M}\left(1+\frac p{p+1}
+    \sum_{m=0}^\infty\left(\frac{\lambda_f(p^{2m+2})}{p^{(m+1)(1+2r)}}
+      -\frac{\lambda_f(p^{2m+2})}{p^{(m+1)(1+2r)}}
+    \right)\right) = 1.
+\end{aligned}\ee
+Last,
+\be Y_f(r,r) = 1, \ee
+so we can conclude $A_f(r,r)=1$. Put
+\be\label{eq:A1fdef}
+A_f^1(r,r)=\pp\alpha\left.A_f(\alpha,\gamma)\right|_{\alpha=\gamma=r}.
+\ee
+Then
+\begin{align}
+  \pp\alpha\left.Y_f(\alpha,\gamma)A_f(\alpha,\gamma)\right|_{\alpha,\gamma=r}
+  &=-\frac{L'\left(\chi'_f,1+2r\right)}{\Lchi[']{1+2r}}A_f(r,r)
+  +\frac{L'_f(\sym^2,1+2r)}{L_f(\sym^2,1+2r)}A_f(r,r)+A_f^1(r,r) \\
+  &=-\frac{L'\left(\chi'_f,1+2r\right)}{\Lchi[']{1+2r}}
+  +\frac{L'_f(\sym^2,1+2r)}{L_f(\sym^2,1+2r)}+A_f^1(r,r).
+\end{align}
+Next, by virtue of the pole of the zeta function in the denominator and the
+nonvanishing of $\Lad{s}$ at $s=1$, we have the simple expression
+\be\begin{aligned}
+  &\pp\alpha\left.
+    \eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2\alpha}
+    \frac{\Gamma\left(\frac k2-\alpha\right)}{\Gamma\left(\frac k2+\alpha\right)}
+    \tilde{Y}_f(-\alpha,\gamma)\tilde{A}_f(-\alpha,\gamma)\right|_{\alpha=\gamma=r} \\
+  &=-\eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2r}
+  \frac{\Gamma\left(\frac k2-r\right)}{\Gamma\left(\frac k2+r\right)}
+  \frac{\Lchi[']{1+2r}L_{\overline f}(\sym^2,1-2r)}
+  {L_f(\ad^2,1)}\tilde{A}_f(-r,r).
+\end{aligned}\ee
+Therefore we have the following for the logarithmic derivative.
+\begin{theorem}\label{thm:logderiv}
+  Assuming the Ratios Conjecture~\ref{conj:ratios} and $\tfrac1{\log X}\ll\Re(r)<\tfrac14$
+  and $\Im(r)\ll X^{1-\vep}$, the average of the logarithmic derivative over the family
+  $\F(X)$ given in Definition~\ref{def:F}, a family of quadratic twists of the
+  $L$-function of a holomorphic cuspidal newform $f$ of weight $k$ and (odd prime) level
+  $M$, is
+  \be\label{eq:logderiv}\begin{aligned}
+    &\sum_{d\in\D(X)}
+    \frac{L'_f\left(\frac12+r,\psi_d\right)}{L_f\left(\frac12+r,\psi_d\right)}
+    \\ =
+    &\sum_{d\in\D(X)}
+    \begin{multlined}[t]
+      \Bigg[-\frac{L'(\chi'_f,1+2r)}{\Lchi[']{1+2r}}
+      +\frac{L'_f(\sym^2,1+2r)}{L_f(\sym^2,1+2r)}+A_f^1(r,r) \\
+      -\eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2r}
+      \frac{\Gamma\left(\frac k2-r\right)}{\Gamma\left(\frac k2+r\right)}
+      \frac{\Lchi[']{1+2r}L_{\overline f}(\sym^2,1-2r)}
+      {L_f(\ad^2,1)}\tilde{A}_f(-r,r)\Bigg]
+      +O(X^{1/2+\vep}),
+    \end{multlined}
+  \end{aligned}
+  \ee
+  where $f$ and $\D(X)$ are as in Definition~\ref{def:D}, $\overline f$ is the dual form,
+  $\ep_f$ is the root number of the functional equation of $L_f(s)$, $L_f(\sym^2,s)$ is the
+  associated symmetric square $L$-function (defined at~\eqref{eq:symfactorization}),
+  $L_f(\ad^2,s)$ is the associated adjoint square $L$-function
+  (defined at~\eqref{eq:adfactorization}), and $A_f$, $\tilde A_f$, and $A^1_f$ are
+  arithmetic factors defined at~\eqref{eq:Afdef}, \eqref{eq:tildeAfdef}, and
+  \eqref{eq:A1fdef} respectively.
+\end{theorem}
+Note that although we do not know the dependence of the error term on $\alpha$,
+we will not significantly increase its size by differentiating because it is
+analytic, being the difference of $R_f(\alpha,\gamma)$ and the main term in
+Conjecture~\ref{conj:ratios}, both of which are analytic.
+\section{One-level density}\label{sec:1ld}
+Let $\gamma_d$ denote the ordinate of a generic non-trivial zero of
+$L_f(s,\psi_d)$ and let $\varphi\in\mathcal S(\R)$
+(an even Schwartz test function). We consider the one-level density
+\be D_1(f;\varphi)\ :=\ \frac1{\left|\D(X)\right|} S_1(f;\varphi),\quad\text{where }
+S_1(f;\varphi)\ :=\ \sum_{d\in\D(X)}\sum_{\gamma_d}\varphi(\gamma_d). \ee
+\subsection{The formula}
+By the argument principle and Cauchy's theorem for contour integrals, and
+assuming GRH, we have
+\be S_1(f;\varphi)=\sum_{d\in\D(X)}\frac1{2\pi i}\left(\int_{(c)}-\int_{(1-c)}\right)
+\frac{L'_f(s,\psi_d)}{L_f(s,\psi_d)}\varphi(-i(s-1/2)) \d s, \ee
+where $1/2+1/\log X<c<3/4$ is fixed. Turning first to the integral on the $c$-line,
+\be\label{eq:clineint} \frac1{2\pi}\int_{-\infty}^\infty \varphi(t-i(c-1/2))
+\sum_{d\in\D(X)}\frac{L'_f\left(\tfrac12+\left(c-\tfrac12+it\right),\psi_d\right)}
+  {L_f\left(\tfrac12+\left(c-\tfrac12+it\right),\psi_d\right)} \d t, \ee
+the sum over $d$ can be replaced by Theorem~\ref{thm:logderiv}. The bounds on
+the size $t$ coming from the ratios conjecture should not pose a problem.
+See~\cite{HKS} and the one-level density section of~\cite{CS} for more details.
+Next, we note that after the replacement, the integrand is regular at $t=0$.
+This can be seen as follows.
+By the prime number theorem for Dirichlet $L$-functions, $L(\chi_f,s)$ does not
+vanish on the line $\Re(s)=1$.
+Hence, the potential obstacles to regularity at $t=0$ are possible poles of
+$\Lchi[']{s}$ or $\Lsym{s}$ at $s=1$. $\Lchi{s}$ has a pole at $s=1$ if and only
+if $\chi_f$ is principal. $\Lsym{s}$ is entire unless $f$ is self-CM.
+In both cases, $\eta_f=1$, so we omit it in the below arguments.
+
+We first consider the case where $\chi_f$ is principal. Note that in this case
+$\Lchi[']{s}=\zeta(s)$, $f$ is self-dual and $\Lsym{s}$ coincides with $\Lad{s}$ and
+is entire.
+By examining~\eqref{eq:logderiv}, we get the desired regularity at $t=0$ in this
+case iff the two terms with poles at $r=0$ cancel exactly. As $r\ra0$,
+\begin{align}
+  &\zeta(1+2r)=\frac1{2r}+O(1)\quad\text{and} \\
+  &-\frac{\zeta'(1+2r)}{\zeta(1+2r)} = \frac1{2r} + O(1).
+\end{align}
+Hence, the integrand is regular iff $\tilde A_f(0,0)=1$. But since $f$ is self-dual,
+it is easily seen that $\tilde A_f$ coincides with $A_f$, and so this fact was
+already established by combining~\eqref{eq:euler1eq1} and~\eqref{eq:euler2eq1}.
+This establishes regularity of the integrand at $t=0$ in the case that $\chi_f$ is
+principal.
+
+Now we consider the case that $\Lsym{s}$ has a pole at $s=1$. This occurs only when
+$\chi_f$ is not principal and $f$ is self-CM; c.f. \S\ref{sec:symad}.
+In this case, $f$ is self-dual but $\chi_f$ is not principal, so $\Lchi[']{s}$ is
+entire but $\Lsym{s}$ inherits the pole of $L(f\otimes f,s)$ at $s=1$. We note that
+$\tilde A_f(-r,r)=A_f(-r,r)$ since $f=\overline f$ and hence all Fourier
+coefficients are real. $A_f$ is analytic, and we have already shown that
+$A_f(r,r)=1$. This allows us to conclude that in this case, $\tilde A_f(0,0)=1$ as
+well. With this simplification in hand, we recall~\eqref{eq:ad1},
+\eqref{eq:symfactorization}, and the argument principle and write, keeping in mind
+$f=\overline f$,
+\be\begin{aligned}
+  &\lim_{r\ra0}\frac{L'_f(\sym^2,1+2r)}{L_f(\sym^2,1+2r)}
+  -\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2r}
+      \frac{\Gamma\left(\frac k2-r\right)}{\Gamma\left(\frac k2+r\right)}
+      \frac{\Lchi[']{1+2r}L_{\overline f}(\sym^2,1-2r)}
+  {L_f(\ad^2,1)}\tilde{A}_f(-r,r) \\
+  &=\lim_{r\ra0}\left(-\frac1{2r}+O(1)\right)
+  -\frac{\Lchi[']{1+2r}\Lchi[']{1-2r}^{-1}L(f\otimes f,1-2r)}{\res_{s=1}L(f\otimes f,s)} \\
+  &=\lim_{r\ra0}\left(-\frac1{2r}+O(1)\right)-\left(-\frac1{2r}+O(1)\right)=O(1).
+\end{aligned}\ee
+This establishes regularity of the integrand in~\eqref{eq:clineint} at $t=0$ in the
+case that $f$ is self-CM and allows us to move the path of integration to
+$c=\tfrac12$ to obtain
+\begin{multline} \frac1{2\pi}\int_{-\infty}^\infty \varphi(t)\;\;\;\;\;\;\;
+\sum_{\mathclap{\substack{d\in\D(X)\\\ }}}\;\;\;\;\;\;\;
+\begin{aligned}[t]\Bigg[
+&-\frac{L'(\chi'_f,1+2it)}{L(\chi'_f,1+2it)}
++\frac{L'_f(\sym^2,1+2it)}{L_f(\sym^2,1+2it)}+A_f^1(it,it) \\
+&-\eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2it}
+\frac{\Gamma\left(\frac k2-it\right)}{\Gamma\left(\frac k2+it\right)}
+\frac{\Lchi{1+2it}L_{\overline f}(\sym^2,1-2it)}
+{L_f(\ad^2,1)}\tilde{A}_f(-it,it)
+\Bigg] \d t\end{aligned} \\ +O(X^{1/2+\vep}).\end{multline}
+For the integral on the line with real part $1-c$, we use the functional equation
+\be\label{eq:sleektwistedfuneq}
+L_{f}(s,\psi_d)=\chi_f(d)\psi_d(-M)\epsilon_f\gfactor{s}L_{\overline f}(1-s,\psi_d)\ee with
+\be\label{eq:funeqgammafactor} \gfactor{s}=
+\left(\frac{\sqrt M|d|}{2\pi}\right)^{1-2s}
+\frac{\Gamma\left(\frac{k+1}2-s\right)}{\Gamma\left(s+\frac{k-1}2\right)}
+\ee
+to obtain (after a change $s\mapsto1-s$):
+\be\label{eq:logderivfuneq} \frac{L'_f(1-s,\psi_d)}{L_f(1-s,\psi_d)} =
+\frac{\gfactor[']{1-s}}{\gfactor{1-s}}
+- \frac{L'_{\overline f}(s,\psi_d)}{L_{\overline f}(s,\psi_d)}. \ee
+Now, the logarithmic derivative of~\eqref{eq:funeqgammafactor} evaluated at
+$s=\tfrac12-\alpha$ is
+\be\label{eq:logderivgammafactor}
+\frac{\gfactor[']{\frac12-\alpha}}{\gfactor{\frac12-\alpha}}
+=
+-2\log\left(\frac{\sqrt M|d|}{2\pi}\right)
+-\frac{\Gamma'}{\Gamma}\left(\frac k2+\alpha\right)
+-\frac{\Gamma'}{\Gamma}\left(\frac k2-\alpha\right).
+\ee
+For the integral on the $(1-c)$ line we change variables $s\mapsto1-s$ and
+use~\eqref{eq:logderivfuneq} (the sign of~\eqref{eq:logderivgammafactor} gets
+switched back to negative when we flip the integral in $t$ coming from the
+$(1-c)$ line back to $(-\infty,\infty)$). We have proved the following.
+\begin{theorem}\label{thm:oneleveldensity}
+  Assuming the Ratios Conjecture~\ref{conj:ratios}, the one-level density for
+  the zeros of the family
+  $\F(X)$ given in Definition~\ref{def:F}, a family of quadratic twists of the
+  $L$-function of a holomorphic cuspidal newform $f$ of weight $k$ and (odd prime) level
+  $M$, is given by
+  \be\label{eq:densitythm}\begin{aligned}
+    &S_1(f;\varphi) \\ &=\sum_{d\in\D(X)}
+    \sum_{\gamma_d}\varphi(\gamma_d) \\
+    &=\begin{aligned}[t]
+      &\frac1{2\pi}\int_{-\infty}^\infty \varphi(t)\;
+      \sum_{\mathclap{\substack{d\in\D(X)\\\ }}}\;\;\;\;\;\;
+      \begin{aligned}[t]\Bigg[
+        &2\log\left(\frac{\sqrt M|d|}{2\pi}\right)
+        +\frac{\Gamma'}{\Gamma}\left(\frac k2+it\right)
+        +\frac{\Gamma'}{\Gamma}\left(\frac k2-it\right) \\
+        &-\frac{L'(\chi'_f,1+2it)}{L(\chi'_f,1+2it)}
+        +\frac{L'_f(\sym^2,1+2it)}{L_f(\sym^2,1+2it)}+A_f^1(it,it) \\
+        &-\eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2it}
+        \frac{\Gamma\left(\frac k2-it\right)}{\Gamma\left(\frac k2+it\right)}
+        \frac{\Lchi[']{1+2it}L_{\overline f}(\sym^2,1-2it)}
+        {L_f(\ad^2,1)}\tilde{A}_f(-it,it) \\
+        &-\frac{L'(\chi'_{\overline f},1+2it)}{L(\chi'_{\overline f},1+2it)}
+        +\frac{L'_{\overline f}(\sym^2,1+2it)}
+        {L_{\overline f}(\sym^2,1+2it)}+A_{\overline f}^1(it,it) \\
+        &-\eta_{\overline f}\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2it}
+        \frac{\Gamma\left(\frac k2-it\right)}{\Gamma\left(\frac k2+it\right)}
+        \frac{\Lchibar[']{1+2it}L_f(\sym^2,1-2it)}
+        {L_{\overline f}(\ad^2,1)}\tilde{A}_{\overline f}(-it,it)
+        \Bigg] \d t\end{aligned} \\
+      &+O(X^{1/2+\vep}),\end{aligned}
+  \end{aligned}\ee
+  where $f$ and $\D(X)$ are as in Definition~\ref{def:D}, $\overline f$ is the dual form,
+  $\gamma_d$ is a generic zero of $L_f(s,\psi_d)$, $\varphi\in\mathcal S(\R)$ is an even
+  test function, $\eta_f$ is the expectation of root numbers in the family $\F$ given
+  in~\eqref{eq:rootexpect}, $\chi_f$
+  is the nebentypus of $f$ and $\chi'_f$ the primitive character that induces it,
+  $L_f(\sym^2,s)$ is the associated symmetric square $L$-function (defined
+  at~\eqref{eq:symfactorization}), $L_f(\ad^2,s)$ is the associated adjoint square
+  $L$-function (defined at~\eqref{eq:adfactorization}), and $A_f$, $\tilde A_f$, and
+  $A^1_f$ are arithmetic factors defined at~\eqref{eq:Afdef},
+  \eqref{eq:tildeAfdef}, and \eqref{eq:A1fdef} respectively.
+\end{theorem}
+
+\subsection{The expansion}
+Finally, we calculate the one-level density for \emph{scaled} zeros and recover the
+limit and the next-to-leading-order term from~\eqref{eq:densitythm}. We first
+need to rescale the variable $t$ in~\eqref{eq:densitythm} as
+\be\label{eq:Rdef} \tau = \tfrac t \pi R,
+\quad\text{where $R:=\log \left(\tfrac{\sqrt M X}{2\pi e}\right)$,} \ee
+and define
+\be\label{eq:gdef} \varphi(t)= g\left(\tfrac t \pi R\right).\ee
+After a change of variables, we obtain
+\be\label{eq:normalizeddensity}\begin{aligned}
+  &\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=\frac1{2R}\int_{-\infty}^\infty g(\tau)
+  \sum_{d\in\D(X)}
+  \begin{aligned}[t]\Bigg[
+    &2\log\left(\frac{\sqrt M|d|}{2\pi}\right)
+    +\frac{\Gamma'}{\Gamma}\left(\frac k2+\frac{i\pi\,\tau}{R}\right)
+    +\frac{\Gamma'}{\Gamma}\left(\frac k2-\frac{i\pi\,\tau}{R}\right) \\
+    &-\frac{L'\left(\chi'_f,1+\frac{2i\pi\,\tau}{R}\right)}
+    {\Lchi[']{1+\frac{2i\pi\,\tau}{R}}}
+    +\frac{L'_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    {L_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    +A_f^1\left(\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right) \\
+    &-\eta_f\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2i\pi\,\tau/R}
+    \frac{\Gamma\left(\frac k2-\frac{i\pi\,\tau}{R}\right)}
+    {\Gamma\left(\frac k2+\frac{i\pi\,\tau}{R}\right)}
+    \frac{\Lchi[']{1+\frac{2i\pi\,\tau}{R}}
+      L_{\overline f}\left(\sym^2,1-\frac{2i\pi\,\tau}{R}\right)}{L_f(\ad^2,1)} \\
+    &\times\tilde{A}_f\left(-\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right) \\
+    &-\frac{L'\left(\chi'_{\overline f},1+\frac{2i\pi\,\tau}{R}\right)}
+    {\Lchibar[']{1+\frac{2i\pi\,\tau}{R}}}
+    +\frac{L'_{\overline f}\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    {L_{\overline f}\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    +A_{\overline f}^1\left(\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right)\\
+    &-\eta_{\overline f}\left(\frac{\sqrt M |d|}{2\pi}\right)^{-\frac{2i\pi\,\tau}{R}}
+    \frac{\Gamma\left(\frac k2-\frac{i\pi\,\tau}{R}\right)}{\Gamma\left(\frac k2+\frac{i\pi\,\tau}{R}\right)}
+    \frac{\Lchibar[']{1+\frac{2i\pi\,\tau}{R}}
+      L_f\left(\sym^2,1-\frac{2i\pi\,\tau}{R}\right)}
+    {L_{\overline f}(\ad^2,1)} \\
+    &\times\tilde{A}_{\overline f}\left(-\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right)
+    \Bigg]\d t
+    +O(X^{1/2+\vep}).\end{aligned}
+\end{aligned}\ee
+Summation by parts together with the cardinality estimate~\eqref{eq:cardest} yield the
+following approximations (c.f.~\cite[Lemma A.2]{HMM} for details):
+\begin{align}
+  \sum_{d\in\D(X)}\log\left(\frac{\sqrt M |d|}{2\pi}\right)
+  &=\left|\D(X)\right|
+    \left[\log\left(\frac{\sqrt M X}{2\pi}\right)-1\right]+O\left(X^{1/2+\vep}\right),
+    \text{ and} \\
+  \sum_{d\in\D(X)}
+  \left(\frac{\sqrt M |d|}{2\pi}\right)^{-2\pi i\,\tau/R}
+  &=\left|\D(X)\right|\left(1-\frac{2i\pi\,\tau}{R}\right)^{-1}e^{-2i\pi\,\tau(1+1/R)}
+    +O\left(X^{1/2+\vep}\right).
+\end{align}
+We now wish to obtain series expansions for the other terms in terms of $R$.
+First, note that $\Lchi[']{s}$ is entire unless $\chi_f$ is principal, in
+which case $\Lchi[']{s}=\zeta(s)$. We split into three cases: $\chi_f$ principal, $\chi_f$
+non-principal but $f$ self-dual, and $f\ne\overline f$.
+\subsection{Principal character}\label{subsec:pc}
+For now, we assume $\chi_f$ principal, and observe that now $f$ is self-dual,
+which yields simplifications. Among others, we have $\tilde A_f=A_f$ and $\eta_f=1$.
+We rewrite~\eqref{eq:normalizeddensity}:
+\be\label{eq:principalnormalizeddensity}\begin{aligned}
+  &\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=\frac1{2R}\int_{-\infty}^\infty g(\tau)\sum_{d\in\D(X)}
+  \begin{aligned}[t]\Bigg(
+    &2\log\left(\frac{\sqrt M|d|}{2\pi}\right)
+    +\frac{\Gamma'}{\Gamma}\left(\frac k2+\frac{i\pi\,\tau}{R}\right)
+    +\frac{\Gamma'}{\Gamma}\left(\frac k2-\frac{i\pi\,\tau}{R}\right) \\
+    &+2\Bigg[-\frac{\zeta'\left(1+\frac{2i\pi\,\tau}{R}\right)}
+    {\zeta\left(1+\frac{2i\pi\,\tau}{R}\right)}
+    +\frac{L'_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    {L_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    +A_f^1\left(\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right) \\
+    &-\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2i\pi\,\tau/R}
+    \frac{\Gamma\left(\frac k2-\frac{i\pi\,\tau}{R}\right)}
+    {\Gamma\left(\frac k2+\frac{i\pi\,\tau}{R}\right)}
+    \frac{\zeta\left(1+\frac{2i\pi\,\tau}{R}\right)
+      L_f\left(\sym^2,1-\frac{2i\pi\,\tau}{R}\right)}{L_f(\sym^2,1)} \\
+    &\times{A}_f\left(-\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right)
+    \Bigg]
+    \Bigg) \d t
+    +O(X^{1/2+\vep}).\end{aligned}
+\end{aligned}\ee
+Writing
+\be\zeta(1+s)=\frac1 s+\sum_{n=0}^\infty\frac{(-1)^n}{n!}\gamma_n s^n,\ee
+we have
+\be
+\frac{\zeta'(1+s)}{\zeta(1+s)}=-s^{-1}+\gamma+(-\gamma^2-2\gamma_1)s+O(s^2),
+\ee
+where $\gamma=\gamma_0$ is the Euler-Mascheroni constant, and so
+\be\zeta\left(1+\frac{2i\pi\,\tau}{R}\right)
+=\frac{R}{2i\pi\,\tau}+\gamma-\gamma_1\frac{2i\pi\,\tau}{R}+O\left(R^{-2}\right)\ee
+and
+\be
+\frac{\zeta'\left(1+\frac{2i\pi\,\tau}{R}\right)}
+{\zeta\left(1+\frac{2i\pi\,\tau}{R}\right)}
+=-\frac{R}{2i\pi\,\tau}+\gamma+(-\gamma^2-2\gamma_1)\frac{2i\pi\,\tau}{R}
++O\left(R^{-2}\right).\ee
+
+% This Laurent expansion for primitive Dirichlet $L$-function about pole at $s=1$
+% was performed in the original analysis before it was determined that in the
+% principal case the Dirichlet becomes simply zeta. Therefore, this analysis is
+% archaic and can be excised.
+% 
+% It follows that, for $f$ a newform of prime level $M$ and principal nebentypus
+% $\chi_f$,
+% \begin{align}
+%   &L\left(\chi_f,1+\frac{2i\pi\,\tau}{R}\right)
+%   =\left(1-M^{-1-\frac{2i\pi\,\tau}{R}}\right)
+%   \zeta\left(1+\frac{2i\pi\,\tau}{R}\right) \\
+%   &=(1-M^{-1})\frac{R}{2i\pi\,\tau}+
+%   \left(\gamma-\frac{\gamma}M+\frac{\log M}M\right)
+%   +M^{-1}(\gamma\log M-\tfrac12(\log M)^2+\gamma_1-2M\gamma_1)
+%   \frac{2i\pi\,\tau}{R}
+%   +O\left(R^{-2}\right)
+% \end{align}
+% and
+% \be\frac{L'\left(\chi_f,1+\frac{2i\pi\,\tau}{R}\right)}
+% {L\left(\chi_f,1+\frac{2i\pi\,\tau}{R}\right)}
+% =-\frac{R}{2i\pi\,\tau}+\left(\gamma+\frac{\log M}{M-1}\right)
+% +\left(-\gamma^2-2\gamma_1-\frac{M(\log M)^2}{(M-1)^2}\right)
+% \frac{2i\pi\,\tau}{R}
+% +O\left(R^{-2}\right).\ee
+
+We record other expansions for completeness:
+\begin{align}
+  \frac{\Gamma'}{\Gamma}\left(\frac k2+\frac{i\pi\,\tau}{R}\right)
+  &=\psi\left(\tfrac k2\right)+\psi^{(1)}\left(\tfrac k2\right)
+  \frac{i\pi\,\tau}{R}+O\left(R^{-2}\right), \\
+  \frac{\Gamma'}{\Gamma}\left(\frac k2-\frac{i\pi\,\tau}{R}\right)
+  &=\psi\left(\tfrac k2\right)-\psi^{(1)}\left(\tfrac k2\right)
+  \frac{i\pi\,\tau}{R}+O\left(R^{-2}\right), \\
+  \frac{\Gamma\left(\frac k2-\frac{i\pi\,\tau}{R}\right)}
+  {\Gamma\left(\frac k2+\frac{i\pi\,\tau}{R}\right)}
+  &=1-2\psi\left(\frac k2\right)\frac{i\pi\,\tau}{R}+O\left(R^{-2}\right),
+\end{align}
+where $\psi(s)=\psi^{(0)}(s)=\frac{\Gamma'}{\Gamma}(s)$ is the digamma function. Further,
+\begin{align}
+  \frac{L'_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+  {L_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+  &=
+  \frac{L'_f\left(\sym^2,1\right)}{L_f\left(\sym^2,1\right)}
+  +
+  \frac{L_f\left(\sym^2,1\right)L''_f\left(\sym^2,1\right)
+    -L'_f\left(\sym^2,1\right)^2}{L_f\left(\sym^2,1\right)^2}
+  \frac{2i\pi\,\tau}{R}
+  +O\left(R^{-2}\right) \\
+  L_f\left(\sym^2,1-\frac{2i\pi\,\tau}{R}\right)
+  &=
+  L_f\left(\sym^2,1\right)-L'_f\left(\sym^2,1\right)\frac{2i\pi\,\tau}{R}
+  +O\left(R^{-2}\right) \\
+  A_f^1\left(\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right)
+  &=
+  A_f^1(0,0)+\dd{r} \left.A_f^1(r,r)\right|_{r=0}\frac{i\pi\,\tau}{R}
+  -\dd[2]{r}\left.A_f^1(r,r)\right|_{r=0}\frac{\pi^2\,\tau^2}{2R^2}
+  +O\left(R^{-2}\right), \\
+  {A}_f\left(-\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right)
+  &=
+  {B}_f(0)+ B'_f(0)\frac{i\pi\,\tau}{R}
+  - B''_f(0)\frac{\pi^2\,\tau^2}{2R^2}+O\left(R^{-3}\right),
+\end{align}
+with
+\begin{align}
+  B_f(s) = A_f(-s,s), &&
+  B^{(n)}_f(s)=\dd[n]{r}\left.A_f(-r,r)\right|_{r=s}.
+\end{align}
+Note, in the case that $\chi_f$ is principal,
+\be\label{eq:Aftildezero}
+A_f(0,0) = 1, \ee
+since in that case $f$ is self-dual and the adjoint and symmetric square
+$L$-functions coincide, and~\eqref{eq:euler1eq1} and \eqref{eq:euler2eq1}
+apply since the Fourier coefficients are real.
+This allows us to record the following expansion:
+\be\label{eq:unsimplifiedprincipalexpansion}\begin{aligned}
+  \frac1 {\left|\D(X)\right|} S_1(f;\varphi)
+  &=
+  \frac1 {\left|\D(X)\right|}\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=
+  \int_{-\infty}^\infty g(\tau)
+  \left(
+    1 + \frac{1-e^{-2i\pi\,\tau}}{2i\pi\,\tau}
+    - a_1\frac{1+e^{-2i\pi\,\tau}}{R}
+    - a_2\frac{i\pi\,\tau\,e^{-2i\pi\,\tau}}{R^2}
+    + O\left(R^{-3}\right)
+  \right)\d\tau,
+\end{aligned}\ee
+where
+\be\label{eq:a1def}
+a_1 = \gamma - \psi\left(\frac k 2\right) - A^1_f(0,0)
+-\frac{L'_f(\sym^2,1)}{L_f(\sym^2,1)} \ee
+and
+\be\label{eq:a2def}
+a_2 =
+\begin{aligned}[t]
+  & 1 -2\gamma\cdot\psi\left(\tfrac k2\right) +\psi\left(\tfrac k2\right)^2 -2\gamma_1
+  +\gamma B'_f(0) -\psi\left(\tfrac k2\right) B'_f(0) +\frac{B''_f(0)}4 \\
+  & -\left(2\gamma+B'_f(0)-2\psi\left(\tfrac k2\right)\right)
+  \frac{\Lsym[']{1}}{\Lsym{1}}+\frac{\Lsym['']{1}}{\Lsym{1}}.
+\end{aligned}\ee
+To obtain~\eqref{eq:a1def}, we need the relation
+\begin{equation}\label{eq:nightmareidentity}
+  -\frac12 B'_f(0) = A^1_f(0,0). \end{equation}
+The brute force computation required to establish this identity is straightforward and
+unrewarding, and we omit it.
+
+Recalling that $g$ is even, we can clear the odd terms in the integrand
+of~\eqref{eq:unsimplifiedprincipalexpansion} and arrive at the following:
+\be\begin{aligned}\label{eq:ratiosexpansionprincipal}
+  D_1(f;\varphi)
+  &=
+  \frac1 {\left|\D(X)\right|}\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=
+  \int_{-\infty}^\infty g(\tau)
+  \left(1+\frac{\sin(2\pi\,\tau)}{2\pi\,\tau}
+    -a_1\frac{1+\cos(2\pi\,\tau)}{R}
+    -a_2\frac{\pi\,\tau\,\sin(2\pi\,\tau)}{R^2}
+    +O\left(R^{-3}\right)\right)\d\tau,
+\end{aligned}\ee
+with $a_1$, $a_2$ as in~\eqref{eq:a1def}, \eqref{eq:a2def},
+respectively.
+We note that specializing~\eqref{eq:ratiosexpansionprincipal}
+to $k=2$ gives a slightly different expression than equation (3.18) of~\cite{HKS}.
+This is because they scale by $\log \left(\tfrac{\sqrt M X}{2\pi}\right)$ while we scale
+instead by $\log \left(\tfrac{\sqrt M X}{2\pi e}\right)$. Otherwise, the two match up.
+
+\subsection{Non-principal character: generic case}\label{subsec:npc}
+We return to~\eqref{eq:normalizeddensity}, but now we assume $\chi_f$ is
+non-principal and $f\ne\overline f$. In this case, $\Lchi[']{s}$ and
+$\Lsym{s}$ are entire (c.f. \S\ref{sec:symad} for details on the latter), and
+the value of $\Lchi[']{s}$ and its derivatives at $s=1$ is not well known except in
+particular cases, such as when $\chi'_f$ is a quadratic character associated to a
+fundamental discriminant. In this case, $\Lchi[']{1}$ is given by Dirichlet's class
+number formula. In this case, we have
+\be\label{eq:unsimplifiednonprincipalexpansion}\begin{aligned}
+  D_1(f;\varphi)
+  &=
+  \frac1 {\left|\D(X)\right|}\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=
+  \int_{-\infty}^\infty g(\tau)
+  \left(
+    1
+    + \frac{b_1+b_2e^{-2i\pi\,\tau}}{R}
+    + c_1\frac{i\pi\,\tau\,e^{-2i\pi\,\tau}}{R^2}
+    + O\left(R^{-3}\right)
+  \right)\d\tau,
+\end{aligned}\ee
+where
+\begin{align}\label{eq:b1def}
+  b_1 &= \psi\left(\tfrac k2\right)
+  + \frac12 A^1_f(0,0) + \frac12 A^1_{\overline f}(0,0)
+  -\frac12\frac{L'(1,\chi'_f)}{\Lchi[']{1}}
+  -\frac12\frac{L'(1,\chi'_{\overline f})}{\Lchibar[']{1}}
+  +\frac12\frac{\Lsym[']{1}}{\Lsym{1}}
+  +\frac12\frac{L'_{\overline f}(1,\sym^2)}{L_{\overline f}(1,\sym^2)}, \\
+  \label{eq:b2def}
+  b_2 &= -\frac12\eta_f\tilde A_f(0,0)\Lchi[']{1}
+  \frac{L_{\overline f}(1,\sym^2)}{\Lad{1}}
+  -\frac12\eta_{\overline f}\tilde A_{\overline f}(0,0)\Lchibar[']{1}
+  \frac{\Lsym{1}}{L_{\overline f}(1,\ad^2)},
+\end{align}
+and
+\be\label{eq:c1def}
+  c_1 = \begin{aligned}[t]
+    & \eta_f\frac{L_{\overline f}(\sym^2,1)}{L_f(\ad^2,1)}
+    \left(      
+      - \frac12\tilde B'_f(0) \Lchi[']{1}
+      + \psi\left(\tfrac k2\right) \cdot \tilde A_f(0,0) \Lchi[']{1}
+      - \tilde A_f(0,0) L'(\chi'_f,1)
+    \right) \\
+    + & \eta_{\overline f}\frac{\Lsym{1}}{L_{\overline f}(\ad^2,1)}
+    \left(
+      - \frac12 \tilde B'_{\overline f}(0) \Lchibar[']{1}
+      + \psi\left(\tfrac k2\right) \cdot \tilde A_{\overline f}(0,0) \Lchibar[']{1}
+      - \tilde A_{\overline f}(0,0)L'(1,\chi'_{\overline f})
+    \right) \\
+    + & \eta_f\frac{L'_{\overline f}(1,\sym^2)}{L_f(\ad^2,1)} \tilde A_f(0,0) \Lchi[']{1}
+    + \eta_{\overline f}\frac{\Lsym[']{1}}{L_{\overline f}(1,\ad^2)}
+    \tilde A_{\overline f}(0,0) \Lchibar[']{1}.
+  \end{aligned}
+\ee
+Note: $\tilde A_f(0,0)$ can no longer be simplified in an obvious way.
+Clearing the odd terms in the integrand
+of~\eqref{eq:unsimplifiednonprincipalexpansion}, we have
+\be\begin{aligned}\label{eq:ratiosexpansionnonprincipal}
+  D_1(f;\varphi)
+  &=
+  \frac1 {\left|\D(X)\right|}\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=
+  \int_{-\infty}^\infty g(\tau)
+  \left(
+    1
+    + \frac{b_1+b_2\,\cos(2\pi\,\tau)}{R}
+    + c_1\frac{\pi\,\tau\,\sin(2\pi\,\tau)}{R^2}
+    + O\left(R^{-3}\right)
+  \right)\d\tau,
+\end{aligned}\ee
+with $b_1$, $b_2$, and $c_1$ as in~\eqref{eq:b1def}, \eqref{eq:b2def},
+and~\eqref{eq:c1def}, respectively.
+
+\subsection{Non-principal character: the self-CM case}
+We now consider the case when $L_f(\sym^2,s)$ is not entire. In this case,
+$f$ is self-dual but has a non-principal nebentypus. This implies, among other
+things, that most of the Fourier coefficients of $f$ are zero. It also implies
+that $f$ arises from a Hecke grossencharacter on an imaginary quadratic field, and
+has complex multiplication by its own nebentypus (c.f. \S\ref{sec:cmforms} and the
+definition of the family $\F(X)$ given in Definition~\ref{def:F}). Since we assume
+$\ep_f=+1$, we also have $\eta_f=+1$ by~\eqref{eq:rootexpect}.
+
+In this special case, by the factorization~\eqref{eq:symfactorization},
+$\Lsym{s}$ has a simple pole at $s=1$ with residue 
+\be\symres:=\res_{s=1}L_f(\sym^2,s)=\frac{\res_{s=1}L(f\otimes f,s)}{\Lchi[']{1}}
+=\frac{\Lad{1}}{\Lchi[']{1}},\ee
+where $\res_{s=1}L(f\otimes f,s)$ in turn is given in~\eqref{eq:rsres}.
+
+We write the Laurent expansion of $L_f(\sym^2,1+s)$ at $s=0$ as
+\be L_f(\sym^2,1+s) = \frac{\symres}{s} + \xi_0 + \xi_1s + O(s^2), \ee
+where \be \xi_n = \oint \frac{L_f(\sym^2,\zeta)}{\zeta^{n+1}} \d\zeta \ee
+and the contour encloses the point $s=1$. Then the Laurent expansion at $s=0$
+of the logarithmic derivative evaluated at $1+s$ is
+\be \frac{L'_f(\sym^2,1+s)} {L_f(\sym^2,1+s)}
+= -\frac1 s+\frac{\xi_0}{\symres} +
+\left(\frac{2\xi_1}{\symres}-\frac{\xi_0^2}{\symres^2}\right)s
++ O(s^2). \ee
+
+Since $f$ is self-dual, we can return to the simplified
+equation~\eqref{eq:principalnormalizeddensity}, but now there is no pole in
+$\Lchi[']{s}$ since $\chi_f$ is non-principal. We may thus
+rewrite~\eqref{eq:normalizeddensity} as
+\be\label{eq:principalnormalizeddensity}\begin{aligned}
+  &\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=\frac1{2R}\int_{-\infty}^\infty g(\tau)\sum_{d\in\D(X)}
+  \begin{aligned}[t]\Bigg(
+    &2\log\left(\frac{\sqrt M|d|}{2\pi}\right)
+    +\frac{\Gamma'}{\Gamma}\left(\frac k2+\frac{i\pi\,\tau}{R}\right)
+    +\frac{\Gamma'}{\Gamma}\left(\frac k2-\frac{i\pi\,\tau}{R}\right) \\
+    &+2\Bigg[-\frac{L'\left(\chi'_f,1+\frac{2i\pi\,\tau}{R}\right)}
+    {\Lchi[']{1+\frac{2i\pi\,\tau}{R}}}
+    +\frac{L'_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    {L_f\left(\sym^2,1+\frac{2i\pi\,\tau}{R}\right)}
+    +A_f^1\left(\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right) \\
+    &-\left(\frac{\sqrt M |d|}{2\pi}\right)^{-2i\pi\,\tau/R}
+    \frac{\Gamma\left(\frac k2-\frac{i\pi\,\tau}{R}\right)}
+    {\Gamma\left(\frac k2+\frac{i\pi\,\tau}{R}\right)}
+    \frac{\Lchi[']{1+\frac{2i\pi\,\tau}{R}}
+      L_f\left(\sym^2,1-\frac{2i\pi\,\tau}{R}\right)}{L_f(\ad^2,1)} \\
+    &\times{A}_f\left(-\frac{i\pi\,\tau}{R},\frac{i\pi\,\tau}{R}\right)
+    \Bigg]
+    \Bigg) \d t
+    +O(X^{1/2+\vep}),\end{aligned}
+\end{aligned}\ee
+The expansion is then
+\be\label{eq:unsimplifiedcmexpansion}\begin{multlined}
+  D_1(f;\varphi)
+  =
+  \frac1 {\left|\D(X)\right|}\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  =
+  \int_{-\infty}^\infty g(\tau)
+  \left(
+    1+\frac{e^{-2i\pi\,\tau}}{2i\pi\,\tau}+d_1\frac{1-e^{-2i\pi\,\tau}}R
+    +d_2\frac{\pi i\,\tau e^{-2i\pi\,\tau}}{R^2}+O\left(R^{-3}\right)
+  \right)\d\tau,
+\end{multlined}\ee
+where
+\be\label{eq:d1def}
+d_1=\psi\left(\tfrac k2\right)+\frac{\xi_0\cdot\Lchi[']{1}}{\Lad{1}}+A^1_f(0,0)
+-\frac{L'(\chi'_f,1)}{\Lchi[']{1}}\ee
+and
+\be\label{eq:d2def} d_2=
+\begin{aligned}[t]
+  &1+\psi\left(\tfrac k2\right)^2 -\psi\left(\tfrac k2\right)B'_f(0) +\frac{B''_f(0)}4
+  -\frac{\xi_0\cdot B'_f(0)\Lchi[']{1}}{\Lad{1}} +\frac{2\xi_1\cdot\Lchi[']{1}}{\Lad{1}} \\
+  &+\frac{2\xi_0\cdot\psi\left(\tfrac k2\right)\Lchi[']{1}}{\Lad{1}}
+  -\frac{2\xi_0\cdot L'(1,\chi'_f)}{\Lad{1}}+\frac{B'_f(0)L'(1,\chi'_f)}{\Lchi[']{1}} \\
+  & -\frac{2\psi\left(\tfrac k2\right)L'(1,\chi'_f)}{\Lchi[']{1}}
+  +\frac{L''(1,\chi'_f)}{\Lchi[']{1}},
+  \end{aligned}\ee
+where we have again used the identity \be -\frac12B'_f(0)=A^1_f(0,0).\ee
+
+Clearing odd terms and recalling~\eqref{eq:rsres} and~\eqref{eq:symfactorization},
+we are left with
+\be\label{eq:simplifiedcmexpansion}\begin{aligned}
+  D_1(f;\varphi)
+  &=
+  \frac1 {\left|\D(X)\right|}\sum_{d\in\D(X)}
+  \sum_{\gamma_d}g\left(\frac{\gamma_d R}\pi\right) \\
+  &=
+  \int_{-\infty}^\infty g(\tau)
+  \left(
+    1-\frac{\sin(2\pi\,\tau)}{2\pi\,\tau}
+    +d_1\frac{1-\cos(2\pi\,\tau)}R
+    +d_2\frac{\pi\,\tau\sin(2\pi\,\tau)}{R^2}
+    + O\left(R^{-3}\right)
+  \right)\d\tau,
+\end{aligned}\ee
+with $d_1$ and $d_2$ as in~\eqref{eq:d1def} and~\eqref{eq:d2def}, respectively.
+
+\subsection{Collection of one-level density results}
+We collect the results of sections~\ref{subsec:pc} and~\ref{subsec:npc} in
+the following
+\begin{corollary}\label{cor:expansion}
+  Assuming the Ratios Conjecture~\ref{conj:ratios}, the one-level density for
+  the \emph{scaled} zeros of the family $\F(X)$ given in Definition~\ref{def:F},
+  a family of quadratic twists of the $L$-function of a holomorphic cuspidal newform $f$ of
+  weight $k$ and (odd prime) level $M$, is given by
+  \begin{align}
+    D_1(f;\varphi) &=
+    \int_{-\infty}^\infty g(\tau)
+    \left(1+\frac{\sin(2\pi\,\tau)}{2\pi\,\tau}
+      +a_1\frac{1+\cos(2\pi\,\tau)}{R}
+      -a_2\frac{\pi\,\tau\,\sin(2\pi\,\tau)}{R^2}
+      +O\left(R^{-3}\right)\right)\d\tau
+    \intertext{if $\chi_f$ is principal,}
+    D_1(f;\varphi) &=
+    \int_{-\infty}^\infty g(\tau)
+    \left(
+      1
+      + \frac{b_1+b_2\,\cos(2\pi\,\tau)}{R}
+      + c_1\frac{\pi\,\tau\,\sin(2\pi\,\tau)}{R^2}
+      + O\left(R^{-3}\right)
+    \right)\d\tau
+    \intertext{if $\chi_f$ is not principal and $f\ne\overline f$, and}
+    D_1(f;\varphi) &=
+    \int_{-\infty}^\infty g(\tau)
+    \left(
+      1-\frac{\sin(2\pi\,\tau)}{2\pi\,\tau}
+      +d_1\frac{1-\cos(2\pi\,\tau)}R
+      +d_2\frac{\pi\,\tau\sin(2\pi\,\tau)}{R^2}
+      + O\left(R^{-3}\right)
+    \right)\d\tau,
+  \end{align}
+  if $\chi_f$ is not principal and $f=\overline f$,
+  \newline
+  
+  \noindent where $f$ and $\D(X)$ are as in Definition~\ref{def:D},
+  $R$ is defined at~\eqref{eq:Rdef}, $g$ is related to $\varphi\in\mathcal S(\R)$, an even
+  test function, by~\eqref{eq:gdef},
+  and the coefficients $a_1$, $a_2$, $b_1$, $b_2$, $c_1$, $d_1$, and $d_2$ are given
+  in~\eqref{eq:a1def}, \eqref{eq:a2def}, \eqref{eq:b1def}, \eqref{eq:b2def},
+  \eqref{eq:c1def}, \eqref{eq:d1def}, and~\eqref{eq:d2def}, respectively.
+\end{corollary}
+We take a moment to note that in the case where $\chi_f$ is principal, the
+one-level density converges to that of the one-level scaling density of
+eigenvalues near 1 in the group of random $SO(\text{even})$
+matrices; in the case where $\chi_f$ is not principal and
+$f\ne \overline f$, the one-level
+density converges to that of the one-level scaling density of eigenvalues
+near 1 in the group of random unitary matrices; and in the case where $\chi_f$ is
+not principal and $f=\overline f$, the one-level density converges to that of
+the one-level scaling density of eigenvalues near 1 in the group of random
+symplectic matrices. Thus, we say that the
+symmetry group of the family of quadratic twists of an $L$-function associated
+to a fixed holomorphic cuspidal newform $f$ with principal nebentypus is even
+orthogonal, the symmetry group of the family when $f$ has non-principal
+nebentypus and is not CM is unitary, and the symmetry group of the
+family when $f$ is CM is symplectic.
+
+\section{Pair-correlation}
+The one-level density results for the generic family of cusp forms $\F$ where
+$f\ne\overline f$ suggest that this family has unitary symmetry. In this case, the detailed
+expansion of the one-level density for the family is useless since there are no lower-order
+terms on the random matrix side to match against. Therefore, we compute the
+pair-correlation for $L$-functions in this generic family only, so as to obtain lower-order
+terms of arithmetic origin with which to calibrate the matrix size of our random matrix
+ensemble.
+
+We remark that the pair-correlation is sensitive to any finite set of zeros, and is a
+statistic that is computed for one $L$-function. That is, since we have an asymptotic
+parameter for each function (height along the critical line), we have no need to average
+over an infinite family of $L$-functions. Of course, the point of this calculation is to
+calibrate the effective matrix size for our family $\F$. It is expected that the local zero
+statistics of $L$-functions in a family such as $\F$ should agree to leading order with
+corresponding random matrix eigenvalue statistics in the correct asymptotic limit.
+Therefore, if we can find an effective matrix size that matches arithmetic lower-order
+terms of the pair-correlation for one $L$-function, it should do a better job of
+approximating \emph{all} local statistics for that function. Therefore, we compute lower
+order terms of the pair-correlation for one $L$-function $L(f\otimes\psi_d,s)\in\F(X)$
+(reserving the possibility that the twist is trivial), and expect that the effective matrix
+size for low-lying zeros in the family $\F(X)$ will be given by the expectation of the
+lower order terms over $d\in\D(X)$ as $X\ra\infty$.
+
+Let $\gamma$, $\gamma'$ denote the ordinates of generic non-trivial zeros of
+$L_f(s,\psi_d)$, and suppose
+\be\label{def:testconditions}\parbox[c][][c]{24em}
+{$\varphi(s)$ is holomorphic throughout the strip $|\Im s|<2$,
+  real on the real line, even, and satisfies the bound
+  $\varphi(x)\ll1/(1+x^2)$ as $x\ra\infty$.}\ee
+We would like to evaluate
+\be\label{eq:paircorr}
+P(\varphi)=\sum_{0<\gamma,\gamma'<T}\varphi\left(\gamma-\gamma'\right).\ee
+\subsection{Ratios lemma}
+To properly evaluate~\eqref{eq:paircorr}, we will need a formula for the average of
+logarithmic derivatives of shifted $L$-functions:
+\be\int_0^T\frac{L'}{L}(s+\alpha,f\otimes\psi_d)
+\frac{L'}{L}(1-s+\beta,\overline f\otimes\psi_d)\d t.\ee
+To this end, we again apply the ratios recipe to the average of ratios of shifted
+$L$-functions \be\T:=\int_0^T
+\frac{L(s+\alpha,f\otimes\psi_d)L(1-s+\beta,\overline f\otimes\psi_d)}
+{L(s+\gamma,f\otimes\psi_d)L(1-s+\delta,\overline f\otimes\psi_d)}\d t.\ee
+In contrast to the definition of $R_f(\alpha,\gamma)$ in~\eqref{eq:Rfdef}, $d$ is now fixed
+and we are averaging over $t$. We make use of the same approximate functional equation as
+in~\eqref{eq:approxfuneq}, the same reciprocal Dirichlet series~\eqref{eq:recipseries} and
+$\mu_g(n)$~\eqref{eq:mudef} (corresponding to the appropriate cusp form $g=f\otimes\psi_d$
+or $\overline f\otimes\psi_d$), and we reprise $\gfactor{s}$ as
+in~\eqref{eq:funeqgammafactor} so that the functional equation~\eqref{eq:twistedfuneq} for
+$\L{s}$ may be written as in~\eqref{eq:sleektwistedfuneq}.
+
+The recipe is mostly the same. We start by replacing the $L$-functions in the numerator by
+their approximate functional equations (where now $xy=t/2\pi$) and discard the remainder.
+We replace the $L$-functions in the denominator by their reciprocal series.
+We then multiply through the denominator and retain only those terms with the same number
+of $\gfactor{s}$ as $\gfactor{1-s}$, dropping the other factors, which are oscillatory.
+By the duplication formula for the gamma function, we may write the local archimedian
+factor of $L(s,f\otimes\psi_d)$ (equivalently its dual $L(s,\overline f\otimes\psi_d)$) as
+\be\left(\frac{2^k}{8\pi}\right)^{1/2}\left(\frac{\sqrt M |d|}{\pi}\right)^s
+\Gamma\left(\frac s2+\frac{k-1}4\right)\Gamma\left(\frac s2+\frac{k+1}4\right).\ee
+It is in this form that we may specialize~\cite[Lemma 6.5]{ours} to our degree 2
+$L$-function to obtain the estimate
+\be\gfactor{s+\alpha}\gfactor{1-s+\beta}=Q^{-2(\alpha+\beta)}
+\left(\frac t2\right)^{-2(\alpha+\beta)}\left(1+O\left(\frac1t\right)\right),
+\qquad\text{with }\label{eq:defQ} Q:=\frac{\sqrt M|d|}{\pi}.\ee
+We replace our product of local archimedian factors by this estimate.
+We integrate term-by-term, and retain only the diagonal. (One implication of the ratios
+conjectures is exceptional cancellation on the off-diagonal.) We then complete the sums
+that result. Since $d$ is fixed, we let
+$\lambda(n):=\lambda_{f\otimes\psi_d}(n)=\lambda_f(n)\psi_d(n)$ be the Fourier coefficients
+and $\chi:=\chi_{f\otimes\psi_d}=\chi_f\psi_d^2$ be the nebentypus of the twisted form,
+and then we let $\mu_d(n)$ denote the coefficient of $n^{-s}$ of the reciprocal series
+$L(s,f\otimes\psi_d)^{-1}$ for $\Re s>1$; then
+\be\mu_d(n)=\begin{cases}\lambda(n)&\text{if $n=p$,} \\ \chi(n)&\text{if $n=p^2$,} \\
+  0&\text{if $n=p^j$, $j>2$.}\end{cases}\ee With this definition, $\overline \mu_d(n)$ is
+equal to the Dirichlet coefficient of $L(s,\overline f\otimes\psi_d)^{-1}$ when $\Re s>1$.
+Additionally, $\overline\lambda=\lambda_{\overline f\otimes\psi_d}$, and
+$\overline\chi=\chi_{\overline f\otimes\psi_d}$. We are left with a kind of equivalence
+\be\begin{aligned}[t]\T&\approx
+  \begin{multlined}[t]\int_0^T\sum_{nk=mh}\frac{\lambda(m)\overline\lambda(n)
+      \mu_d(h)\overline\mu_d(k)}{m^{1/2+\alpha}n^{1/2+\beta}h^{1/2+\gamma}k^{1/2+\delta}}
+  + \\ +
+  Q^{-2(\alpha+\beta)}\left(\frac t2\right)^{-2(\alpha+\beta)}
+  \sum_{mk=nh}\frac{\overline\lambda(m)\lambda(n)\mu_d(h)\overline\mu_d(k)}
+  {m^{1/2-\alpha}n^{1/2-\beta}h^{1/2+\gamma}k^{1/2+\delta}}\d t.\end{multlined} \\
+  &=\int_0^T J_1 + J_2 \d t,\quad\text{say.}\end{aligned}\ee
+Examining now the first diagonal sum, we rewrite it as the Euler product
+\be J_1=\prod_p
+\left(\sum_{n+k=h+m}\frac{\lambda(p^m)\overline\lambda(p^n)\mu_d(p^h)\overline\mu_d(p^k)}
+  {p^{(1/2+\alpha)m+(1/2+\beta)n+(1/2+\gamma)h+(1/2+\delta)k}}\right).\ee Recalling the
+definition of $\mu_d$, we note that if $p\mid N=M|d|^2$, we discard all terms except for
+$h,k\in\{0,1\}$. If $p\nmid N$, we discard all except $h,k\in\{0,1,2\}$. We therefore have
+\be J_1\approx W_\mid(\alpha,\beta,\gamma,\delta)W_\nmid(\alpha,\beta,\gamma,\delta),\ee
+with
+\begin{align}
+  &W_\mid(\alpha,\beta,\gamma,\delta)=\prod_{p\mid M}
+    \begin{multlined}[t]\Bigg[
+      \sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2}{p^{(1+\alpha+\beta)m}}
+      -\sum_{m\geq0}\frac{\lambda(p^{m+1})\overline\lambda(p^m)\overline\lambda(p)}
+      {p^{(1+\alpha+\beta)m+(1+\alpha+\delta)}} \\
+      -\sum_{m\geq0}\frac{\lambda(p^m)\overline\lambda(p^{m+1})\lambda(p)}
+      {p^{(1+\alpha+\beta)m+(1+\beta+\gamma)}}
+      +\sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2\left|\lambda(p)\right|^2}
+      {p^{(1+\alpha+\beta)m+(1+\gamma+\delta)}}
+      \Bigg],\text{ and}
+    \end{multlined} \\
+  \intertext{}
+  &W_\nmid(\alpha,\beta,\gamma,\delta)=\prod_{p\nmid N}
+    \begin{aligned}[t]\Bigg[
+      &\sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2}{p^{(1+\alpha+\beta)m}}
+      -\sum_{m\geq0}\frac{\lambda(p^{m+1})\overline\lambda(p^m)\overline\lambda(p)}
+      {p^{(1+\alpha+\beta)m+(1+\alpha+\delta)}} 
+      -\sum_{m\geq0}\frac{\lambda(p^m)\overline\lambda(p^{m+1})\lambda(p)}
+      {p^{(1+\alpha+\beta)m+(1+\beta+\gamma)}} \\
+      &+\sum_{m\geq0}\frac{\overline\lambda(p^m)\lambda(p^{m+2})\overline\chi(p)}
+      {p^{(1+\alpha+\beta)m+(2+2\alpha+2\delta)}}
+      +\sum_{m\geq0}\frac{\lambda(p^m)\overline\lambda(p^{m+2})\chi(p)}
+      {p^{(1+\alpha+\beta)m+(2+2\beta+2\gamma)}} \\
+      &+\sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2\left|\lambda(p)\right|^2}
+      {p^{(1+\alpha+\beta)m+(1+\gamma+\delta)}}
+      -\sum_{m\geq0}\frac{\lambda(p^{m+1})\overline\lambda(p^m)\lambda(p)\overline\chi(p)}
+      {p^{(1+\alpha+\beta)m+(2+\alpha+\gamma+2\delta)}} \\
+      &-\sum_{m\geq0}\frac{\lambda(p^m)\overline\lambda(p^{m+1})\overline\lambda(p)\chi(p)}
+      {p^{(1+\alpha+\beta)m+(2+\beta+2\gamma+\delta)}}
+      +\sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2\left|\chi(p)\right|^2}
+      {p^{(1+\alpha+\beta)m+(2+2\gamma+2\delta)}}
+      \Bigg].
+    \end{aligned}
+\end{align}
+(Recall $\chi(p)$ may be zero on primes not dividing $N$.)
+The places at $p\mid d$ are easily seen to be 1.
+The divisor bound on the modulus of $\lambda(n)$,
+\be|\lambda(n)|\leq\tau(n),\ee assures us
+of the convergence of the sums in the Euler factor for a particular prime $p$.
+We are again interested in examining the
+slowly-converging parts of the $W_\nmid(\alpha,\beta,\gamma,\delta)$ Euler product.
+Assuming $\alpha,\beta,\gamma,\delta\ll1$, we look at terms on the order of $1/p$ and see
+that these terms correspond to local factors of the Rankin-Selberg convolution
+of $f\otimes\psi_d$ with its dual. We write down the factorization
+\be W_\nmid(\alpha,\beta,\gamma,\delta)W_\mid(\alpha,\beta,\gamma,\delta)
+=\pazocal Y(\alpha,\beta,\gamma,\delta)\pazocal A(\alpha,\beta,\gamma,\delta),\ee where
+\be\pazocal Y(\alpha,\beta,\gamma,\delta):=
+\frac{L\left(1+\alpha+\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+  L\left(1+\gamma+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+{L\left(1+\alpha+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+  L\left(1+\beta+\gamma,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}\ee and
+\be\label{eq:defpazoA} \pazocal A(\alpha,\beta,\gamma,\delta):=
+\pazocal Y(\alpha,\beta,\gamma,\delta)^{-1}
+W_\mid(\alpha,\beta,\gamma,\delta)W_\nmid(\alpha,\beta,\gamma,\delta)\ee
+is analytic after setting $\gamma\mapsto\alpha$, $\delta\mapsto\beta$ and letting
+$\alpha,\beta\ra0$.
+We now proceed to get an expression for $J_2$ by the same techniques. The process is the
+same, so we just record the result. We have
+\be J_2\approx Q^{-2(\alpha+\beta)}\left(\frac t2\right)^{-2(\alpha+\beta)}
+\pazocal Y(-\beta,-\alpha,\gamma,\delta)\pazocal A(-\beta,-\alpha,\gamma,\delta).\ee
+We now arrive at the following conjecture.
+\begin{conjecture}\label{conj:pairratios}
+  With constraints on $\alpha,\beta,\gamma,\delta$, we have
+  \be\begin{aligned}[t]
+    &\T=\int_0^T\frac{L(s+\alpha,f\otimes\psi_d)L(1-s+\beta,\overline f\otimes\psi_d)}
+    {L(s+\gamma,f\otimes\psi_d)L(1-s+\delta,\overline f\otimes\psi_d}\d t \\
+    &=\int_0^T\Bigg[
+    \frac{L\left(1+\alpha+\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+      L\left(1+\gamma+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+    {L\left(1+\alpha+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+      L\left(1+\beta+\gamma,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+    \pazocal A(\alpha,\beta,\gamma,\delta) \\
+    &\begin{multlined}+\left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2(\alpha+\beta)}
+    \frac{L\left(1-\alpha-\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+      L\left(1+\gamma+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+    {L\left(1-\beta+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+      L\left(1-\alpha+\gamma,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+    \times \\ \times
+    \pazocal A(-\beta,-\alpha,\gamma,\delta)\Bigg]\d t
+    +O\left(T^{1/2+\vep}\right),\end{multlined}
+  \end{aligned}\ee
+  where $\pazocal A$ is defined at~\eqref{eq:defpazoA}.
+\end{conjecture}
+For the constraints on the size of the shifts, we follow~\cite{CS} and insist that for
+$\alpha$ a generic shift in the numerator ($\alpha$ and $\beta$ in the above) and $\delta$
+a generic shift in the denominator ($\gamma$, $\delta$ in the above), we have
+\begin{align}
+  &-\frac14<\Re\alpha<\frac14,\\ &\frac1{\log T}\ll\Re\delta<\frac14, \\
+  &\Im\alpha,\Im\delta\ll_\vep T^{1-\vep}\quad(\forall\vep>0).
+\end{align}
+For the application to the pair-correlation, we need the following
+\begin{theorem}\label{thm:pairlogderiv}
+  Assuming Conjecture~\ref{conj:pairratios}, we have
+  \be\begin{aligned}[b]
+    &\int_0^T \frac{L'}{L}(s+\alpha,f\otimes\psi_d)
+    \frac{L'}{L}(1-s+\beta,\overline f\otimes\psi_d)\d t \\
+    &=\int_0^T\begin{aligned}[t]
+      &\left(\frac{\Lunram'}\Lunram\right)'
+      \left(1+\alpha+\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+      +\frac{1}{c_{f\otimes\psi_d}^2}
+      \left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2(\alpha+\beta)} \\
+      &\times L(1+\alpha+\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))
+      L(1-\alpha-\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))
+      \pazocal A(-\beta,-\alpha,\alpha,\beta) \\
+      &-\mathcal B(1+\alpha+\beta)
+      +\sum_{p\mid M}\frac{(\log p)^2}
+      {\left|\lambda_{f\otimes\psi_d}(p)\right|^{-2}p^{1+\alpha+\beta}-1}\d t
+      +O\left(T^{1/2+\vep}\right),
+    \end{aligned}\end{aligned}\ee where
+  $f$ is new of level $M$, $M|d|^2=N$, $\psi_d$ is the Kronecker character associated to
+  a fundamental discriminant $d>0$ prime to $M$,
+  $c_{f\otimes\psi_d}=\res_{s=1}L(s,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))$
+  is given in~\eqref{eq:twistedrsres}, $\mathcal B(s)$ is given in~\eqref{def:mathcalB},
+  and $\Lunram(s,(f\otimes\psi)\otimes(\overline f\otimes\psi_d))$ is the `unramified' part
+  of the Rankin-Selberg convolution, as defined in~\eqref{def:Lunram}.
+\end{theorem}
+The appearance of the Rankin-Selberg convolution of the cusp form $f\otimes\psi_d$ in
+Theorem~\ref{thm:pairlogderiv} is not a surprise. We take a moment to compare
+to~\cite[Theorem 2.5]{CS}. The Rankin-Selberg convolution of $\zeta(s)$ with itself is just
+$\zeta(s)$. We see that Theorem~\ref{thm:pairlogderiv} has the same shape as
+in the corresponding theorem for $\zeta(s)$. We believe that Theorem~\ref{thm:pairlogderiv}
+constitutes a fairly generic expression for the average of a product of shifted logarithmic
+derivatives of automorphic $L$-functions, insofar as such formulæ should generally be
+controlled by the $L$-function attached to the appropriate automorphic Rankin-Selberg lift.
+It is important to note is that on $\GL(2)$, the Rankin-Selberg lift counts $\zeta(s)$
+as a factor. It is likely that moments of all automorphic functions also involve
+contributions from $\zeta(s)$ to the main term.
+\begin{proof}[Proof of Theorem~\ref{thm:pairlogderiv}]
+  The theorem follows from differentiating with respect to $\alpha$ and $\beta$ and setting
+  $\gamma=\alpha$ and $\delta=\beta$. The calculations follow like more complicated
+  analogues of those involved in Conjecture~\ref{conj:ratios}, since we now have a ratio
+  with two $\GL(2)$ $L$-functions in the numerator and denominator.
+  We detail the appearance of each contribution, and give sufficient indication of how to
+  derive each contribution as it appears.
+
+  First, the fact that $L(s,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))$ has
+  a simple pole at $s=1$ makes evaluating
+  \be\frac{\partial^2}{\partial\beta\partial\alpha}
+  \left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2(\alpha+\beta)}
+  \frac{L\left(1-\alpha-\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    L\left(1+\gamma+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+  {L\left(1-\beta+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    L\left(1-\alpha+\gamma,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+  \pazocal A(-\beta,-\alpha,\gamma,\delta)\ee
+  straightforward, since the only term that survives after setting $\gamma=\alpha$,
+  $\delta=\beta$ is the one corresponding to successive differentation of the denominator,
+  which is given (pre-substitution) by
+  \be\begin{aligned}[t]&
+    \left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2(\alpha+\beta)}
+    \frac{L'\left(1-\beta+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+    {\left(L\left(1-\beta+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)\right)^2}
+    \frac{L'\left(1-\alpha+\gamma,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+    {\left(L\left(1-\alpha+\gamma,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)\right)^2} \\
+    &\times L\left(1-\alpha-\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    L\left(1+\gamma+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)    
+    \pazocal A(-\beta,-\alpha,\gamma,\delta).\end{aligned}\ee
+  By the argument principle,
+  $\left(L'/L\right)\left(s,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)$
+  has one simple pole at $s=1$ only with residue $-1$. Per~\eqref{eq:rsres},
+  $L(s,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))$ has a simple pole at $s=1$
+  with residue
+  \be\label{eq:twistedrsres}c_{f\otimes\psi_d}
+  =\frac{(4\pi)^k\langle f\otimes\psi_d,f\otimes\psi_d\rangle}
+  {\Gamma(k)\operatorname{vol}(\Gamma_0(M|d|^2)\backslash\H)}.\ee Therefore
+  $\left(L'/L^2\right)\left(s,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)$ is
+  entire and attains the value \be-\frac1{c_{f\otimes\psi_d}}\qquad\text{at $s=1$.}\ee
+
+  Next, straightforward differentiation shows that the contribution from the term
+  \be\frac{\partial^2}{\partial\beta\partial\alpha}
+  \frac{L\left(1+\alpha+\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    L\left(1+\gamma+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+  {L\left(1+\alpha+\delta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    L\left(1+\beta+\gamma,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)}
+  \pazocal A(\alpha,\beta,\gamma,\delta)\ee in Conjecture~\ref{conj:pairratios}
+  is \be\label{eq:positiveratiocontribution}
+  \left(\frac{L'}{L}\right)'
+  \left(1+\alpha+\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+  \pazocal A(\alpha,\beta,\alpha,\beta)+
+  \frac{\partial^2}{\partial\beta\partial\alpha}\left.\pazocal
+    A(\alpha,\beta,\gamma,\delta)\right|_{\substack{\gamma=\alpha\\\delta=\beta}}.\ee
+  It is a tedious but straightforward computation to verify that
+  $\pazocal A(\alpha,\beta,\alpha,\beta)=1$ by reindexing sums and repeatedly applying the
+  identity \be\label{eq:lambdamagic}
+  \lambda(p)\lambda(p^m)=\lambda(p^{m+1})+\chi(p)\lambda(p^{m-1})\ee
+  obtained from~\eqref{eq:fourierrelation}.
+
+  Differentiating $\pazocal A(\alpha,\beta,\gamma,\delta)$ is the most involved part of the
+  computation. Since each local factor of
+  $\pazocal Y(\alpha,\beta,\gamma,\delta)^{-1}$ and the Euler products
+  $W_\mid(\alpha,\beta,\gamma,\delta)$ and $W_\nmid(\alpha,\beta,\gamma,\delta)$
+  are equal to 1 when $\gamma\mapsto\alpha$ and $\delta\mapsto\beta$,
+  we can focus on each part of the product separately.
+
+  First, a straightforward calculation shows that
+  \be\frac{\partial^2}{\partial\beta\partial\alpha}
+  \left.\pazocal Y(\alpha,\beta,\gamma,\delta)^{-1}
+  \right|_{\substack{\gamma=\alpha\\\delta=\beta}}
+  =-\left(\frac{L'}L\right)'
+  (1+\alpha+\beta,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)),\ee
+  cancelling part of the contribution in~\eqref{eq:positiveratiocontribution}.
+
+  Next, since the Fourier coefficients $\lambda(p)$ are completely multiplicative at
+  primes dividing $M$ (and vanish at primes dividing $d$ because of the twist by $\psi_d$),
+  we can make short work of the differentiation
+  \be\frac{\partial^2}{\partial\beta\partial\alpha}\left.
+    W_\mid(\alpha,\beta,\gamma,\delta)\right|_{\substack{\gamma=\alpha\\\delta=\beta}}.\ee
+  Let $\nu$ stand in for $1+\alpha+\beta$. A straightforward reindexing and cancelation
+  leaves us with a geometric series at each prime given by
+  \be\sum_{p\mid M}(\log p)^2\frac{\left|\lambda(p)\right|^2p^{-\nu}}
+  {1-\left|\lambda(p)\right|^2p^{-\nu}}.\ee
+
+  Finally, we consider the result of differentiating the Euler product in
+  $W_\nmid(\alpha,\beta,\gamma,\delta)$ term-by-term.
+  After substituting for $\gamma$ and $\delta$, we obtain the sum over primes
+  \be\sum_{p\nmid N}(\log p)^2\left[\clubsuit+\spadesuit\right],\ee where
+  \be\begin{aligned}[t]
+    &\clubsuit:=\begin{aligned}[t]&
+    \sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2m^2}{p^{\nu m}}
+    -\sum_{m\geq0}\frac{\lambda(p^{m+1})\overline\lambda(p^m)\overline\lambda(p)m^2}
+    {p^{\nu(m+1)}}
+    -\sum_{m\geq0}\frac{\overline\lambda(p^{m+1})\lambda(p^m)\lambda(p)m^2}
+    {p^{\nu(m+1)}} \\
+    &+\sum_{m\geq0}\frac{\overline\lambda(p^{m})\lambda(p^{m+2})\overline\chi(p)m^2}
+    {p^{\nu(m+2)}}
+    +\sum_{m\geq0}\frac{\lambda(p^{m})\overline\lambda(p^{m+2})\chi(p)m^2}
+    {p^{\nu(m+2)}}
+    +\sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2\left|\lambda(p)\right|m^2}
+    {p^{\nu(m+1)}} \\
+    &-\sum_{m\geq0}\frac{\lambda(p^{m+1})\overline\lambda(p^m)\lambda(p)\overline\chi(p)m^2}
+    {p^{\nu(m+2)}}
+    -\sum_{m\geq0}\frac{\overline\lambda(p^{m+1})\lambda(p^m)\overline\lambda(p)\chi(p)m^2}
+    {p^{\nu(m+2)}}
+    +\sum_{m\geq0}\frac{\left|\lambda(p^m)\right|^2\left|\chi(p)\right|^2m^2}{p^{\nu(m+2)}},
+    \quad\text{and}
+  \end{aligned} \\
+  &\spadesuit:=\begin{aligned}[t]
+    &-\sum_{m\geq0}\frac{\lambda(p^{m+1})\overline\lambda(p^m)\overline\lambda(p)m}
+    {p^{\nu(m+1)}}
+    -\sum_{m\geq0}\frac{\lambda(p^m)\overline\lambda(p^{m+1})\lambda(p)m}
+    {p^{\nu(m+1)}}
+    +\sum_{m\geq0}\frac{2\overline\lambda(p^m)\lambda(p^{m+2})\overline\chi(p)m}
+    {p^{\nu(m+2)}} \\
+    &+\sum_{m\geq0}\frac{2\lambda(p^m)\overline\lambda(p^{m+2})\chi(p)m}
+    {p^{\nu(m+2)}}
+    -\sum_{m\geq0}\frac{\lambda(p^{m+1})\overline\lambda(p^m)\lambda(p)\overline\chi(p)m}
+    {p^{\nu(m+2)}}
+    -\sum_{m\geq0}\frac{\lambda(p^m)\overline\lambda(p^{m+1})\overline\lambda(p)\chi(p)m}
+    {p^{\nu(m+2)}}.
+  \end{aligned}\end{aligned}\ee
+Next, we re-index the sums in $\clubsuit$ and $\spadesuit$ to put them over a common
+denominator of $p^{\nu m}$. After this reindexing, we again group the sums in
+terms of $m^2$, $m$, and now also $1$ coefficients. Making frequent recourse
+to~\eqref{eq:lambdamagic}, we find that the sums with coefficients in $m^2$ and $m$
+evaluate to zero, and we are left with
+\be\sum_{p\nmid N}(\log p)^2\left[\frac{\left|\lambda(p)\right|^2}{p^{1+\alpha+\beta}}
+  +\sum_{m\geq0}
+  \frac{(\lambda(p^{m+2})-\chi(p)\lambda(p^m))
+    (\overline\lambda(p^{m+2})-\overline\chi(p)\overline\lambda(p^m))}
+  {p^{\nu(m+2)}}\right].\ee
+We now expand $\lambda(p^{m+2})-\chi(p)\lambda(p^m)$ in terms of Satake parameters
+attached to $f\otimes\psi_d$ (c.f.~\eqref{eq:satakeidentity}) and write
+\be\lambda(p^{m+2})-\chi(p)\lambda(p^m)
+=\sum_{\ell=0}^{m+2}\alpha(p)^\ell\beta(p)^{m+2-\ell}
+-\alpha(p)\beta(p)\sum_{k=0}^m\alpha(p)^k\beta(p)^{m-k}
+=\alpha(p)^{m+2}+\beta(p)^{m+2}.\ee
+It is then a simple matter to obtain the expression
+\be\begin{aligned}[b]&\sum_{p\nmid N}(\log p)^2\left[
+  \frac{\lambda(p)\overline\lambda(p)}{p^\nu}
+  +\frac{(\alpha(p)\overline\alpha(p))^2p^{-2\nu}}{1-\alpha(p)\overline\alpha(p)p^{-\nu}}
+  +\frac{(\alpha(p)\overline\beta(p))^2p^{-2\nu}}{1-\alpha(p)\overline\beta(p)p^{-\nu}}
+  +\frac{(\overline\alpha(p)\beta(p))^2p^{-2\nu}}{1-\overline\alpha(p)\beta(p)p^{-\nu}}
+  +\frac{(\beta(p)\overline\beta(p))^2p^{-2\nu}}{1-\beta(p)\overline\beta(p)p^{-\nu}}
+\right] \\
+&=\sum_{p\nmid N}\left[
+  \frac{(\alpha(p)\overline\alpha(p)\log^2p)p^{-\nu}}{1-\alpha(p)\overline\alpha(p)p^{-\nu}}
+  +\frac{(\alpha(p)\overline\beta(p)\log^2p)p^{-\nu}}{1-\alpha(p)\overline\beta(p)p^{-\nu}}
+  +\frac{(\overline\alpha(p)\beta(p)\log^2p)p^{-\nu}}{1-\overline\alpha(p)\beta(p)p^{-\nu}}
+  +\frac{(\beta(p)\overline\beta(p)\log^2p)p^{-\nu}}{1-\beta(p)\overline\beta(p)p^{-\nu}}
+\right] \\
+&=\begin{aligned}[t]
+  &\left(\frac{\Lunram'}\Lunram\right)'
+  \left(\nu,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right) \\
+  &-\sum_{p\nmid N}\left[
+  \left(\frac{\alpha(p)\overline\alpha(p)\log p}{p^\nu-\alpha(p)\overline\alpha(p)}\right)^2
+  +\left(\frac{\alpha(p)\overline\beta(p)\log p}{p^\nu-\alpha(p)\overline\beta(p)}\right)^2
+  +\left(\frac{(\overline\alpha(p)\beta(p)\log p}{p^\nu-\overline\alpha(p)\beta(p)}\right)^2
+  +\left(\frac{\beta(p)\overline\beta(p)\log p}{p^\nu-\beta(p)\overline\beta(p)}\right)^2
+\right]
+\end{aligned} \\
+&:=\left(\frac{\Lunram'}\Lunram\right)'
+\left(\nu,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+-\mathcal B(\nu),\quad\text{say,}\label{def:mathcalB}
+\end{aligned}\ee
+where $\Lunram$ denotes the `unramified' part of the $L$-function and may be given
+explicitly in the half-plane of convergence of the Euler product by
+\be\label{def:Lunram}\Lunram(s)=\prod_{p\nmid N}L_p(s)=L(s)\prod_{p\mid N}L_p(s)^{-1},\ee
+where $L_p(s)$ is the appropriate local archimedean factor, and therefore is equal to
+$L(s)$ times the partial Euler product at primes dividing the level. (It therefore inherits
+the analytic continuation, etc. of $L(s)$.)
+\end{proof}
+
+\subsection{Contour estimation}
+We now use contour integration and Theorem~\ref{thm:pairlogderiv} to evaluate the pair
+correlation for $L(s,f\otimes\psi_d)$.
+Let $1/2+1/\log T<a<b<3/4$, let $\pazocal C_1$ be the positively-oriented contour with
+corners at $a,a+iT,1-a+iT$, and $1-a$, and let $\pazocal C_2$ be the contour with corners
+at $b,b+iT,1-b+iT$, and $1-b$. We want to evaluate the following sum on GRH:
+\be\label{eq:paircorrcontour}
+P(\varphi)=\sum_{0<\gamma,\gamma'<T}\varphi\left(\gamma-\gamma'\right)=\frac1{(2\pi i)^2}
+\int_{\pazocal C_1}\int_{\pazocal C_2}\frac{L'}{L}(z,f\otimes\psi_d)
+\frac{L'}{L}(w,f\otimes\psi_d)\varphi(-i(z-w))\d w\d z.\ee
+A standard convexity estimate for $\GL(2)$ confirms that the integrals along the horizontal
+sides can be absorbed into the error term of Theorem~\ref{thm:pairlogderiv} and can be
+ignored.
+We end up with four double integrals $I_1,\ldots,I_4$.
+Let $I_1$ denote the integral with vertical parts $a$ and $b$.
+Let $I_2$ have vertical parts $1-a$ and $1-b$, $I_3$ have vertical parts $a$ and $1-b$,
+and $I_4$ have vertical parts $1-a$ and $b$.
+
+We may move the contours in $I_1$ to the right on GRH without picking up any residues.
+Integrating term-by-term, we see $I_1\ll T^\vep$.
+
+For $I_2$, we use the functional equation~\eqref{eq:logderivfuneq} (after $1-s\mapsto s$)
+for both terms and find similarly that
+\be I_2=\frac1{(2\pi)^2}\int_0^T\int_0^T\frac{\gf'}{\gf}(1/2+iu)
+\frac{\gf'}{\gf}(1/2+iv)\varphi(u-v)\d u\d v+O(T^\vep).\ee
+The asymptotic \be\frac{\gf'}{\gf}(1/2+it)=-2\log\left(A t\right)
+\left(1+O\left(\frac 1t\right)\right),\qquad A:=\frac{\sqrt M |d|}{2\pi}\ee is valid for
+$t\ra\infty$; together with the fact $\varphi$ is even and with a substitution $u=v+\rho$
+and change in the order of integration, and then subsequent substitution $v\mapsto vT$, we
+have
+\be\label{eq:I2}\begin{aligned}[b]
+  I_2&=\frac8{(2\pi)^2}\int_0^T\int_v^T\log(Au)\log(Av)\varphi(u-v)\d u\d v+O(T^\vep) \\
+  &=\frac8{(2\pi)^2}\int_0^T\varphi(\rho)\int_0^{T-\rho}\log(A(v+\rho))\log(Av)\d v\d\rho
+  +O(T^\vep) \\
+  &=\frac8{(2\pi)^2}T\int_0^T\varphi(\rho)\int_0^{1-\rho/T}\log(A(vT+\rho))\log(AvT)
+  \d v\d\rho+O(T^\vep) \\
+  &=\frac8{(2\pi)^2}T\int_0^T\varphi(\rho)\int_0^1\log(A(vT+\rho))\log(AvT)
+  \d v\d\rho+O(T^\vep) \\
+  &=\frac8{(2\pi)^2}T\int_0^T\varphi(\rho)\int_0^1\log^2(AvT)\d v\d\rho+O(T^\vep) \\
+  &=\frac4{(2\pi)^2}\int_{-T}^T\varphi(\rho)\int_0^T\log^2(Av)\d v\d\rho+O(T^\vep).
+\end{aligned}\ee
+Recall $\varphi(x)\ll1/(1+x^2)$ for real $x$ as $x\ra+\infty$.
+This allows us to extend the upper limit of integration of the inner integral to $v=1$ in
+the third-to-last line, with an error of $\log^3 T$. It also allows us to replace
+$\log(A(vT+\rho))$ with $\log(AvT)$ in the second-to-last line, also with an error of
+$\log^3 T$. Evenness of $\varphi$ allows us to make the last step.
+
+We now turn to $I_3$. We substitute $z=w+\rho$ (for a complex variable $\rho$) and exchange
+the order of integration to integrate over $\rho$ and write
+\be\begin{aligned}[b]
+  I_3&=\frac{-1}{(2\pi i)^2}\int_{1-b}^{1-b+iT}\int_a^{a+iT}\frac{L'}{L}(w,f\otimes\psi_d)
+  \frac{L'}{L}(z,f\otimes\psi_d)\varphi(-i(z-w))\d w\d z \\
+  &=\frac{-1}{(2\pi)^2i}\int_{1-a-b-iT}^{1-a-b+iT}\varphi(-i\rho)
+  \int_{T_1}^{T_2}\frac{L'}{L}(a+it,f\otimes\psi_d)
+  \frac{L'}{L}(a+it+\rho,f\otimes\psi_d)\d t\d\rho,
+\end{aligned}\ee
+where $T_1=\max\{0,-\Im\rho\}$ and $T_2=\min\{T,T-\Im\rho\}$.
+Next, we use the functional equation~\eqref{eq:logderivfuneq}, in the form
+\be\frac{L'}{L}(a+\rho+it,f\otimes\psi_d)=\frac{\gf'}{\gf}(a+\rho+it)
+-\frac{L'}{L}(1-a-\rho-it,\overline f\otimes\psi_d)\ee and note that the term with
+$\gf'/\gf$ is small (as is evident after moving the contour to the right) to write
+\be\begin{aligned}[b]
+  I_3&=\frac{1}{(2\pi)^2i}\int_{1-a-b-iT}^{1-a-b+iT}\varphi(-i\rho)
+  \int_{T_1}^{T_2}\frac{L'}{L}(a+it,f\otimes\psi_d)
+  \frac{L'}{L}(1-a-it-\rho,\overline f\otimes\psi_d)\d t\d\rho+O\left(T^\vep\right) \\
+  &=\frac{1}{(2\pi)^2i}\int_{1-a-b-iT}^{1-a-b+iT}\varphi(-i\rho)
+  \int_{T_1}^{T_2}\frac{L'}{L}(s+(a-1/2),f\otimes\psi_d)
+  \frac{L'}{L}(1-s+(1/2-a-\rho),\overline f\otimes\psi_d)\d t\d\rho+O\left(T^\vep\right),
+\end{aligned}\ee
+where $s=1/2+it$. By Theorem~\ref{thm:pairlogderiv}, we have
+\be\label{eq:I3postsub}\begin{aligned}[b]
+  I_3\ = \ &
+  \frac{1}{(2\pi)^2i}\int_{1-a-b-iT}^{1-a-b+iT}\varphi(-i\rho)
+  \int_{T_1}^{T_2}\Bigg[
+  \left(\frac{\Lunram'}\Lunram\right)'\left(1-\rho,f_d\otimes\overline f_d\right) \\
+  &+\frac{1}{c_{f_d}^2}
+  \left(\frac{\sqrt M|d|t}{2\pi}\right)^{2\rho}
+  L(1-\rho,f_d\otimes\overline f_d)L(1+\rho,f_d\otimes\overline f_d)
+  \pazocal A(-1/2+a+\rho,1/2-a,a-1/2,1/2-a-\rho) \\
+  &-\mathcal B(1-\rho)+\sum_{p\mid M}\frac{(\log p)^2}
+  {\left|\lambda_{f_d}(p)\right|^{-2}p^{1-\rho}-1}\Bigg]\d t\d\rho
+  +O\left(T^{1/2+\vep}\right).
+\end{aligned}\ee
+Here we have used $f_d$ in place of $f\otimes\psi_d$ to make the notation more compact.
+Since we will leave $M$ fixed, we have that the sum over primes dividing $M$ is $O(1)$ and
+hence its contribution to $I_3$ may be absorbed into the existing error term.
+We let $\delta:=a+b-1$ and let $\mathcal I(-\rho,t)$ stand in for the innermost integrand
+in~\eqref{eq:I3postsub} minus the sum over $p\mid M$.
+We may then extend the range of the inner integration over $t$ to all of $[0,T]$ with an
+error term of size $T^\vep\int_\rho|\rho||f(\rho)|\d\rho\ll T^\vep$. We are left with
+\be\label{eq:I3final}
+I_3=\frac{1}{(2\pi)^2i}\int_0^T\int_{-\delta-iT}^{-\delta+iT}\varphi(-i\rho)
+\mathcal I(-\rho,t)\d\rho\d t+O\left(T^{1/2+\vep}\right).\ee
+We now turn to $I_4$. We again let $z=w+\rho$. Then,
+\be\begin{aligned}[b]
+  I_4&=
+  \frac{-1}{(2\pi i)^2}\int_{1-a}^{1-a+iT}\int_b^{b+iT}
+  \frac{L'}{L}(w,f\otimes\psi_d)\frac{L'}{L}(z,f\otimes\psi_d)\varphi(-i(z-w))\d z\d w \\
+  &=\frac{-1}{(2\pi)^2i}\int_{a+b-1-iT}^{a+b-1+iT}\varphi(-i\rho)\int_{T_1}^{T_2}
+  \frac{L'}{L}(1-a+it)\frac{L'}{L}(1-a+it+\rho)\d t\d\rho.
+\end{aligned}\ee
+We use the functional equation
+\be\frac{L'}{L}(1-a+it,f\otimes\psi_d)
+=\frac{\gf'}{\gf}(1-a+it)-\frac{L'}{L}(a-it,\overline f\otimes\psi_d).\ee
+Again, the term corresponding to $\gf'/\gf$ is $\ll T^\vep$, and we are left with
+\be\begin{aligned}[t]
+  I_4&=\frac1{(2\pi)^2i}\int_{a+b-1-iT}^{a+b-1+iT}\varphi(-i\rho)\int_{T_1}^{T_2}
+  \frac{L'}{L}(a-it,\overline f\otimes\psi_d)
+  \frac{L'}{L}(1-a+it+\rho,f\otimes\psi_d)\d t\d\rho+O(T^\vep) \\
+  &=\frac1{(2\pi)^2i}\int_{a+b-1-iT}^{a+b-1+iT}\varphi(-i\rho)\int_{T_1}^{T_2}
+  \frac{L'}{L}(1-s+(a-1/2),\overline f\otimes\psi_d)
+  \frac{L'}{L}(s+(1/2-a+\rho),f\otimes\psi_d)\d t\d\rho+O(T^\vep).
+\end{aligned}\ee
+We may now replace the integrand per Theorem~\ref{thm:pairlogderiv} and obtain
+\be\begin{aligned}[b]
+  I_4\ =\ &\frac1{(2\pi)^2i}\int_{a+b-1-iT}^{a+b-1+iT}\varphi(-i\rho)\int_{T_1}^{T_2}
+  \Bigg[\left(\frac{\Lunram'}\Lunram\right)'
+      \left(1+\rho,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right) \\
+  &+\frac{1}{c_{f_d}^2}
+  \left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2\rho}
+  L(1+\rho,f_d\otimes\overline f_d)L(1-\rho,f_d\otimes\overline f_d)
+  \pazocal A(1/2-a,a-1/2-\rho,1/2-a+\rho,a-1/2) \\
+  &-\mathcal B(1+\rho)
+  +\sum_{p\mid M}\frac{(\log p)^2}{\left|\lambda_{f_d}(p)\right|^{-2}p^{1+\rho}-1}\Bigg]
+  \d t\d\rho+O\left(T^{1/2+\vep}\right),
+\end{aligned}\ee
+with $f_d=f\otimes\psi_d$ as above.
+Re-using the same notation as in the discussion of $I_3$, we again extend the range of
+integration, absorb the sum over $p\mid M$ into the existing error, and write
+\be\label{eq:I4final}
+I_4=\frac1{(2\pi)^2i}\int_0^T\int_{\delta-iT}^{\delta+iT}\varphi(-i\rho)
+\mathcal I(\rho,t)\d\rho\d t+O\left(T^{1/2+\vep}\right).\ee
+To be able to write the above, we must have that
+\be\label{def:mathcalA}\mathcal A(\rho):=\pazocal A(-1/2+a+\rho,1/2-a,a-1/2,1/2-a-\rho)
+=\pazocal A(1/2-a,a-1/2+\rho,1/2-a-\rho,a-1/2).\ee
+This identity may be verified straightaway.
+Combining~\eqref{eq:I4final} with the expression obtained for $I_3$ in~\eqref{eq:I3final},
+we have, recalling that $\varphi$ is even and changing variables in $I_3$,
+\be\label{eq:I3I4}
+I_3+I_4=\frac2{(2\pi)^2i}\int_0^T\int_{\delta-iT}^{\delta+iT}\varphi(i\rho)
+\mathcal I(\rho,t)\d\rho\d t+O\left(T^{1/2+\vep}\right).\ee
+We have that $\mathcal I(\rho,t)$ assumes the form
+\begin{multline}\mathcal I(\rho,t)=\left(\frac{\Lunram'}\Lunram\right)'
+\left(1+\rho,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)-\mathcal B(1+\rho) \\
++\frac{1}{c_{f\otimes\psi_d}^2}\left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2\rho}
+L(1+\rho,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))
+L(1-\rho,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))
+\mathcal A(\rho).\end{multline}
+It is straightforward but laborious to verify that $\mathcal A'(0)=0$.
+(We have from before that $\mathcal A(0)=1$.)
+With these facts in hand, and recalling the factorization of $L(s,f_d\otimes\overline f_d)$
+given in~\eqref{eq:adfactorization} and the special value~\eqref{eq:ad1}, we see that the
+first term of $\mathcal I(\rho,t)$ has a Laurent series development at $\rho=0$ given by
+\be\begin{aligned}[b]&\begin{multlined}[b]\frac1{c_{f\otimes\psi_d}^2}
+\left(1-2\log\left(\frac{\sqrt M|d|t}{2\pi}\right)+O(\rho^2)\right)
+\left(\frac1\rho+\gamma+O(\rho)\right)
+\left(c_{f\otimes\psi_d}+L'(1,\ad^2(f\otimes\psi_d))\rho+O(\rho^2)\right) \\
+\times\left(-\frac1\rho+\gamma+O(\rho)\right)
+\left(c_{f\otimes\psi_d}-L'(1,\ad^2(f\otimes\psi_d))\rho+O(\rho^2)\right)
+\left(1+O(\rho^2)\right)\end{multlined} \\
+&=-\frac1{\rho^2}+\frac{2\log\left(\sqrt M|d|t/2\pi\right)}{\rho}+O(1).
+\end{aligned}\ee
+Since $(\Lunram'/\Lunram)'(s,f_d\otimes\overline f_d)$ differs from
+$(L'/L)'(s,f_d\otimes\overline f_d)$ by a sum over a finite number of primes that
+constitutes an entire function of $s$, so
+\be\left(\frac{\Lunram'}{\Lunram}\right)'(1+\rho,f_d\otimes\overline f_d)
+=\frac1{\rho^2}+O(1).\ee
+It is then the case that $\mathcal I(\rho,t)$ has a Laurent development
+about $\rho=0$ given by
+\be\mathcal I(\rho,t)=\frac{2\log\left(\sqrt M|d|t/2\pi\right)}{\rho}+O(1).\ee
+We now want to let $\delta\ra0$ and pass the line of integration in $\rho$ to the imaginary
+axis from $-T$ to $T$. Since it becomes singular at $\rho=0$, we regard it as a principal
+value as we pass through 0 and add the contribution from half the residue of
+$\mathcal I(\rho,t)$ at $\rho=0$ in the integral~\eqref{eq:I3I4}, which is
+\be\frac1{\pi}\int_0^T\varphi(0)\log\left(\frac{\sqrt M|d|t}{2\pi}\right)\d t.\ee
+\subsection{Pair-correlation theorem and expansion}\label{sec:pcthm}
+Combining our expression for $I_1$, $I_2$~\eqref{eq:I2}, and $I_3+I_4$~\eqref{eq:I3I4} and
+changing variables $\rho\mapsto ir$, we have proved the following.
+\begin{theorem}
+  Assuming Conjecture~\ref{conj:pairratios}, and with $\varphi$
+  satisfying~\eqref{def:testconditions}, we have
+  \be\begin{aligned}[b]P(\varphi)
+    \ =\ &\sum_{0<\gamma,\gamma'<T}\varphi\left(\gamma-\gamma'\right)
+    =\frac2{(2\pi)^2}\int_0^T\Bigg[
+    2\pi\varphi(0)\log\left(\frac{\sqrt M|d|t}{2\pi}\right)
+    +\int_{-T}^T\varphi(r)\Bigg(
+    2\log^2\left(\frac{\sqrt M|d|t}{2\pi}\right) \\
+    &+\left(\frac{\Lunram'}\Lunram\right)'
+    \left(1+ir,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right) \\
+    &+\frac{1}{c_{f\otimes\psi_d}^2}
+    \left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2 ir}
+    L(1+ir,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))
+    L(1-ir,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))\mathcal A(ir) \\
+    &-\mathcal B(1+ir)\Bigg)\d r\Bigg]\d t+O\left(T^{1/2+\vep}\right),
+  \end{aligned}\ee
+  where the inner integral is to be regarded as a principal value near $r=0$,
+  $f$ is new of level $M$, $M|d|^2=N$, $\psi_d$ is the Kronecker character associated to
+  a fundamental discriminant $d>0$ prime to $M$,
+  $c_{f\otimes\psi_d}=\res_{s=1}L(s,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d))$
+  is given in~\eqref{eq:twistedrsres},
+  $\mathcal A(\rho)$ is defined in~\eqref{def:mathcalA} together with~\eqref{eq:defpazoA},
+  $\mathcal B(1+\rho)$ is defined in~\eqref{def:mathcalB},
+  and $\Lunram(s,(f\otimes\psi)\otimes(\overline f\otimes\psi_d))$ is the `unramified' part
+  of the Rankin-Selberg convolution, as defined in~\eqref{def:Lunram}.
+\end{theorem}
+We now want to obtain a series development for large $T$ of $P(\varphi)$. As in the
+one-level density, we rescale variables and test functions by the mean density.
+
+It is a fact that if we let $L(s,f)$ be the $L$-function of a cusp form $f$ of level $N$
+on $\GL(2)$ and $N(T,f)$ be the number of zeros $\rho=\beta+i\gamma$ of $L(s,f)$ such that
+$0\leq\beta\leq1$ and $0<\gamma\leq T$, then
+\be N(T,f)=\frac T\pi\log\left(\frac{\sqrt N T}{2\pi e}\right)+O(\log T).\ee
+Therefore, we let
+\be\label{eq:Rdef2} y = \tfrac r \pi R,
+\quad\text{where }R:=\log \left(\tfrac{\sqrt M |d|T}{2\pi e}\right),\ee
+and define the rescaled test function $g$ implicitly by
+\be\label{eq:gdef2} \varphi(r)= g\left(\tfrac r \pi R\right).\ee
+We change variables and obtain
+\be\begin{aligned}[b]
+  &\sum_{0<\gamma,\gamma'<T}\varphi\left((\gamma-\gamma')\frac R\pi\right) \\
+  &=\ \begin{aligned}[t]
+    &\frac2{(2\pi)^2}\int_0^T\Bigg[
+    2\pi g(0)\log\left(\frac{\sqrt M|d|t}{2\pi}\right)
+    +\frac \pi R\int_{-T(R/\pi)}^{T(R/\pi)} g(y)\Bigg(
+    2\log^2\left(\frac{\sqrt M|d|t}{2\pi}\right) \\
+    &+\left(\frac{\Lunram'}\Lunram\right)'
+    \left(1+\frac{i\pi y}R,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right) \\
+    &+\frac{1}{c_{f\otimes\psi_d}^2}
+    \left(\frac{\sqrt M|d|t}{2\pi}\right)^{-2\pi i y/R}
+    L\left(1+\frac{i\pi y}{R},(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    L\left(1-\frac{i\pi y}{R},(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    \mathcal A\left(\frac{i\pi y}{R}\right) \\
+    &-\mathcal B\left(1+\frac{i\pi y}R\right)
+    \Bigg)\d y\Bigg]\d t+O\left(T^{1/2+\vep}\right).\end{aligned}\end{aligned}\ee
+Next, we integrate over $t$. We remark on some individual points.
+Very explicitly, \begin{gather}\int_0^T\log\left(\frac{\sqrt M|d|T}{2\pi}\right)\d t
+=T\left(\log\left(\frac{\sqrt M|d|T}{2\pi}\right)-1\right)
+=T\log\left(\frac{\sqrt M|d|T}{2\pi e}\right), \\
+\int_0^T\log^2\left(\frac{\sqrt M|d|T}{2\pi}\right)\d t
+=T\left(1+\log^2\left(\frac{\sqrt M|d|T}{2\pi e}\right)\right)=T(1+R^2),\text{ and} \\
+\int_0^T\left(\frac{\sqrt M|d|T}{2\pi}\right)^{-2\pi iy/R}\d t
+=\frac{T(AT)^{-2\pi iy/R}}{1-2\pi iy/R}=\frac{Te^{-2\pi iy(1+1/R)}}{1-2\pi iy/R}.
+\end{gather}
+These are the only terms that appear with $t$-dependence. We have
+\be\begin{aligned}[b]
+  &\sum_{0<\gamma,\gamma'<T}\varphi\left((\gamma-\gamma')\frac R\pi\right) \\
+  &=\ \begin{aligned}[t]
+    &\frac T\pi\log\left(\frac{\sqrt M|d|T}{2\pi e}\right)
+    \Bigg[g(0)+\frac1{2R^2T}\int_{-\infty}^\infty g(y)\Bigg(
+    2T(R^2+1)+T\left(\frac{\Lunram'}\Lunram\right)'
+    \left(1+\frac{i\pi y}R,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right) \\
+    &+\frac{1}{c_{f\otimes\psi_d}^2}
+    \left[\frac{Te^{-2\pi iy(1+1/R)}}{1-2\pi iy/R}\right]
+    L\left(1+\frac{i\pi y}{R},(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    L\left(1-\frac{i\pi y}{R},(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right)
+    \mathcal A\left(\frac{i\pi y}{R}\right) \\
+    &-T\mathcal B\left(1+\frac{i\pi y}R\right)
+    \Bigg)\d y\Bigg]\d t+O\left(T^{1/2+\vep}\right).\end{aligned}\end{aligned}\ee
+We now expand in large $R$ and arrive at
+\be\begin{aligned}[b]
+  &\sum_{0<\gamma,\gamma'<T}\varphi\left((\gamma-\gamma')\frac R\pi\right) \\
+  &=\ \begin{multlined}[t]
+    \frac T\pi\log\left(\frac{\sqrt M|d|T}{2\pi e}\right)
+    \Bigg(g(0)+ \\ +\int_{-\infty}^\infty g(y)\Bigg(
+    1-\frac1{2\pi^2y^2}
+    +\frac{e^{-2\pi iy}}{2\pi^2y^2}-\frac{e_1(1-e^{-2\pi iy})}{R^2}
+    -\frac{e_2 e^{-2\pi i y}\pi i y}{R^3}
+    +O\left(R^{-4}\right)
+    \Bigg)\d y\Bigg)+O\left(T^{1/2+\vep}\right)\end{multlined} \\
+  &=\ \begin{multlined}[0.885\textwidth][t]
+    \frac T\pi\log\left(\frac{\sqrt M|d|T}{2\pi e}\right)
+    \Bigg(g(0)+ \\ +\int_{-\infty}^\infty g(y)\Bigg(
+    1-\left(\frac{\sin\pi y}{\pi y}\right)^2
+    -\frac{e_1\sin^2\pi y}{R^2}
+    -\frac{e_2\pi y\sin2\pi y}{R^3}
+    +O\left(R^{-4}\right)
+    \Bigg)\d y\Bigg)
+    +O\left(T^{1/2+\vep}\right)\end{multlined} \label{eq:pairexpansion} \\
+  &\sim
+    N\left(T,f\otimes\psi_d\right)
+    \left(g(0)+\int_{-\infty}^\infty g(y)\Bigg(
+    1-\left(\frac{\sin\pi y}{\pi y}\right)^2    
+    \Bigg)\d y\right),
+\end{aligned}\ee
+where \begin{align}\label{eq:a1pc}
+e_1&=-2+\gamma^2+2\gamma_1-\frac{\mathcal A''(0)}{2}
++\frac{L'(1,\ad^2f\otimes\psi_d)^2}{c_{f\otimes\psi_d}^2}
+     -\frac{L''(1,\ad^2,f\otimes\psi_d)}{c_{f\otimes\psi_d}} \\
+   &=-2+\gamma^2+2\gamma_1-\frac{\mathcal A''(0)}{2}
+     -\left(\frac{L'}{L}\right)'(1,\ad^2 f\otimes\psi_d),\quad\text{and} \\ \label{eq:a2pc}
+        e_2&=\frac{16+\mathcal A'''(0)}{12}.\end{align}
+To obtain the arithmetic constants $e_1$ and $e_2$, it is necessary to express the various
+$L$-functions that appear in terms of possible factorizations, where applicable.
+To obtain $e_1$, it is also necessary to use the identity
+\be\frac{\mathcal A''(0)}{2}=-\mathcal B(1)-\left(\frac{\Lram'}{\Lram}\right)'
+\left(1,(f\otimes\psi_d)\otimes(\overline f\otimes\psi_d)\right),\ee
+which is laborious to obtain.
+(Here, $\Lram(s)=L/\Lunram(s)$ is entire.)
+The expression $1-(\sin^2\pi y)/(\pi y)^2$ is the limiting two-point correlation function
+predicted by Montgomery~\cite{montgomery}.
+The (scaled) pair-correlation $\pazocal Q_{U(N)}(v)$ for $U(N)$
+(c.f., e.g.~\cite{conreymatrix}) is \be\label{eq:Upc}
+\pazocal Q_{U(N)}(v)=1-\left(\frac1 N\frac{\sin(\pi v)}{\sin(\pi v/N)}\right)^2
+=1-\left(\frac{\sin\pi v}{\pi v}\right)^2-\frac{\sin^2\pi v}{3N^2}+O\left(N^{-4}\right).\ee
+We see good agreement between~\eqref{eq:pairexpansion} and~\eqref{eq:Upc}.
+Notably, there is the appearance of a term of order $1/R^3$ in~\eqref{eq:pairexpansion},
+which does not appear in $\pazocal Q_{U(N)}(v)$. Bogolmony \etal\ encounter the same
+phenomenon when dealing with $\zeta(s)$; they propose a shift in the variable $y$ to absorb
+the term of order $1/R^3$ into the term of order $1/R^2$. A similar shift could easily be
+made here, but it is not necessary for our application so we do not pursue the argument
+here.
+
+Our goal throughout has been to suggest an effective matrix size to model a family of
+quadratic twists outside the asymptotic limit. The arithmetic constants $e_1$ and $e_2$ are
+easily seen to depend on the particular cusp form $f\otimes\psi_d$.
+It is not clear how to obtain expressions for expectations over $d$ of $e_1$ or $e_2$; we
+propose that, to find the effective matrix size over some range of $d$, the expectation of
+the arithmetic constants over $d$ in that range should be found numerically.
+So, for the $L$-function attached to the fixed form $f\otimes\psi_d$, we should have an
+effective matrix size (useful for approximating local statistics outside the asymptotic
+limit for $L(s,f\otimes\psi_d)$) given by \be\neff=\frac R{\sqrt{3e_1}}.\ee
+For a family of quadratic twists where $d$ varies over some set, we need to find the
+average $\langle e_1\rangle$ of the arithmetic constant over the set, and then $\neff$ for
+the family is given by \be\neff=\frac R{\sqrt{3\langle e_1\rangle}}.\ee
+
+\appendix
+
+\section{Counting fundamental discriminants}\label{sec:funcountproof}
+\begin{lemma}\label{lem:funcount}
+  Let $\mathcal D(X)$ denote the set of fundamental discriminants $d$ that satisfy
+  $0<d\leq X$, and fix $M$ an odd prime and $\heartsuit\in\{\pm1\}$. Then
+  \be\label{eq:funasymp1}
+  \sum_{\substack{d\in\mathcal D(X)\\\left(\frac d M\right)=\heartsuit}}1
+  =\frac3{\pi^2}\frac M{2(M+1)}X+O\left(X^{1/2}\right),\ee
+  where $\left(\frac\cdot M\right)$ denotes the Legendre symbol.
+  Fix $0<\diamondsuit<M$ an integer. Then
+  \be\label{eq:funasymp2}\sum_{\substack{d\in\mathcal D(X)\\d\equiv\diamondsuit\mod M}}1
+  =\frac3{\pi^2}\frac M{M^2-1}X+O\left(X^{1/2}\right).\ee
+\end{lemma}
+\begin{proof}
+  There are two different asymptotics to establish.
+  Modulo trivial modification,~\eqref{eq:funasymp1} is done in~\cite[Lemma A.1]{HMM}, and
+  we do not repeat the proof here.
+
+  Equation~\eqref{eq:funasymp2} follows in much the same way, and may be viewed as
+  complementary to~\cite[Lemma~B.1]{mil08}. We have
+  \be\sum_{\substack{d\in\mathcal D(X)\\d\equiv\diamondsuit\mod M}}1
+  =\sum_{\substack{0<d\leq X\\d\equiv1\mod4\\d\equiv\diamondsuit\mod M}}\mu(d)^2
+  +\sum_{\substack{0<d\leq X\\4\mid d\\d/4\equiv2\mod4\\d\equiv\diamondsuit\mod M}}\mu(d/4)^2
+  +\sum_{\substack{0<d\leq X\\4\mid d\\d/4\equiv3\mod4\\d\equiv\diamondsuit\mod M}}\mu(d/4)^2.\ee
+  Using elementary group operations and the Chinese remainder theorem, we can rewrite this
+  trio of sums as
+  \be\label{eq:chinese}\sum_{\substack{d\in\mathcal D(X)\\d\equiv\diamondsuit\mod M}}1
+  =\sum_{\substack{0<d\leq X\\d\equiv A\mod 4M}}\mu(d)^2
+  +\sum_{\substack{0<d\leq X/4\\d\equiv A'\mod 4M}}\mu(d)^2
+  +\sum_{\substack{0<d\leq X/4\\d\equiv A''\mod 4M}}\mu(d)^2.\ee
+  where $(A,4M)=1=(A'',4M)$ and $(A',4M)=2$.
+  We recall the identity \be\mu(n)^2=\sum_{m^2\mid n}\mu(m)\ee and note that as $m$ ranges
+  over the integers, $(m^2,4M)$ is never 2, but $A'\equiv2\mod4$.
+  With these facts in hand, we let $A^\circ$ stand in for $A$, $A'$, or $A''$, exchange the
+  order of summation, and write
+  \be\label{eq:slinkysum}
+  \begin{aligned}[b]\sum_{\substack{0<d\leq X\\d\equiv A^\circ\mod 4M}}\mu(d)^2
+    &=\sum_{\substack{0<d\leq X\\d\equiv A^\circ\mod 4M}}\sum_{m^2\mid d}\mu(m) \\
+    &=\sum_{m\leq X^{1/2}}\mu(m)\sum_{\substack{d'\leq X/m^2\\d'm^2\equiv A^\circ\mod 4M}}1 \\
+    &=\sum_{\substack{m\leq X^{1/2}\\(m^2,4M)\mid A^\circ}}\mu(m)
+    \left(\frac X{m^2}\frac{(m^2,4M)}{4M}+O(1)\right) \\
+    &=\frac{X}{4M}\sum_{\substack{m\leq X^{1/2}\\(m^2,4M)\mid A^\circ}}
+    \frac{\mu(m)(m^2,4M)}{m^2}+O\left(X^{1/2}\right) \\
+    &=\frac X{4M}\sum_{\substack{m\leq X^{1/2}\\(m^2,4M)=1}}\frac{\mu(m)}{m^2}
+    +O\left(X^{1/2}\right) \\
+    &=\frac X{4M}\frac{\left(1-\frac14\right)^{-1}\left(1-\frac1{M^2}\right)^{-1}}
+    {\zeta(2)}+O\left(X^{1/2}\right) \\
+    &=\frac{2}{\pi^2}\frac{M}{M^2-1}X+O\left(X^{1/2}\right).
+  \end{aligned}\ee
+  Inputting into~\eqref{eq:chinese} yields the claim.
+\end{proof}
+
+\section{Guessing the symmetry constant}
+\subsection{Quadratic twists}
+Consider first the family $\F^+(X)$ of even quadratic twists of a fixed holomorphic
+cuspidal newform, i.e. primitive Hecke cusp form $f\in S^\star_k(M,\chi_f)$. For each
+fundamental discriminant $d>0$, let $\psi_d=\left(\frac d\cdot\right)$ be the Jacobi
+symbol. The
+asymptotic parameter of our family is then $d$. Let $M$, the level of our fixed form $f$,
+be prime. Note $f\otimes\psi_d$ is a primitive cusp form, provided $(d,M)=1$; restrict
+henceforth to such $d$ not divisible by $M$. If $f$ admits the Fourier expansion
+\be f(z)=\sum_{n=1}^\infty a_f(n)n^{(k-1)/2}e(nz),\ee then $f\otimes\psi_d$ has the
+expansion \be f\otimes\psi_d(z)=\sum_{n=1}^\infty\psi_d(n)a_f(n)n^{(k-1)/2}e(nz).\ee
+Therefore, the Fourier coefficients $a_{f\otimes\psi_d}(n)$ equal the Fourier coefficients
+twisted by the character $\psi_d$. Also, $\chi_{f\otimes\psi_d}=\psi_d^2\chi_f$, and the
+level of $f\otimes\psi_d$ equals $Md^2$, since $\chi_d$ is primitive of modulus $d$ prime
+to $M$.
+Therefore, with the restriction in place on $d$ and since $f\in S^\star_k(M,\chi_f)$, we
+have $f\otimes\psi_d\in S^\star_k\left(Md^2,\psi_d^2\chi_f\right)$. Notating the Satake
+parameters of $f$ as $\alpha_f$, $\beta_f$, we have that, per~\cite[Definition 2.1]{conv},
+\be b_f\left(p^2\right)=\alpha_f(p)^2+\beta_f(p)^2,\ee where $b_f(n)$ is the coefficient of
+the Dirichlet series of the logarithmic derivative of $L(s,f)$, which is supported on prime
+powers only. We then have the following heuristic for the symmetry constant of the family,
+following~\cite[Definition 1.1(3ii)]{conv}.
+\begin{heuristic}\label{heur}
+  For some $c_{\F^+}\in\{-1,0,1\}$, \be\label{eq:symsniff}
+  -2\sum_p\frac1p\frac{\log p}{\log R_N}
+  \hat\phi\left(2\frac{\log p}{\log R_N}\right)\frac1{\left|\F^+(N)\right|}
+  \sum_{g\in\F^+(N)}b_g\left(p^2\right)=-c_{\F^+}\frac{\phi(0)}2+o(1),\ee
+  where $\phi\in\mathcal S(\R)$ with some compact support, $R_N$ is a free parameter
+  we usually take to be $\asymp\left|\F^+(N)\right|$, and $c_{\F^+}$ is
+  the symmetry constant of the family.
+  Often,~\eqref{eq:symsniff} is satisfied because $\exists\delta_2>0,\mu_2\geq0,
+  c_{\F^+}\in\{-1,0,1\}$ such that \be\label{eq:shortsniff}
+  \frac1{\left|\F^+(N)\right|}
+  \sum_{g\in\F^+(N)}b_g\left(p^2\right)=c_{\F^+}
+  +O\left(\left|\F^+(N)\right|^{-\delta_2}p^{\mu_2}\right).\ee
+\end{heuristic}
+{\it\color{Plum}This is now wrong, since the below has not yet been updated to reflect the
+  change in definition of $d$ good.}
+\begin{remark};Since our family is parametrized by positive fundamental discriminants $d$,
+  the average over the family can be written as an average over fundamental discriminants;
+  i.e. \be\frac1{\left|\F^+(X)\right|}\sum_{g\in\F^+(X)}b_g\left(p^2\right)
+  =\frac1{X^\ast}\left.\sum_{\mathclap{d\leq X}}\right.^\ast
+  b_{f\otimes\psi_d}\left(p^2\right),\ee where the star indicates it is a sum over only
+  those fundamental discriminants $d$ such that $f\otimes\psi_d$ is an even form, and
+  \begin{align}
+    X^\ast&=\left|\left\{0<d\leq X:f\otimes\psi_d\in\F^+\right\}\right|,\text{ and}\\
+    X^\ast_p&=\left|\left\{0<d\leq X:p\nmid d,f\otimes\psi_d\in\F^+\right\}\right|
+  \end{align}
+  are the number of fundamental discriminants less than or equal to $X$ that twist $f$ to a
+  form with an even functional equation, and the number of such $d$ indivisible by $p$,
+  respectively.
+\end{remark}
+  
+We seek to apply Heuristic~\ref{heur} to our family $\F^+$. We have that
+\begin{align}
+  b_{f\otimes\psi_d}\left(p^2\right)
+  =\alpha_{f\otimes\psi_d}(p)^2+\beta_{f\otimes\psi_d}(p)^2
+  =a_{f\otimes\psi_d}\left(p^2\right)-\chi_{f\otimes\psi_d}(p)
+  &=a_{f\otimes\psi_d}(p)^2-2\chi_{f\otimes\psi_d}(p) \\
+  &=\psi_d(p)^2a_f(p)^2-2\psi_d(p)^2\chi_f(p),
+\end{align}
+where here we have used the equations
+\begin{align}
+  a_g(n)&=\alpha_g(n)+\beta_g(n), \\ \chi_g(n)&=\alpha_g(n)\beta_g(n), \\
+  a_g(p)^2&=a_g\left(p^2\right)+\chi_g(p),
+\end{align} valid for any cusp form $g$. We conclude that since $\psi_d$ is quadratic,
+\be b_{f\otimes\psi_d}\left(p^2\right)=\left(a_f(p)^2-2\chi_f(p)\right)\psi_d(p)^2
+=\begin{cases}b_f\left(p^2\right)&(d,p)=1 \\ 0&\text{otherwise},\end{cases}\ee
+whence \be\frac1{\left|\F^+(X)\right|}\sum_{g\in\F^+(X)}b_g\left(p^2\right)
+=\frac1{X^\ast}\sum_{0<d\leq X}b_{f\otimes\psi_d}\left(p^2\right)
+=b_{f}\left(p^2\right)\frac{X^\ast_p}{X^\ast}.\ee
+Let \be\Delta(X,p):=\frac{X^\ast_p}{X^\ast}.\ee $\Delta(X,p)$ attains positive values less
+than 1 only. Then
+\be\frac1{\left|\F^+(X)\right|}\sum_{f\in\F^+(X)}b_f\left(p^2\right)
+=b_f\left(p^2\right)\Delta(X,p).\ee Therefore the left hand side of~\eqref{eq:symsniff}
+simplifies to \be\label{eq:sniffapplied}-2\sum_p\frac{\Delta(N,p)}p\frac{\log p}{\log R_N}
+\hat\phi\left(2\frac{\log p}{\log R_n}\right)b_f\left(p^2\right),\ee where again $f$ is the
+fixed form we're twisting.
+\begin{remark} Let $\mathcal Q_p(N)$ denote the number of square-free numbers that avoid
+  a fixed prime $p$. Then, specializing a theorem of Cellarosi and
+  Sinai~\cite[Theorem 2.3]{CS}, we have the asymptotic
+  \be\left|\mathcal Q_p(N)\right|=\frac6{\pi^2}\frac p{p+1}N+O\left(N^{-1/2}\right),\ee
+  where the implied constant depends on $p$. $\left|\mathcal Q(N)\right|$, the number of
+  square-free numbers less than or equal to $N$, is asymptotically $(6/\pi^2)N$.\end{remark}
+Since $d$ is a fundamental discriminant iff $\mathcal Q\ni d\equiv1\mod4$ or
+$d=4m$, where $\mathcal Q\ni m\equiv2\text{ or }3\mod4$, it is reasonable to expect that
+\be\Delta(N,p)\sim\frac6{\pi^2}\frac p{p+1}N\ee for fixed $p$.
+
+Returning to~\eqref{eq:sniffapplied}, replacing $b_f\left(p^2\right)$ with its expectation
+over primes, we achieve for the family of quadratic twists the same symmetries as for the
+general families described in detail in the next section.
+
+\subsection{Underlying symmetry of general families}
+Let $\mathcal F^\circ$ now denote the family of all cusp forms with primitive
+character of weight $k$ and level $N$ ($\circ=\heartsuit$), the family of all cusp forms
+with non-primitive character of weight $k$ and level $N$ ($\circ=\diamondsuit$), or
+the family of all CM cusp forms of weight $k$ and level $N$ ($\circ=\clubsuit$). In all
+cases, let $N$ be our asymptotic parameter. Then, applying~\eqref{eq:shortsniff} is
+successful. 
+
+In the case of $\mathcal F^\heartsuit$, we have generically that
+\be b_f\left(p^2\right)=a_f\left(p^2\right)-1,\ee and, as we average over the whole family,
+orthogonality of Fourier coefficients produces $c_{\mathcal F^\heartsuit}=-1$.
+
+In the case of $\mathcal F^\diamondsuit$, we have generically that
+\be b_f\left(p^2\right)=a_f\left(p^2\right)-\chi_f,\ee and, as we average over the whole
+family, orthogonality of Fourier coefficients and orthogonality of characters produces
+$c_{\mathcal F^\diamondsuit}=0$.
+
+In the case of $\mathcal F^\clubsuit$, we have generically that
+\be b_f\left(p^2\right)=a_f\left(p^2\right)-\chi_f=a_f(p)^2-2\chi_f,\ee $\chi_f$ is
+non-principal, and $a_f$ is real. As we average over the whole
+family, orthogonality of characters means the contribution from $\chi_f$ is zero, while
+orthogonality of Fourier coefficients means that the contribution from $a_f(p)^2$ is 1,
+so $c_{\mathcal F^\clubsuit}=1$.
+
+
+
+% \nocite{*}                      
+\bibliographystyle{amsalpha}
+\bibliography{central}
+
+% \begin{thebibliography}{DHKMS}
+% \bibitem[CFKRS]{recipe} CFKRS, \textit{Integral moments of $L$-functions.}
+% \bibitem[CS]{CS} CS, \textit{Applications of the $L$-functions ratios conjectures.}
+% \bibitem[DHKMS]{DHKMS} DHKMS, \textit{A random matrix model for elliptic
+%     curve $L$-functions of finite conductor.}
+% \bibitem[DM]{conv} DM, \textit{The effect of convolving families of L-functions on
+%     the underlying group symmetries.}
+% \bibitem[HKS]{HKS} HKS, \textit{Lower order terms for the one-level density
+%     of elliptic curve $L$-functions.}
+% \bibitem[HMM]{HMM} HMM, \textit{An elliptic curve test of the $L$-Functions
+%     Ratios Conjecture.}
+% \bibitem[IK]{IK} Iwaniec-Kowalski, \textit{Analytic number theory.}
+% \bibitem[KZ]{KZ} Kohnen, Zagier, \textit{Values of $L$-series of Modular Forms
+%     at the Center of the Critical Strip.}
+% \bibitem[BM]{BM} Baruch, Mao, \textit{Central value of automorphic $L$-functions.}
+% \bibitem[Ma]{mao} Mao, Zhengyu, \textit{A generalized Shimura correspondence
+%     for newforms.}
+% \bibitem[Ogg]{Ogg} Ogg, \textit{On a Convolution of $L$-Series.}
+% \bibitem[MW]{MW} MW, \textit{Pôles des fonctions $L$ de paires pour $GL(N)$.}
+%   (In \textit{Le spectre résiduel de $GL(N)$}.)
+% \bibitem[MiNg]{simplezeros} Milinivich, Ng, \textit{Simple zeros of modular
+%     $L$-functions.}
+% \bibitem[De]{deligne} Deligne, P., \textit{La conjecture de Weil, I.}
+
+% \bibitem[Mi06]{mil06} Miller, S.J. 2006 repulsion
+% \bibitem[BBLM]{bblm} Bogomolny, Bohigas, Leboeuf, and Monastra -- the cool cats.
+% \bibitem[Co]{conreymatrix} Conrey, Matrix Eigenvalues, in
+%   \textit{Perspectives on RMT and NT}.
+% \bibitem[CS]{cs} arXiv:1112.4691 [math.DS].
+% \bibitem[CKRS1]{CKRS1} CKRS. On the frequency of vanishing of quadratic twists of modular
+%   $L$-functions. arXiv:math/0012043 [math.NT]
+% \bibitem[CKRS2]{CKRS2} CKRS. RMT and the Fourier coefficients of half-integral weight forms.
+% \bibitem[KeSn1]{rmtzeta} Keating, Snaith. Random matrix theory and $\zeta(1/2+it)$.
+% \bibitem[KeSn2]{rmtL} Keating, Sniath. Random matrix theory and $L$-functions at $s=1/2$.
+% \bibitem[Ba]{barnes} Barnes. The theory of the $G$-function.
+% \bibitem[Ko1]{kohnen} W. Kohnen, Fourier coefficients of modular forms of half-integral weight, Math. Ann. 271 (1985) 237--268.
+% \bibitem[Wa1]{wald1} Waldspurger, Correspondance de Shimura, J. Math. Pures Appl. (9)
+%   59 (1980) 1--113.
+% \bibitem[Wa2]{wald2} Waldspurger, Sur les coefficients de Fourier des formes modulaires
+%   de poids demi-entier.
+% \bibitem[Iw]{iwan} Iwaniec, Classical Theory of Automorphic Forms.
+% \bibitem[Ri]{ribet} Galois representations attached to eigenforms with Nebentypus.
+%   In Modular functions of one variable, V
+%   (Proc. Second Internat. Conf., Univ. Bonn, Bonn, 1976),
+%   pages 17--51. Lecture Notes in Math., Vol. 601. Springer, Berlin, 1977
+% \bibitem[Mi]{miyake} Miyake, Modular Forms.
+% \bibitem[Mi08]{mil08} Miller, S.J. 2008 Symplectic test.
+% \bibitem[us]{ours} Gaps between zeros of $GL(2)$ $L$-functions.
+% \bibitem[Mo]{montgomery} Montgomery, \textit{The Pair Correlation of Zeros of the
+% Zeta Function}
+% \bibitem[He]{hejhal} Hejhal, \textit{On the triple correlation of zeros of the zeta function}
+% \bibitem[RS]{RS} Rudnick, Sarnak, \textit{The n-level correlations of zeros of the zeta function}
+% \bibitem[KaSa1]{KS1} Katz, Sarnak, \textit{Random Matrices, Frobenius Eigenvalues and Monodromy}
+% \bibitem[KaSa2]{KS2} Katz, Sarnak, \textit{Zeros of zeta functions and symmetries}
+% \bibitem[ILS]{ILS} Iwaniec, Luo, Sarnak, \textit{Low lying zeros of families of L-functions}
+% \end{thebibliography}
+\end{document}

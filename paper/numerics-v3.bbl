@@ -1,0 +1,134 @@
+\begin{thebibliography}{10}
+
+\bibitem{bm}
+Owen Barrett and Steven~J. Miller.
+\newblock An excised orthogonal model for families of cusp forms.
+\newblock Preprint.
+
+\bibitem{bogomolnykeating1}
+Eugene~B Bogomolny and Jon~Peter Keating.
+\newblock Random matrix theory and the riemann zeros. i. three-and four-point
+  correlations.
+\newblock {\em Nonlinearity}, 8(6):1115, 1995.
+
+\bibitem{bogomolnykeating2}
+Eugene~B Bogomolny and Jonathan~P Keating.
+\newblock Random matrix theory and the riemann zeros ii: n-point correlations.
+\newblock {\em Nonlinearity}, 9(4):911, 1996.
+
+\bibitem{CKRS}
+J.~B. Conrey, J.~P. Keating, M.~O. Rubinstein, and N.~C. Snaith.
+\newblock On the frequency of vanishing of quadratic twists of modular
+  {$L$}-functions.
+\newblock In {\em Number theory for the millennium, {I} ({U}rbana, {IL},
+  2000)}, pages 301--315. A K Peters, Natick, MA, 2002.
+
+\bibitem{CKRS2}
+J~Brian Conrey, Jon~P Keating, Michael~O Rubinstein, and Nina~C Snaith.
+\newblock Random matrix theory and the fourier coefficients of
+  half-integral-weight forms.
+\newblock {\em Experimental Mathematics}, 15(1):67--82, 2006.
+
+\bibitem{CF}
+JB~Conrey and DW~Farmer.
+\newblock Mean values of l-functions and symmetry.
+\newblock {\em International Mathematics Research Notices}, 2000(17):883--908,
+  2000.
+
+\bibitem{DHKMS}
+E.~Due\~{n}ez, D.~K. Huynh, J.~P. Keating, S.~J. Miller, and N.~C. Snaith.
+\newblock A random matrix model for elliptic curve {$L$}-functions of finite
+  conductor.
+\newblock {\em J. Phys. A}, 45(11):115207, 32, 2012.
+
+\bibitem{ils}
+Henryk Iwaniec, Wenzhi Luo, and Peter Sarnak.
+\newblock Low lying zeros of families of $ l $-functions.
+\newblock {\em Publications Math{\'e}matiques de l'IH{\'E}S}, 91:55--131, 2000.
+
+\bibitem{katzsarnak}
+Nicholas Katz and Peter Sarnak.
+\newblock Zeroes of zeta functions and symmetry.
+\newblock {\em Bulletin of the American Mathematical Society}, 36(1):1--26,
+  1999.
+
+\bibitem{KS}
+Jon~P Keating and Nina~C Snaith.
+\newblock Random matrix theory and ${L}$-functions at $s= 1/2$.
+\newblock {\em Communications in Mathematical Physics}, 214(1):91--100, 2000.
+
+\bibitem{KZ}
+Winfried Kohnen and Don Zagier.
+\newblock {Values ofL-series of modular forms at the center of the critical
+  strip}.
+\newblock {\em Inventiones mathematicae}, 64(2):175--198, 1981.
+
+\bibitem{lmfdb}
+The {LMFDB Collaboration}.
+\newblock The {L}-functions and modular forms database.
+\newblock \url{http://www.lmfdb.org}, 2020.
+\newblock [Online; accessed 5 July 2020].
+
+\bibitem{mezzadri}
+Francesco Mezzadri.
+\newblock How to generate random matrices from the classical compact groups.
+\newblock {\em Notices Amer. Math. Soc.}, 54(5):592--604, 2007.
+
+\bibitem{miller06}
+Steven~J. Miller.
+\newblock Investigations of zeros near the central point of elliptic curve
+  {$L$}-functions.
+\newblock {\em Experiment. Math.}, 15(3):257--279, 2006.
+\newblock With an appendix by Eduardo Due\~{n}ez.
+
+\bibitem{montgomery}
+Hugh~L Montgomery.
+\newblock The pair correlation of zeros of the zeta function.
+\newblock In {\em Proc. Symp. Pure Math}, volume~24, pages 181--193, 1973.
+
+\bibitem{odlyzko}
+AM~Odlyzko.
+\newblock The $10^{22}$-nd zero of the riemann zeta function.
+\newblock {\em Dynamical, Spectral, and Arithmetic Zeta Functions: AMS Special
+  Session on Dynamical, Spectral, and Arithmetic Zeta Functions, January 15-16,
+  1999, San Antonio, Texas}, 290:139, 2001.
+
+\bibitem{os}
+Ali~Erhan {\"O}zl{\"u}k and Chip Snyder.
+\newblock On the distribution of the nontrivial zeros of quadratic l-functions
+  close to the real axis.
+\newblock {\em Acta Arithmetica}, 91(3):209--228, 1999.
+
+\bibitem{R}
+{R Core Team}.
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2018.
+
+\bibitem{rudnicksarnak}
+Ze{\'e}v Rudnick, Peter Sarnak, et~al.
+\newblock Zeros of principal l-functions and random matrix theory.
+\newblock {\em Duke Mathematical Journal}, 81(2):269--322, 1996.
+
+\bibitem{code}
+Nathan~C. Ryan.
+\newblock Repulsion of low-lying zeros of l-functions.
+\newblock \url{https://github.com/nathancryan/vanishings}, 2019.
+
+\bibitem{sage}
+W.\thinspace{}A. Stein et~al.
+\newblock {\em {S}age {M}athematics {S}oftware ({V}ersion 7.2)}.
+\newblock The Sage Development Team, 2016.
+\newblock {\tt http://www.sagemath.org}.
+
+\bibitem{PARI}
+{The PARI~Group}, Univ. Bordeaux.
+\newblock {\em {PARI/GP version {\tt 2.11.2}}}, 2018.
+\newblock available from \url{http://pari.math.u-bordeaux.fr/}.
+
+\bibitem{Waldspurger}
+J-L Waldspurger.
+\newblock {Sur les valeurs de certaines fonctions $ L $ automorphes en leur
+  centre de sym{\'e}trie}.
+\newblock {\em Compositio Mathematica}, 54(2):173--242, 1985.
+
+\end{thebibliography}
